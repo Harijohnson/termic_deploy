@@ -32,7 +32,7 @@ function HomeScreen() {
   return (
     <div>
       { !keyword && <ProductCarousel /> }
-      <h1>Latest Produtcts</h1>
+      <h1>Latest Produtcts (updated)</h1>
       {
         loading ? <Loader /> 
         : error ? <Message  variant='danger'>{error}</Message> 
