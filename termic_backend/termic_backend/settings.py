@@ -15,15 +15,10 @@ import os #import the os for locate the static and templates for  project
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-BASE_DIR2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # change directory to main folders
-
-BASE_DIR3 = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # change directory to main folders
-
 
 # print('look below')
 # print('directry is  ' , os.path.join(BASE_DIR,'termic_shop/build/static'))
 # TEMPLATES_DIR =  os.path.join(BASE_DIR,'termic_shop/build')
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'termic_shop/build')
 
 # STATIC_DIR = os.path.join(BASE_DIR2,'static') # locate the static file like image and js and css file and images for project
 
@@ -137,7 +132,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-           TEMPLATES_DIR,
+           os.path.join(BASE_DIR , 'termic_shop/build'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -168,16 +163,16 @@ WSGI_APPLICATION = 'termic_backend.wsgi.application'
 # this configured for mysql database db bd named termic 
 # create database termic.     and use this 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'termic',
-#         'USER': 'root',
-#         'PASSWORD': 'root',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'termic',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
 
 
 # DATABASES = {
@@ -192,16 +187,16 @@ WSGI_APPLICATION = 'termic_backend.wsgi.application'
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'F6eF5A-eAbg65F1A15c-353256bCg2*3',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '44211',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'F6eF5A-eAbg65F1A15c-353256bCg2*3',
+#         'HOST': 'viaduct.proxy.rlwy.net',
+#         'PORT': '44211',
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -240,12 +235,13 @@ STATIC_URL = '/static/' # this is a folder to stores  static file for project in
 MEDIA_URL = '/images/' # this folder stores images for frontend to render
 
 STATICFILES_DIRS =[
-    BASE_DIR / 'base/static',  # inherited from static files
+    BASE_DIR / 'static',  # inherited from static files
     BASE_DIR / 'termic_shop/build/static',
 ]
 
 # print('static file dir is  : ' ,STATICFILES_DIRS)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'base/static/images' )# this for set the images
+
+MEDIA_ROOT = 'static/images' # this for set the images
 # print('media root dir i s :',MEDIA_ROOT)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
