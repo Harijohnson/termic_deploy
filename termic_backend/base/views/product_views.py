@@ -21,7 +21,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 @api_view(['GET'])
 def getProducts(request):
-    print('request object :',request)
+    # print('request object :',request)
     query = request.query_params.get('keyword')
 
 
@@ -32,19 +32,19 @@ def getProducts(request):
 
     products = Product.objects.filter(name__icontains=query)  #if the name of the product contains any values in side of the query  filter it and return it back
     
-    print('product is ',products)
+    # print('product is ',products)
     page = request.query_params.get('pages')
-    print('page number is :',page)
-    paginator = Paginator(products,5)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
+    # print('page number is :',page)
+    paginator = Paginator(products,8)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
 
 
     # print('paginator is :',paginator)
     try:
         products = paginator.page(page)
-        print('paginator product is :',products)
+        # print('paginator product is :',products)
     except PageNotAnInteger:
         products =  paginator.page(1)
-        print('paginator product is except :',products)
+        # print('paginator product is except :',products)
     
     
     except EmptyPage:
