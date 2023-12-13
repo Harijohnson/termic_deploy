@@ -151,8 +151,8 @@ def deleteProduct(request,pk):
 @permission_classes([IsAdminUser])
 def uploadImage(request):
     data = request.data
-    # print('LOOK BELOW FOR DATA')
-    # print(data)
+    print('LOOK BELOW FOR DATA')
+    print(data)
     product_id = data['product_id']
 
 

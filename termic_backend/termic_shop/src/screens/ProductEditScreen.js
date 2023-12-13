@@ -26,6 +26,8 @@ function ProductEditScreen() {
 
     const productId  = id
 
+    // console.log('priduct_id is :',productId)
+
 
     const [name,setName] = useState('')
     const [price,setPrice] = useState(0)
@@ -107,7 +109,7 @@ function ProductEditScreen() {
         const formData =new FormData()
 
         formData.append('image',file)
-        formData.append('produc_id',productId)
+        formData.append('product_id',productId)
         setUploading(true)
 
         try{
@@ -121,7 +123,9 @@ function ProductEditScreen() {
             }
 
 
-            const {data} = await axios.post('api/products/upload/',formData,config)
+            const {data} = await axios.post('/api/products/upload/',
+            formData,
+            config)
 
             setImage(data)
             setUploading(false)
