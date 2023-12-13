@@ -58,11 +58,11 @@ def addOrderItems(request):
                 name=product.name,
                 qty= i['qty'],
                 price = i['price'],
-                # image = product.image.url,
+                image = product.image.url,
 
             )
 
-        # update stock
+            # update stock
 
             product.countInStock -= item.qty
             product.save()
@@ -85,23 +85,11 @@ def getMyOrders(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdminUser])
 def getOrders(request):
     orders = Order.objects.all()
     serializer = OrderSerializer(orders ,many=True)
     return Response(serializer.data)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

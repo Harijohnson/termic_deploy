@@ -56,11 +56,11 @@ function OrderScreen(  {match} ) {
     const { userInfo } = userLogin
 
 
-    
+    console.log('order item is :',order)
 
-    if (!loading && !error){
-    order.itemsPrice = order.orderItems.reduce((acc,item) => acc + item.price * item.qty,0 ).toFixed(2)
-    } 
+    // if (order && !loading && !error){
+    //     order.itemsPrice = order.orderItems.reduce((acc,item) => acc + item.price * item.qty,0 ).toFixed(2)
+    // } 
     
 
     const addPayPalScript = () =>{
@@ -111,7 +111,7 @@ function OrderScreen(  {match} ) {
         };
     
         fetchOrderDetails();
-    }, [order, orderId, dispatch,successPay,successDelivered]);
+    }, [order, orderId, dispatch,successPay,successDelivered,userInfo,navigate]);
 
 
 
@@ -127,7 +127,7 @@ function OrderScreen(  {match} ) {
     }
 
 
-    return loading ? <Loader /> 
+    return (loading ? <Loader /> 
     : error ? (
         <Message variant='danger'>{error}</Message>
     ): 
@@ -152,11 +152,21 @@ function OrderScreen(  {match} ) {
                         {order.shippingAddress.postalCode},
                         {order.shippingAddress.country}.
                     </p>
-                    {order.isDelivered ? (
+                    {/* {order.isDelivered !== undefined ? (
                         <Message variant = 'success'>Delivered On : {order.isDelivered}</Message>
                     ): (
                         <Message variant = 'warning'>Not Delivered</Message>
+                    )} */}
+                    {order.isDelivered !== undefined ? (
+                    order.isDelivered ? (
+                        <Message variant="success">Delivered On : {order.isDelivered}</Message>
+                    ) : (
+                        <Message variant="warning">Not Delivered</Message>
+                    )
+                    ) : (
+                    <Message variant="info">Delivery status not available</Message>
                     )}
+
                 </ListGroup.Item>
 
                 <ListGroup.Item>
@@ -299,7 +309,10 @@ function OrderScreen(  {match} ) {
         </Col>
       </Row>
     </div>
+
+    )
 }
+
 
 export default OrderScreen
 

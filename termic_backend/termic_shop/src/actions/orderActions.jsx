@@ -285,7 +285,7 @@ export  const  listOrders= ( ) => async (dispatch,getState) => {
 
     }
     const {data} = await axios.get(
-        // console.log('the product id is :',id)
+        
         `/api/orders/`,
         config
         )

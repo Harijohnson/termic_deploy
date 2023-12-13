@@ -5,7 +5,7 @@ from base.views import order_views as views
 urlpatterns = [
     path('',views.getOrders,name='order'),
     path('add/',views.addOrderItems,name='orders-add'),
-    path('myorders/',views.getMyOrders,name='myorder'),
+    path('myorders/',views.getMyOrders,name='myorders'),
 
 
     path('<str:pk>/delivered/',views.updateOrderToDelivered,name='order-delivered'),
