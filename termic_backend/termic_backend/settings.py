@@ -16,8 +16,8 @@ import os #import the os for locate the static and templates for  project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# print('look below')
-# print('directry is  ' , os.path.join(BASE_DIR,'termic_shop/build/static'))
+print('look below')
+print('directry is  ' , BASE_DIR)
 # TEMPLATES_DIR =  os.path.join(BASE_DIR,'termic_shop/build')
 
 # STATIC_DIR = os.path.join(BASE_DIR2,'static') # locate the static file like image and js and css file and images for project
@@ -231,12 +231,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/' # this is a folder to stores  static file for project inetilation
-MEDIA_URL = '/images/' # this folder stores images for frontend to render
+STATIC_URL = 'static/' # this is a folder to stores  static file for project inetilation
+MEDIA_URL = 'images/' # this folder stores images for frontend to render
 
 STATICFILES_DIRS =[
-    BASE_DIR / 'static',  # inherited from static files
     BASE_DIR / 'termic_shop/build/static',
+    BASE_DIR / 'static',  # inherited from static files
+    
 ]
 
 # print('static file dir is  : ' ,STATICFILES_DIRS)

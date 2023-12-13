@@ -10,7 +10,7 @@ function Paginate({pages, page, keyword='',isAdmin=false}) {
     }
   
   
-    console.log(keyword)
+    // console.log(keyword)
     return ( pages >1 && (
         <Pagination>
             {
