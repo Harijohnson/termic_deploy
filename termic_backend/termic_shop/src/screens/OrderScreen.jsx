@@ -1,10 +1,9 @@
 import React,{ useEffect, useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
 import { Row,Col,ListGroup,Card,Image, Button } from 'react-bootstrap'
 import { useDispatch,useSelector } from 'react-redux'
 import { Link,useParams,useNavigate } from 'react-router-dom'
 import Message from '../components/Message'
-import { getOrderDetails,payOrder,deliverOrder } from '../actions/orderActions'
+import { getOrderDetails,payOrder,deliverOrder} from '../actions/orderActions'
 import Loader from '../components/Loader'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { ORDER_PAY_RESET,ORDER_DELIVERED_RESET } from '../constants/OrderConstant'
@@ -13,26 +12,18 @@ import { ORDER_PAY_RESET,ORDER_DELIVERED_RESET } from '../constants/OrderConstan
 
 
 
-function OrderScreen(  {match} ) {
+function OrderScreen() {
     const  { id } = useParams();
     const navigate = useNavigate();
-    // const orderId = match.params.id
 
     const orderId  = id
     const  dispatch = useDispatch()
 
     const [sdkReady,setSdkReady] = useState(false) 
 
-    // const navigate = useNavigate();
-    
-
-
-
 
     const orderPay = useSelector((state)=>state.orderPay)
     const { loading:loadingPay, success:successPay } = orderPay
-
-
 
 
     
@@ -40,34 +31,35 @@ function OrderScreen(  {match} ) {
     const { loading:loadingDelivered, success:successDelivered } = orderDelivered
 
 
-
-
-
-
-
-
-
     const orderDetails = useSelector((state)=>state.orderDetails)
     const { order,error,loading } = orderDetails
 
-
     
+  console.log('orderDetails:', orderDetails);
+  console.log('orderDetails.order:', orderDetails.order);
+
+
+
+
     const userLogin = useSelector((state)=>state.userLogin)
     const { userInfo } = userLogin
-
-
-    console.log('order item is :',order)
-
-    // if (order && !loading && !error){
-    //     order.itemsPrice = order.orderItems.reduce((acc,item) => acc + item.price * item.qty,0 ).toFixed(2)
-    // } 
     
+   
+
+    // console.log('order item is :',order)
+
+    if (!loading && !error){
+        order.itemsPrice = order.orderItems.reduce((acc,item) => acc + item.price * item.qty,0 ).toFixed(2)
+    } 
+   
+    console.log('order.item details ',order)
+    
+    //   order.itemsPrice = 0
 
     const addPayPalScript = () =>{
         const script =document.createElement('script')
         script.type = 'text/javascript'
         script.src = 'https://www.paypal.com/sdk/js?client-id=AazML7DItushjgZYVB1vO-ZbyHPYlUOymuhxCtQS5bOUPFxPT0jjdu7cRKj9j7dZXQUqLbVr-ZUGtmcd&components=buttons&currency=USD'
-        // https://www.paypal.com/sdk/js?client-id=test&currency=USD
         script.async=true
         script.onload = () =>{
             setSdkReady(true)
@@ -86,17 +78,13 @@ function OrderScreen(  {match} ) {
         const fetchOrderDetails = async () => {
             try {
                 if (!order || successPay || order._id !== Number(orderId) || successDelivered) {
-                dispatch({
-                    type:ORDER_PAY_RESET
-                })
-
+                dispatch({ type:ORDER_PAY_RESET })
                 dispatch({type:ORDER_DELIVERED_RESET})
-
-
-
-                 dispatch(getOrderDetails(Number(orderId)));
+                dispatch(getOrderDetails(Number(orderId)));
+            
+                console.log('order Response:', order);
                 }
-                else if(!order.isPaid){
+                else if(!order.isPaid && order.orderItems ){
                     if(!window.paypal){
                         addPayPalScript()
                     }
@@ -111,26 +99,28 @@ function OrderScreen(  {match} ) {
         };
     
         fetchOrderDetails();
+
+         // Add console logs to check values
+         console.log('order:', order);
+         console.log('order.orderItems:', order && order.orderItems);
+         console.log('order.orderItems.length:', order && order.orderItems && order.orderItems.length);
     }, [order, orderId, dispatch,successPay,successDelivered,userInfo,navigate]);
 
 
 
     const successPaymentHandler= (paymentResult) =>{
-        // alert('Paid')
         dispatch(payOrder(orderId,paymentResult))
     }
-
-
 
     const deliveredHandler  =  () =>{
         dispatch(deliverOrder(order))
     }
 
 
-    return (loading ? <Loader /> 
-    : error ? (
+    return (loading ? (<Loader /> 
+    ) : error ? (
         <Message variant='danger'>{error}</Message>
-    ): 
+    ): (
     <div>
         <h1>Order : {order._id}</h1>
       <Row>
@@ -152,20 +142,12 @@ function OrderScreen(  {match} ) {
                         {order.shippingAddress.postalCode},
                         {order.shippingAddress.country}.
                     </p>
-                    {/* {order.isDelivered !== undefined ? (
-                        <Message variant = 'success'>Delivered On : {order.isDelivered}</Message>
+                    {order.isDelivered  ? (
+                        <Message variant = 'success'>Delivered On : {order.deliveredAt}</Message>
                     ): (
                         <Message variant = 'warning'>Not Delivered</Message>
-                    )} */}
-                    {order.isDelivered !== undefined ? (
-                    order.isDelivered ? (
-                        <Message variant="success">Delivered On : {order.isDelivered}</Message>
-                    ) : (
-                        <Message variant="warning">Not Delivered</Message>
-                    )
-                    ) : (
-                    <Message variant="info">Delivery status not available</Message>
                     )}
+                
 
                 </ListGroup.Item>
 
@@ -189,11 +171,11 @@ function OrderScreen(  {match} ) {
 
                 <ListGroup.Item>
                     <h2>Order Item  </h2>
-                    {order.orderItems.length ===0 ? <Message variant='info'>
+                    {order.orderItems && order.orderItems.length === 0 ? <Message variant='info'>
                         Order is Empty
                     </Message> : (
                         <ListGroup variant='flush'>
-                            {order && order.orderItems &&  order.orderItems.map((item,index)=>(
+                            { order.orderItems &&  order.orderItems.map((item,index)=>(
                                 <ListGroup.Item key={index}>
                                     <Row>
                                         <Col md={1}>
@@ -293,7 +275,7 @@ function OrderScreen(  {match} ) {
 
 
 
-                    {loadingDelivered && <Loader />}
+                {loadingDelivered && <Loader />}
                 {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                     <ListGroup.Item>
                         <Button
@@ -309,6 +291,7 @@ function OrderScreen(  {match} ) {
         </Col>
       </Row>
     </div>
+    )
 
     )
 }

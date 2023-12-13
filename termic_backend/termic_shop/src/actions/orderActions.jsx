@@ -127,6 +127,7 @@ export  const  getOrderDetails= ( id ) => async (dispatch,getState) => {
         config
         )
     
+    console.log('api responser for get product action is :',data)
     dispatch({
         type:ORDER_DETAILS_SUCCESS,
         payload:data,
@@ -173,7 +174,6 @@ export  const  payOrder= ( id,paymentResult ) => async (dispatch,getState) => {
 
         }
         const {data} = await axios.put(
-            // console.log('the product id is :',id)
             `/api/orders/${id}/pay/`,
             paymentResult,
             config
