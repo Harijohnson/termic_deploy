@@ -75,6 +75,7 @@ export const orderDetailsReducer = (state={loading:true,order:[],shippingAddress
             return {
                 loading:false,
                 order:action.payload,
+                error:null,
             }
         case ORDER_DETAILS_FAILE:
             return {

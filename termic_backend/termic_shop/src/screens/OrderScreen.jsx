@@ -33,28 +33,17 @@ function OrderScreen() {
 
     const orderDetails = useSelector((state)=>state.orderDetails)
     const { order,error,loading } = orderDetails
-
     
-  console.log('orderDetails:', orderDetails);
-  console.log('orderDetails.order:', orderDetails.order);
-
-
-
 
     const userLogin = useSelector((state)=>state.userLogin)
     const { userInfo } = userLogin
-    
-   
 
-    // console.log('order item is :',order)
 
     if (!loading && !error){
+        console.log('order details',order)
         order.itemsPrice = order.orderItems.reduce((acc,item) => acc + item.price * item.qty,0 ).toFixed(2)
     } 
    
-    console.log('order.item details ',order)
-    
-    //   order.itemsPrice = 0
 
     const addPayPalScript = () =>{
         const script =document.createElement('script')
@@ -68,23 +57,29 @@ function OrderScreen() {
 
     
     }
-
+   
     useEffect(() => {
         if(!userInfo){
             navigate('/login')
         }
 
-
         const fetchOrderDetails = async () => {
             try {
                 if (!order || successPay || order._id !== Number(orderId) || successDelivered) {
-                dispatch({ type:ORDER_PAY_RESET })
-                dispatch({type:ORDER_DELIVERED_RESET})
+                dispatch(
+                    {
+                         type:ORDER_PAY_RESET
+                    }
+                    )
+                dispatch(
+                    {
+                        type:ORDER_DELIVERED_RESET
+                    }
+                    )
                 dispatch(getOrderDetails(Number(orderId)));
-            
-                console.log('order Response:', order);
                 }
-                else if(!order.isPaid && order.orderItems ){
+
+                else if(!order.isPaid ){
                     if(!window.paypal){
                         addPayPalScript()
                     }
@@ -93,21 +88,18 @@ function OrderScreen() {
                     }
                 }
             } catch (error) {
-                console.error('Error fetching order details:', error);
-                // Handle error, e.g., show an error message
+                console.error('Error fetching order details:', error)
             }
         };
     
+     
         fetchOrderDetails();
 
-         // Add console logs to check values
-         console.log('order:', order);
-         console.log('order.orderItems:', order && order.orderItems);
-         console.log('order.orderItems.length:', order && order.orderItems && order.orderItems.length);
-    }, [order, orderId, dispatch,successPay,successDelivered,userInfo,navigate]);
-
-
-
+    }, [order,orderId, dispatch,successPay,successDelivered,userInfo,navigate]);
+    
+    
+   
+    
     const successPaymentHandler= (paymentResult) =>{
         dispatch(payOrder(orderId,paymentResult))
     }
@@ -117,7 +109,7 @@ function OrderScreen() {
     }
 
 
-    return (loading ? (<Loader /> 
+    return (loading  ? (<Loader /> 
     ) : error ? (
         <Message variant='danger'>{error}</Message>
     ): (
@@ -138,7 +130,7 @@ function OrderScreen() {
                             Shipping :
                         </strong>
                         {order.shippingAddress.address},
-                        {order.shippingAddress.city},{' '}
+                        {order.shippingAddress.city},
                         {order.shippingAddress.postalCode},
                         {order.shippingAddress.country}.
                     </p>

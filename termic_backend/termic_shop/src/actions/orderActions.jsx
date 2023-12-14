@@ -127,7 +127,7 @@ export  const  getOrderDetails= ( id ) => async (dispatch,getState) => {
         config
         )
     
-    console.log('api responser for get product action is :',data)
+    // console.log('api responser for get product action is :',data)
     dispatch({
         type:ORDER_DETAILS_SUCCESS,
         payload:data,
