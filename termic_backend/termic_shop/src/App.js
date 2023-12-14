@@ -22,7 +22,7 @@ function App() {
     <Router >
       <Header />
         <main className = 'py-5'>
-          <Container>
+          <Container fluid>
             <Routes>
               <Route  path='/' element={ <HomeScreen />} exact />
               <Route  path='/product/:id' element={ <ProductScreen />} />

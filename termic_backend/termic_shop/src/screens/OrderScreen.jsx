@@ -40,7 +40,7 @@ function OrderScreen() {
 
 
     if (!loading && !error){
-        console.log('order details',order)
+        // console.log('order details',order)
         order.itemsPrice = order.orderItems.reduce((acc,item) => acc + item.price * item.qty,0 ).toFixed(2)
     } 
    
@@ -135,7 +135,7 @@ function OrderScreen() {
                         {order.shippingAddress.country}.
                     </p>
                     {order.isDelivered  ? (
-                        <Message variant = 'success'>Delivered On : {order.deliveredAt}</Message>
+                        <Message variant = 'success'>Delivered On : {order.deliveredAt.substring(0,10)}</Message>
                     ): (
                         <Message variant = 'warning'>Not Delivered</Message>
                     )}
@@ -155,7 +155,7 @@ function OrderScreen() {
                     </p>
 
                     {order.isPaid ? (
-                        <Message variant = 'success'>Paid On : {order.paidAt}</Message>
+                        <Message variant = 'success'>Paid On : {order.paidAt.substring(0,10)}</Message>
                     ): (
                         <Message variant = 'warning'>Not Paid</Message>
                     )}
@@ -171,8 +171,9 @@ function OrderScreen() {
                                 <ListGroup.Item key={index}>
                                     <Row>
                                         <Col md={1}>
-                                            <Image src={item.image}  alt={item.name} fluid rounded/>
-
+                                            {/* <Image src={item.image}  alt={item.name} fluid rounded/>
+                                            {console.log('item.image:', item.image)} */}
+                                            <Image src={item.image.replace('/images/', '/')} alt={item.name} fluid rounded />
                                         </Col>
                                         <Col variant='info'>
                                             <Link to={`/product/${item.product}`}>{item.name}</Link>

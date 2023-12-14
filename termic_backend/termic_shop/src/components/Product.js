@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom'
 function Product( {product}) {
   return (
    <Card className="my-3 p-3 rounded">
-        <Link to={`./product/${product._id}`}>
+        <Link to={`./product/${product._id}`} className="text-decoration-none link-dark">
             <Card.Img src={product.image}  /> 
         </Link>
         <Card.Body>
-        <Link to={`./product/${product._id}`}>
+        <Link to={`./product/${product._id}`} className="text-decoration-none link-dark">
             <Card.Title as='div'>
                 <strong>{product.name}</strong>
             </Card.Title>  
@@ -18,8 +18,9 @@ function Product( {product}) {
 
         <Card.Text as='div'>
             <div className='my-3'>
-                {product.rating} from {product.numReviews} reviews
-                <Rating value={product.ratings} text={`${product.numReviews} reviews`} color={"#f8e825"} />
+                {/* {console.log('product.ratings :', product)} */}
+                {/* {Number(product.rating)} from {product.numReviews} reviews */}
+                <Rating value={product.rating} text={`${product.numReviews} reviews`} color={"#f8e825"} />
             </div>
 
         </Card.Text >

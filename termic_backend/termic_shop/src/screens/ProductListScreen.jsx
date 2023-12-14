@@ -89,7 +89,7 @@ function ProductListScreen() {
 
   return (
     <div>
-    <Row className='aligh-items-center'>
+    <Row className='align-items-center'>
         <Col>
             <h1>Products</h1>
         </Col>
