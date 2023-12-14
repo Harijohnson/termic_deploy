@@ -16,8 +16,8 @@ import os #import the os for locate the static and templates for  project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-print('look below')
-print('directry is  ' , BASE_DIR)
+# print('look below')
+# print('directry is  ' , BASE_DIR)
 # TEMPLATES_DIR =  os.path.join(BASE_DIR,'termic_shop/build')
 
 # STATIC_DIR = os.path.join(BASE_DIR2,'static') # locate the static file like image and js and css file and images for project
