@@ -65,7 +65,7 @@ def getProducts(request):
 @api_view(['GET'])
 def getTopProducts(request):
 
-    products = Product.objects.filter(ratings__gte=4).order_by('-ratings')[0:5] 
+    products = Product.objects.filter(rating__gte=4).order_by('-rating')[0:5] 
     serializer = ProductSerializer(products,many =  True)
     return Response(serializer.data)
 
@@ -106,7 +106,7 @@ def createProduct(request):
         countInStock = 0,
         category = 'Sample category',
         description = 'Sample Discription',
-        ratings = 0,
+        rating = 0,
     )
     serializer = ProductSerializer(product,many =  False)
     return Response(serializer.data)
@@ -151,8 +151,8 @@ def deleteProduct(request,pk):
 @permission_classes([IsAdminUser])
 def uploadImage(request):
     data = request.data
-    print('LOOK BELOW FOR DATA')
-    print(data)
+    # print('LOOK BELOW FOR DATA')
+    # print(data)
     product_id = data['product_id']
 
 
@@ -181,8 +181,8 @@ def createProductReview(request,pk):
     user = request.user
     product = Product.objects.get(_id=pk)
     data = request.data
-    print('look below for data from front end')
-    print(data)
+    # print('look below for data from front end')
+    # print(data)
 
     # 1  senario if review alread exist stop the user to syop multiple reviews
 
