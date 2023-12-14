@@ -31,13 +31,13 @@ function Header() {
 
   return (
     <header>
-        <Navbar expand="lg"    className="bg-body-tertiary" collapseOnSelect>
-            <Container fluid>
+        <Navbar expand="lg"    className="bg-dark" variant='dark' collapseOnSelect>
+            <Container fluid >
                 <LinkContainer to='/'> 
                   <Navbar.Brand  >TermicShop</Navbar.Brand>
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse id="basic-navbar-nav" >
 
 
                 <SearchBox />

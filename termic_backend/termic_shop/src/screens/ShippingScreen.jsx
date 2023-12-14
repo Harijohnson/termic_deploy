@@ -82,7 +82,7 @@ function ShippingScreen() {
             </Form.Control>
         </Form.Group>
 
-        <Button type='submit' varient='primary' >
+        <Button type='submit' variant='primary' >
           Continue
         </Button>
       </Form>

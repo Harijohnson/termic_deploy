@@ -9,7 +9,7 @@ import { listTopProducts } from '../actions/productActions'
 
 
 
-function ProductCarousel() {
+function ProductCarousel( { maxProducts } ) {
 
     const dispatch = useDispatch()
 
@@ -28,9 +28,9 @@ function ProductCarousel() {
   :
   (
     <Carousel pause='hover'className='bg-dark'>
-        {products.map(product => (
+        {products.slice(0, maxProducts).map(product => (
             <Carousel.Item key={product._id}>
-                <Link to={`/product/${product._id}`}>
+                <Link to={`/product/${product._id}`} className="text-decoration-none link-dark">
                     <Image src={product.image} alt = {product.name} fluid='true'/>
                     <Carousel.Caption  className='carousel.caption'>
                         <h4>{product.name} (${product.price})</h4>

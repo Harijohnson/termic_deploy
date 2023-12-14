@@ -30,18 +30,18 @@ function HomeScreen() {
   },[dispatch,keyword])
 
   return (
-    <div>
-      { !keyword && <ProductCarousel /> }
-      <h1>Latest Produtcts </h1>
+    <div className="container">
+      { !keyword && <ProductCarousel maxProducts={5} /> }
+      <h1 className="my-4">Latest Produtcts </h1>
       {
         loading ? <Loader /> 
         : error ? <Message  variant='danger'>{error}</Message> 
         : products ? (
 
           <div>
-              <Row>
+              <Row  xs={2} sm={2} md={3} lg={4} xl={4} className="g-4">
                 {products.map((product) => (
-                    <Col key={ product._id} sm={12} md={6} lg={4} xl={3}>
+                    <Col key={ product._id} className="mb-3" >
                         <Product product={product}  />
                     </Col>
                 ))}

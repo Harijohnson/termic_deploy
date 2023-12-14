@@ -101,7 +101,7 @@ function PlaceOrderScreen() {
                     {cart.cartItems.length ===0 ? <Message varient='info'>
                         Your Cart is Empty
                     </Message> : (
-                        <ListGroup varient='flush'>
+                        <ListGroup variant='flush'>
                             {cart.cartItems.map((item,index)=>(
                                 <ListGroup.Item key={index}>
                                     <Row>
@@ -134,7 +134,7 @@ function PlaceOrderScreen() {
 
         <Col md={4}>
             <Card>
-                <ListGroup varient='flush'>
+                <ListGroup variant='flush'>
                     
                     <ListGroup.Item>
                         <h2>Order SUmmary</h2>
@@ -186,7 +186,7 @@ function PlaceOrderScreen() {
                     
 
                     <ListGroup.Item> 
-                        {error && <Message varient='danger'>
+                        {error && <Message variant='danger'>
                             {error}
                             </Message>}
                     </ListGroup.Item>
