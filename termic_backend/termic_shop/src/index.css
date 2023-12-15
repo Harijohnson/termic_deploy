@@ -274,12 +274,49 @@ h2{
 }
 
 
-/* paginator color chnages effect  */
 
-/* Add this CSS to your stylesheets */
-/* Add these styles to your global stylesheet or component */
-/* Add these styles to your global stylesheet or component */
-.pagination-item-active {
-  background-color: black !important;
-  color: white !important;
+
+/* media queries for image resize */
+
+@media (max-width: 353px) {
+  .product-card img {
+    height: 107px; /* Adjust the value as needed */
+    width:85px ;
+  }
 }
+
+@media (max-width: 375px) {
+  .product-card img {
+    height: 118px; /* Adjust the value as needed */
+    width:95px ;
+  }
+}
+
+@media (max-width: 430px) {
+  .product-card img {
+    height: 145px; /* Adjust the value as needed */
+    width:116px ;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .product-card img {
+    height: 182px; /* Adjust the value as needed */
+    width:145px ;
+  }
+} 
+
+@media (max-width: 820px) {
+  .product-card img {
+    height: 182px; /* Adjust the value as needed */
+    width:145px ;
+  }
+} 
+
+@media (max-width: 1300px) {
+  .product-card img {
+    height: 200px; /* Adjust the value as needed */
+    width:100% ;
+  }
+} 
