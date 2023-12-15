@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pagination } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-
+import '../index.css'
 
 
 
@@ -21,30 +21,9 @@ function Paginate({pages, page, keyword='',isAdmin=false}) {
     } else {
       search = `/${search}`;
     }
-  
-    // console.log(keyword)
-    return ( pages >1 && (
-        // <Pagination>
-        //     {
-        //         [
-        //             ...Array(pages).keys()
-        //         ].map((x) =>(
-        //             <LinkContainer
-        //              key ={x+1}
-        //              to={ !isAdmin 
-        //                 ? `/?keyword=${keyword}&pages=${x + 1}` 
-        //                  : `/admin/productlist/?keyword=${keyword}&pages=${x + 1}`}>
 
+    return ( pages > 1 && (
 
-        //                 <Pagination.Item  active={ x + 1  === page}   >  {x+1}</Pagination.Item>
-        //             </LinkContainer>
-
-
-
-        //
-        //         ))
-        //     }
-        // </Pagination>
         <Pagination>
         {
         [
@@ -57,8 +36,16 @@ function Paginate({pages, page, keyword='',isAdmin=false}) {
             search: `?keyword=${keyword}&pages=${x + 1}`,
           }}
         >
-          <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item>
-        </LinkContainer>
+          {/* <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item> */}
+          <Pagination.Item
+            style={{
+              backgroundColor: x + 1 === pages ? 'black' : 'white',
+              color: x + 1 === pages ? 'white' : 'black',
+            }}
+          >
+            {x + 1}
+          </Pagination.Item>
+        </LinkContainer>  
       ))}
     </Pagination>
 
