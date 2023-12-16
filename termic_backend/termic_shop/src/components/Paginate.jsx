@@ -1,8 +1,7 @@
 import React from 'react'
-import { Pagination } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
-import '../index.css'
-
+import { Pagination, } from 'react-bootstrap'
+import { LinkContainer, } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom';
 
 
 
@@ -13,45 +12,39 @@ function Paginate({pages, page, keyword='',isAdmin=false}) {
     if(keyword){
         keyword = keyword.split('?keyword=')[1].split('&')[0]
     }
+
+
+    return pages > 1 && (
+      <Pagination>
+        {[...Array(pages).keys()].map((x) => {
+          const pageNumber = x + 1;
   
-    let search = `?keyword=${keyword}&pages=${page}`;
-
-    if (isAdmin) {
-      search = `/admin/productlist/${search}`;
-    } else {
-      search = `/${search}`;
-    }
-
-    return ( pages > 1 && (
-
-        <Pagination>
-        {
-        [
-            ...Array(pages).keys()
-        ].map((x) => (
-        <LinkContainer
-          key={x + 1}
-          to={{
-            pathname: '/',
-            search: `?keyword=${keyword}&pages=${x + 1}`,
-          }}
-        >
-          {/* <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item> */}
-          <Pagination.Item
-            style={{
-              backgroundColor: x + 1 === pages ? 'black' : 'white',
-              color: x + 1 === pages ? 'white' : 'black',
-            }}
-          >
-            {x + 1}
-          </Pagination.Item>
-        </LinkContainer>  
-      ))}
-    </Pagination>
-
+          const linkProps = {
+            to: !isAdmin
+              ? {
+                pathname: '/',
+                search: `?keyword=${keyword}&page=${pageNumber}`,
+              }
+              : {
+                pathname: '/admin/productlist',
+                search: `?keyword=${keyword}&page=${pageNumber}`,
+              },
+            style: {
+              backgroundColor: pageNumber === Number(page) ? 'gray' : 'white',
+              // Add other styles as needed
+            },
+          };
+  
+          return (
+            <Pagination.Item key={pageNumber}>
+              <Link {...linkProps} className="page-link">
+                {pageNumber}
+              </Link>
+            </Pagination.Item>
+          );
+        })}
+      </Pagination>
     )
-
-  )
 }
 
 export default Paginate

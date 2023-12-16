@@ -159,7 +159,7 @@ function ProductListScreen() {
                 </Table>
 
 
-                <Paginate pages={pages} page={page} isAdmin={true}></Paginate>
+                <Paginate page={page} pages={pages} isAdmin={true}></Paginate>
             </div>
           ) }
   </div>

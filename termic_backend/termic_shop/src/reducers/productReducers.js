@@ -51,8 +51,8 @@ switch(action.type){
         return {
             loading:false,
             products:action.payload.products,
-            page:action.payload.page,pages:action.
-            payload.pages
+            page:action.payload.page,
+            pages:action.payload.pages,
         }
     case PRODUCT_LIST_FAIL:
         return {loading:false,error:action.payload}
