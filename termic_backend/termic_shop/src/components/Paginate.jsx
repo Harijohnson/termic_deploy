@@ -31,7 +31,6 @@ function Paginate({pages, page, keyword='',isAdmin=false}) {
               },
             style: {
               backgroundColor: pageNumber === Number(page) ? 'gray' : 'white',
-              // Add other styles as needed
             },
           };
   
