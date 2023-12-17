@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom'
 
 function Product( {product}) {
   return (
-   <Card className="my-3 p-3 rounded">
-        <Link to={`./product/${product._id}`} className="text-decoration-none link-dark">
-            <Card.Img src={product.image}  /> 
+   <Card className="my-3 p-3 rounded product-card">
+        <Link to={`./product/${product._id}`} className="text-decoration-none ">
+            <Card.Img src={product.image}  
+            alt={product.name} 
+            className ='card-img'
+            /> 
         </Link>
         <Card.Body>
-        <Link to={`./product/${product._id}`} className="text-decoration-none link-dark">
+        <Link to={`./product/${product._id}`} className="text-decoration-none ">
             <Card.Title as='div'>
                 <strong>{product.name}</strong>
             </Card.Title>  

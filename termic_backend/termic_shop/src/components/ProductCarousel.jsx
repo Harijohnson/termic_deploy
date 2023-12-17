@@ -27,7 +27,7 @@ function ProductCarousel( { maxProducts } ) {
   <Message variant='danger'>{error}</Message>
   :
   (
-    <Carousel pause='hover'className='bg-dark'>
+    <Carousel pause='hover'className='bg-light'>
         {products.slice(0, maxProducts).map(product => (
             <Carousel.Item key={product._id}>
                 <Link to={`/product/${product._id}`} className="text-decoration-none link-dark">

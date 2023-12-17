@@ -33,7 +33,7 @@ def getProducts(request):
     products = Product.objects.filter(name__icontains=query)  #if the name of the product contains any values in side of the query  filter it and return it back
     
     # print('product is ',products)
-    page = request.query_params.get('pages')
+    page = request.query_params.get('page')
     # print('page number is :',page)
     paginator = Paginator(products,8)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
 

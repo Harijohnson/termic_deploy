@@ -93,8 +93,12 @@ function ProductListScreen() {
         <Col>
             <h1>Products</h1>
         </Col>
-        <Col className='form-group'>
-            <Button className='btn float-right' onClick={createProductHandler}>
+        <Col className='d-flex justify-content-end'>
+            <Button className='btn'
+            style={{ marginRight: '40px' }} 
+            onClick={createProductHandler}
+            >
+
                 <i className='fas fa-plus'>   </i>{'  '} Create Product
             </Button>
         </Col>
@@ -159,7 +163,7 @@ function ProductListScreen() {
                 </Table>
 
 
-                <Paginate pages={pages} page={page} isAdmin={true}></Paginate>
+                <Paginate page={page} pages={pages} isAdmin={true}></Paginate>
             </div>
           ) }
   </div>
