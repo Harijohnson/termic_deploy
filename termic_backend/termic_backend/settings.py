@@ -193,8 +193,8 @@ DATABASES = {
         'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': os.environ.get('DB_PASS'),
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '44211',
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '22825',
     }
 }
 # Password validation
