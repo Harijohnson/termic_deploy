@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import json
+
 # Create your models here.
 
 
@@ -7,7 +9,18 @@ class Product(models.Model):
     user = models.ForeignKey(User,on_delete=models.SET_NULL ,null=True)  # if the person who add the product in db the user is deleted buy product is not to be deleted
     name = models.CharField(max_length=200,null=True,blank=True)
     # image = models.ImageField(null=True,blank=True,default='/placeholder.png')
-    images = models.ManyToManyField('ProductImage', blank=True, related_name='product_images')
+    corousel = models.ImageField(upload_to='corousel/', null=True, blank=True)
+    image1 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image2 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image3 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image4 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image5 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image6 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image7 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image8 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image9 = models.ImageField(upload_to='products/', null=True, blank=True)
+    image10 = models.ImageField(upload_to='products/', null=True, blank=True)
+
     brand = models.CharField(max_length=200,null=True,blank=True)
     category = models.CharField(max_length=200,null=True,blank=True)
     description = models.TextField(null=True,blank=True)
@@ -22,12 +35,6 @@ class Product(models.Model):
         return self.name
 
 
-class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_images')
-    image = models.ImageField(upload_to='base/static/images/products/', null=True, blank=True)
-
-    def __str__(self):
-        return f"Image for {self.product.name if self.product else 'No Product'}"
 
 
 class Review(models.Model):
@@ -82,9 +89,3 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return str(self.address)
-class Carousel(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE, null=True, blank=True, related_name='carousel')
-    image = models.ImageField(upload_to='base/static/images/produts/', null=True, blank=True, default='carousel_images/placeholder.png')
-
-    def __str__(self):
-        return f"Carousel for {self.product.name if self.product else 'No Product'}"

@@ -14,15 +14,20 @@ from pathlib import Path
 import os #import the os for locate the static and templates for  project 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# print('look below')
-# print('directry is  ' , BASE_DIR)
-# TEMPLATES_DIR =  os.path.join(BASE_DIR,'termic_shop/build')
+TEMPLATES_DIR =  os.path.join(BASE_DIR,'termic_shop/build')
 
-# STATIC_DIR = os.path.join(BASE_DIR2,'static') # locate the static file like image and js and css file and images for project
+STATIC_DIR = os.path.join(BASE_DIR2,"base/static") # locate the static file like image and js and css file and images for project
 
 
+IMAGES_DIR = os.path.join(BASE_DIR2,"base/static/images/products")
+
+
+
+print('look below')
+print('directry is  ' , TEMPLATES_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -132,7 +137,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-           os.path.join(BASE_DIR , 'termic_shop/build'),
+        #    os.path.join(BASE_DIR , 'termic_shop/build'),
+            TEMPLATES_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -235,22 +241,20 @@ STATIC_URL = 'static/' # this is a folder to stores  static file for project ine
 MEDIA_URL = 'images/' # this folder stores images for frontend to render
 
 STATICFILES_DIRS =[
-    BASE_DIR / 'termic_shop/build/static',
-    BASE_DIR / 'static',  # inherited from static files
+    STATIC_DIR  # inherited from static files
     
 ]
 
 # print('static file dir is  : ' ,STATICFILES_DIRS)
 
-MEDIA_ROOT = 'static/images' # this for set the images
+MEDIA_ROOT = IMAGES_DIR # this for set the images
 # print('media root dir i s :',MEDIA_ROOT)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-STATIC_ROOT = BASE_DIR / 'staticfiles' 
+# STATIC_ROOT = STATIC_DIR
 # allow the react ot access the urls in django
 CORS_ALLOW_ALL_ORIGINS = True
 

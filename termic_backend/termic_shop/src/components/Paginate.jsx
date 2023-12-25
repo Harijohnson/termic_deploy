@@ -1,6 +1,5 @@
 import React from 'react'
 import { Pagination, } from 'react-bootstrap'
-import { LinkContainer, } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom';
 
 
@@ -31,6 +30,7 @@ function Paginate({pages, page, keyword='',isAdmin=false}) {
               },
             style: {
               backgroundColor: pageNumber === Number(page) ? 'gray' : 'white',
+              paddingTop:'15px',
             },
           };
   
