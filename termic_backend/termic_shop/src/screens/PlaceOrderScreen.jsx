@@ -106,7 +106,7 @@ function PlaceOrderScreen() {
                                 <ListGroup.Item key={index}>
                                     <Row>
                                         <Col md={1}>
-                                            <Image src={item.image}  alt={item.name} fluid rounded/>
+                                            <Image src={item.image1}  alt={item.name} fluid rounded/>
 
                                         </Col>
                                         <Col varient='info'>

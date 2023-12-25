@@ -72,7 +72,7 @@ class OrderItem(models.Model):
     name = models.CharField(max_length=200,null=True,blank=True)
     qty = models.BigIntegerField(null=True,blank=True,default=0)
     price = models.DecimalField(max_digits=20,decimal_places=2,null=True,blank=True)
-    image = models.ImageField(null=True,blank=True)
+    image1 = models.ImageField(null=True,blank=True)
     _id = models.AutoField(primary_key=True,editable=False)
 
     def __str__(self):

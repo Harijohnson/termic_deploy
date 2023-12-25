@@ -31,10 +31,10 @@ function ProductCarousel( { maxProducts } ) {
         {products.slice(0, maxProducts).map(product => (
             <Carousel.Item key={product._id}>
                 <Link to={`/product/${product._id}`} className="text-decoration-none link-dark">
-                    <Image src={product.image} alt = {product.name} fluid='true'/>
-                    <Carousel.Caption  className='carousel.caption'>
+                    <Image src={product.corousel} alt = {product.name} fluid='true'/>
+                    {/* <Carousel.Caption  className='carousel.caption'>
                         <h4>{product.name} (${product.price})</h4>
-                    </Carousel.Caption>
+                    </Carousel.Caption> */}
                 </Link>
             </Carousel.Item>
         ))}

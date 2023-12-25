@@ -47,10 +47,10 @@ function CartScreen( ) {
             
           <ListGroup variant = 'flush'>
               {cartItems.map((item) => (
-                  <ListGroup.Item key={item.productId} item={item}>
-                  <Row >   {/*//key={item.productId} item={item} */}
+                  <ListGroup.Item >
+                  <Row key={item.productId} item={item} >
                     <Col md={2}>
-                      <Image src={item.image} alt={item.name} fluid rounded/>
+                      <Image src={item.image1} alt={item.name} fluid rounded/>
                     </Col>
                     <Col md={3}>
                       <Link to={`/products/${item.product}`}>{item.name}</Link>
