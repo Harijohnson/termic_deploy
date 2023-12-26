@@ -37,7 +37,7 @@ function ProductScreen(  ) {
   const [qty,setQty] = useState(1)
   const [rating,setRating] = useState(0)
   const [comment,setComment] = useState("")
-
+  // const [selectedImage, setSelectedImage] = useState(product?.image1 || '');
 
 
 
@@ -75,6 +75,17 @@ function ProductScreen(  ) {
 
     ))
   }
+
+  const [selectedImage, setSelectedImage] = useState(product.image1 || "");
+  const countAvailableImages = product.image1 ? 1 : 0;
+
+
+  const handleImageClick = (image) => {
+    // console.log('Image change is clicked');
+    // console.log('Selected Image Before:', selectedImage);
+    setSelectedImage(image);
+    // console.log('Selected Image After:', selectedImage);
+  };
   return (
     <div>
       <Link to='/' className='btn btn-light my-3'>Go Back</Link>
@@ -88,9 +99,45 @@ function ProductScreen(  ) {
             <div>
             <Row>
 
-            <Col md={6}>
+            {/* <Col md={6}>
               <Image src={product.image1}  alt ={product.name} style = {{width:'100%',height:'auto',borderRadius:'20px'}}/> 
+            </Col> */}
+
+            <Col md={6}>
+            {product.image1 && (
+                <Image
+                  src={selectedImage || product.image1}
+                  alt={product.name}
+                  style={{ width: '100%', height: 'auto', borderRadius: '20px' }}
+                />
+              )}
+              {product.image1 && (
+               <Row className="mt-3">
+               {[...Array(9).keys()].map(index => {
+                 const imageKey = `image${index + 1}`;
+                 // Check if the image is available and not null or undefined
+                 if (product[imageKey] !== null && product[imageKey] !== undefined) {
+                   return (
+                      <Col md={1} key={index + 1} className="mb-3"> 
+                      
+                       <Image
+                         src={product[imageKey]}
+                         alt={`${product.name} - ${index + 1}`}
+                         className="img-fluid img-thumbnail"
+                         style={{ cursor: 'pointer', width: '100px', height: 'auto' }}
+                         onClick={() => handleImageClick(product[imageKey])}
+                       />
+                     </Col>
+                   );
+                 }
+                 return null; // Skip rendering if image is null or undefined
+               })}
+             </Row>
+              )}
+              
             </Col>
+
+
     
             <Col md={3}>
               <ListGroup variant='flush'>
