@@ -113,7 +113,7 @@ function ProductScreen(  ) {
               )}
               {product.image1 && (
                <Row className="mt-3">
-               {[...Array(9).keys()].map(index => {
+               {[...Array(10).keys()].map(index => {
                  const imageKey = `image${index + 1}`;
                  // Check if the image is available and not null or undefined
                  if (product[imageKey] !== null && product[imageKey] !== undefined) {
@@ -124,7 +124,11 @@ function ProductScreen(  ) {
                          src={product[imageKey]}
                          alt={`${product.name} - ${index + 1}`}
                          className="img-fluid img-thumbnail"
-                         style={{ cursor: 'pointer', width: '100px', height: 'auto' }}
+                         style={{
+                           cursor: 'pointer',
+                            width: '160px', 
+                            height: '80px' , 
+                            objectFit: 'cover',}}
                          onClick={() => handleImageClick(product[imageKey])}
                        />
                      </Col>
