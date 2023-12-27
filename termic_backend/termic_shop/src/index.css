@@ -328,3 +328,31 @@ h2{
     width:100% ;
   }
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* this for product page thumbnail border box */
+.border-blue {
+  border: 2px solid blue !important;
+}
+
+
+
+
+/* ProductCarousel.css */
+
+
+
+.carousel-indicators .active {
+  background-color: #0055af !important; /* Set color for the active indicator */
+}

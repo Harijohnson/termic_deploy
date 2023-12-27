@@ -173,7 +173,8 @@ function OrderScreen() {
                                         <Col md={1}>
                                             {/* <Image src={item.image}  alt={item.name} fluid rounded/>
                                             {console.log('item.image:', item.image)} */}
-                                            <Image src={item.image1.replace('/images/', '/')} alt={item.name} fluid rounded />
+                                            <Image src={item.image1} alt={item.name} fluid rounded />  
+                                            {/* //.replace('/images/', '/') */}
                                         </Col>
                                         <Col variant='info'>
                                             <Link to={`/product/${item.product}`}>{item.name}</Link>

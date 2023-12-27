@@ -50,7 +50,7 @@ function CartScreen( ) {
                   <ListGroup.Item >
                   <Row key={item.productId} item={item} >
                     <Col md={2}>
-                      <Image src={item.image6} alt={item.name} fluid rounded/>
+                      <Image src={item.image1} alt={item.name} fluid rounded/>
                     </Col>
                     {/* <Col md={4}>
                       <Image src={item.image2} alt={item.name} fluid rounded/>

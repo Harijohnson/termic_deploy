@@ -78,12 +78,14 @@ function ProductScreen(  ) {
 
   const [selectedImage, setSelectedImage] = useState(product.image1 || "");
   const countAvailableImages = product.image1 ? 1 : 0;
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
 
-  const handleImageClick = (image) => {
+  const handleImageClick = (image,index) => {
     // console.log('Image change is clicked');
     // console.log('Selected Image Before:', selectedImage);
     setSelectedImage(image);
+    setActiveImageIndex(index);
     // console.log('Selected Image After:', selectedImage);
   };
   return (
@@ -108,33 +110,32 @@ function ProductScreen(  ) {
                 <Image
                   src={selectedImage || product.image1}
                   alt={product.name}
-                  style={{ width: '100%', height: 'auto', borderRadius: '20px' }}
+                  style={{ width: '100%', height: '580px', borderRadius: '20px' }}
                 />
               )}
               {product.image1 && (
                <Row className="mt-3">
-               {[...Array(10).keys()].map(index => {
+               {[...Array(10).keys()].map((index) => {
                  const imageKey = `image${index + 1}`;
-                 // Check if the image is available and not null or undefined
                  if (product[imageKey] !== null && product[imageKey] !== undefined) {
                    return (
-                      <Col md={1} key={index + 1} className="mb-3"> 
-                      
+                     <Col md={1} key={index + 1} className="mb-3">
                        <Image
                          src={product[imageKey]}
                          alt={`${product.name} - ${index + 1}`}
-                         className="img-fluid img-thumbnail"
+                         className={`img-fluid img-thumbnail ${activeImageIndex === index ? 'border-blue' : ''}`}
                          style={{
                            cursor: 'pointer',
-                            width: '160px', 
-                            height: '80px' , 
-                            objectFit: 'cover',}}
-                         onClick={() => handleImageClick(product[imageKey])}
+                           width: '70px',
+                           height: '70px',
+                           objectFit: 'cover',
+                         }}
+                         onClick={() => handleImageClick(product[imageKey], index)}
                        />
                      </Col>
                    );
                  }
-                 return null; // Skip rendering if image is null or undefined
+                 return null;
                })}
              </Row>
               )}
