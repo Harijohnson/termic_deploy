@@ -160,6 +160,7 @@ h2{
 .carousel-item-prev,
 .carousel-item.active {
   display: flex;
+  background-color:transparent,
 }
 
 

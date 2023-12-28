@@ -32,9 +32,9 @@ function ProductCarousel( { maxProducts } ) {
             <Carousel.Item key={product._id}>
                 <Link to={`/product/${product._id}`} className="text-decoration-none link-dark">
                     <Image src={product.corousel} alt = {product.name} fluid='true'/>
-                    <Carousel.Caption  className='carousel.caption'>
+                    {/* <Carousel.Caption  className='carousel.caption'>
                         <h4>{product.name} (${product.price})</h4>
-                    </Carousel.Caption>
+                    </Carousel.Caption> */}
                 </Link>
             </Carousel.Item>
            

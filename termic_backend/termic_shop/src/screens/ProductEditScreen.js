@@ -33,7 +33,7 @@ function ProductEditScreen() {
     const [price,setPrice] = useState(0)
     const [brand,setBrand] = useState('')
     const [category,setCategory] = useState('')
-    const [image,setImage] = useState('')
+    // const [image,setImage] = useState('')
     const [countInStock,setCountInStock] = useState(0)
     const [description,setDescription] = useState("")
     const [uploading,setUploading] = useState(false)
@@ -61,7 +61,7 @@ function ProductEditScreen() {
     const userLogin = useSelector((state)=>state.userLogin)
     const { userInfo } = userLogin
 
-
+    const [images, setImages] = useState(Array.from({ length: 10 }, () => ''));
     
     
     useEffect (() => {
@@ -78,8 +78,9 @@ function ProductEditScreen() {
                 setBrand(product.brand || "")
                 setCategory(product.category || "")
                 setDescription(product.description || "")
-                setImage(product.image || "")
+                // setImage(product.image || "")
                 setCountInStock(product.countInStock || 0)
+                setImages(product.images || Array.from({ length: 10 }, () => ''));
             }
         }}
      , [product,productId,navigate,dispatch,successUpdate])
@@ -90,7 +91,7 @@ function ProductEditScreen() {
             _id:productId,
             name,
             price,
-            image,
+            images,
             brand,
             countInStock,
             category,
@@ -102,7 +103,7 @@ function ProductEditScreen() {
    
 
 
-    const uploadFileHandler  = async(e) =>
+    const uploadFileHandler  = async(e,index) =>
      {
 
         const file = e.target.files[0]
@@ -127,7 +128,12 @@ function ProductEditScreen() {
             formData,
             config)
 
-            setImage(data)
+            // setImage(data)
+            setImages((prevImages) => {
+                const newImages = [...prevImages];
+                newImages[index] = data;
+                return newImages;
+              });
             setUploading(false)
 
         }catch(error){
@@ -180,7 +186,22 @@ function ProductEditScreen() {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId='image'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    {/* <Form.Group controlId='image'>
                         <Form.Label>
                             Image
                         </Form.Label>
@@ -193,7 +214,6 @@ function ProductEditScreen() {
 
                         </Form.Control>
 
-
                         <Form.Control
                         type='file'
                         label ='Choose Image'
@@ -203,7 +223,50 @@ function ProductEditScreen() {
                         </Form.Control>
                         {uploading && <Loader />}
 
-                    </Form.Group>
+                    </Form.Group>  */}
+
+
+
+
+
+<Form.Group controlId="image">
+              <Form.Label>Image</Form.Label>
+
+              {images.map((image, index) => (
+                <Row key={index}>
+                  <Col>
+                    <Form.Control
+                      type="text"
+                      placeholder={`Enter Image ${index + 1}`}
+                      value={image}
+                      onChange={(e) => {
+                        setImages((prevImages) => {
+                          const newImages = [...prevImages];
+                          newImages[index] = e.target.value;
+                          return newImages;
+                        });
+                      }}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.File
+                      id={`image-${index}`}
+                      label={`Choose Image ${index + 1}`}
+                      custom
+                      onChange={(e) => uploadFileHandler(e, index)}
+                    />
+                  </Col>
+                  {uploading && <Loader />}
+                </Row>
+              ))}
+            </Form.Group>
+
+
+
+
+
+
+
 
 
                     <Form.Group controlId='brand'>
