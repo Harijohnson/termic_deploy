@@ -189,7 +189,7 @@ h2{
   width: 100%;
   /* padding: 30px; */
   margin: 40px;
-  /* border-radius: 40%; */
+  border-radius: 8px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -354,6 +354,58 @@ h2{
 
 
 
+/* Optionally, you can remove the box shadow as well */
+.carousel-item {
+  border:none;
+  padding : none;
+}
+
+
+
+
+/* .carousel-indicators {
+  background-color:black
+}
+ */
+
+
+ .carousel-indicators button {
+  background-color: rgb(139, 139, 139) !important; /* Change to your desired color */
+}
+
+.carousel-indicators [data-bs-target]:hover {
+  background-color: rgb(0, 0, 0) !important; /* Change to your desired hover color */
+}
+
 .carousel-indicators .active {
-  background-color: #0055af !important; /* Set color for the active indicator */
+  background-color: rgb(0, 0, 0) !important; /* Change to your desired active color */
+}
+
+
+
+
+
+
+
+
+/* Add this CSS in your component or a global style file */
+.carousel-control-prev, .carousel-control-next {
+  font-size: 24px; /* Change to your desired font size */
+  width: 20px; /* Change to your desired width */
+  height: 10%; /* Change to your desired height */
+  background-color: rgb(255, 0, 0); /* Change to your desired background color */
+ /* Optional: makes the button circular */
+ 
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: rgb(0, 0, 0); /* Change to your desired icon color */
+}
+
+/* Optional: Hover effect */
+.carousel-control-prev:hover, .carousel-control-next:hover {
+  background-color: rgb(94, 94, 95); /* Change to your desired hover color */
+}
+.carousel-control-prev, .carousel-control-next {
+  padding: 1px; /* Adjust the padding to reduce the active area */
 }

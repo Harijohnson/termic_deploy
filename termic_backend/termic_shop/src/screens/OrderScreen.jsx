@@ -171,10 +171,9 @@ function OrderScreen() {
                                 <ListGroup.Item key={index}>
                                     <Row>
                                         <Col md={1}>
-                                            {/* <Image src={item.image}  alt={item.name} fluid rounded/>
-                                            {console.log('item.image:', item.image)} */}
-                                            <Image src={item.image1} alt={item.name} fluid rounded />  
-                                            {/* //.replace('/images/', '/') */}
+
+                                            <Image src={item.image1.replace(/.*\/images\/products\//, '/images/products/')}  alt={item.name} fluid rounded />  
+                                           
                                         </Col>
                                         <Col variant='info'>
                                             <Link to={`/product/${item.product}`}>{item.name}</Link>

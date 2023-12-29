@@ -122,21 +122,14 @@ export  const  getOrderDetails= ( id ) => async (dispatch,getState) => {
 
     }
     const {data} = await axios.get(
-        // console.log('the product id is :',id)
         `/api/orders/${id}/`,
         config
         )
     
-    // console.log('api responser for get product action is :',data)
     dispatch({
         type:ORDER_DETAILS_SUCCESS,
         payload:data,
     })
-
-
-
-
-
     }
     catch(error){
         dispatch({

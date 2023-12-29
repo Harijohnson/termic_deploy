@@ -101,12 +101,10 @@ def getOrders(request):
 @permission_classes([IsAuthenticated])
 def getOrderById(request, pk):
     user = request.user
-    print(user)
-    # order = Order.objects.get( _id=pk )
-    # print(order)
+
     try:
         order = Order.objects.get( _id=pk )
-        print('order is :',order)
+        # print('order is :',order)
         if user.is_staff or order.user == user :
             serializer =  OrderSerializer(order,many=False)
             # print('serializer is :',serializer)

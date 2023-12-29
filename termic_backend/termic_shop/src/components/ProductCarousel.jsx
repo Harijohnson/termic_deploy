@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Carousel,Image } from 'react-bootstrap'
+import { Carousel,Image,Button  } from 'react-bootstrap'
 import Loader from './Loader'
 import Message from './Message'
 import { listTopProducts } from '../actions/productActions'
@@ -27,10 +27,11 @@ function ProductCarousel( { maxProducts } ) {
   <Message variant='danger'>{error}</Message>
   :
   (
-    <Carousel pause='hover'className='bg-light'>
+    <div className="product-carousel-wrapper">
+    <Carousel pause='hover'>
         {products.slice(0, maxProducts).map(product => (
             <Carousel.Item key={product._id}>
-                <Link to={`/product/${product._id}`} className="text-decoration-none link-dark">
+                <Link to={`/product/${product._id}`} className="text-decoration-none">
                     <Image src={product.corousel} alt = {product.name} fluid='true'/>
                     {/* <Carousel.Caption  className='carousel.caption'>
                         <h4>{product.name} (${product.price})</h4>
@@ -40,6 +41,7 @@ function ProductCarousel( { maxProducts } ) {
            
         ))}
     </Carousel>
+    </div>
   )
 
   )
