@@ -61,6 +61,7 @@ def addOrderItems(request):
                 image1 = product.image1.url,
 
             )
+            print('details',item)
 
             # update stock
 

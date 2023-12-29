@@ -36,6 +36,7 @@ function CartScreen( ) {
 
   return (
     <Row>
+      <Link to='/' className='btn btn-light  text-start' style={{backgroundColor:'lightblue'}}>Continue to Shopping</Link>
       <Col md={8}>
         <h1>Shopping cart</h1>
           {cartItems.length === 0 ? (
@@ -50,8 +51,9 @@ function CartScreen( ) {
                   <ListGroup.Item >
                   <Row key={item.productId} item={item} >
                     <Col md={2}>
-                      <Image src={item.image1} alt={item.name} fluid rounded/>
+                      <Image src={item.image} alt={item.name} fluid rounded/>
                     </Col>
+                    {console.log('items arguments',item)}
                     {/* <Col md={4}>
                       <Image src={item.image2} alt={item.name} fluid rounded/>
                     </Col> */}

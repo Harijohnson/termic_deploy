@@ -21,7 +21,7 @@ function App() {
   return (
     <Router >
       <Header />
-        <main className = 'py-5'>
+        <main>
           <Container fluid>
             <Routes>
               <Route  path='/' element={ <HomeScreen />} exact />

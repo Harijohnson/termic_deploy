@@ -35,7 +35,7 @@ def getProducts(request):
     # print('products          :',products)
     page = request.query_params.get('page')
     
-    paginator = Paginator(products,8)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
+    paginator = Paginator(products,15)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
 
 
    

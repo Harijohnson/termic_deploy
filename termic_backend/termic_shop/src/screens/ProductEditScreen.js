@@ -252,7 +252,7 @@ function ProductEditScreen() {
 
 
 
-                    {/* <Form.Group controlId='image'>
+                {/* <Form.Group controlId='image'>
                         <Form.Label>
                             Image
                         </Form.Label>
@@ -289,7 +289,7 @@ function ProductEditScreen() {
                         label ='Choose Image'
                         custom='true'
                         onChange={(e) => uploadFileHandler(e, 'image1')} 
-                        required >
+                       >
                             
                         </Form.Control>
                         {uploading && <Loader />}
