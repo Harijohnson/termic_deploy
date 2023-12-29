@@ -8,22 +8,16 @@ import { listProductDetails, updateProduct } from '../actions/productActions'
 import  FormContainer   from '../components/FormContainer'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 import  axios  from 'axios'
+import { Carousel } from 'react-bootstrap';
+
 
 
 
 
 function ProductEditScreen() {
-
-
     const navigate = useNavigate()
-
-  
-
-
-
     const  { id } = useParams();
     // const orderId = match.params.id
-
     const productId  = id
 
     // console.log('priduct_id is :',productId)
@@ -33,17 +27,22 @@ function ProductEditScreen() {
     const [price,setPrice] = useState(0)
     const [brand,setBrand] = useState('')
     const [category,setCategory] = useState('')
-    // const [image,setImage] = useState('')
+    const [image,setImage] = useState('')
     const [countInStock,setCountInStock] = useState(0)
     const [description,setDescription] = useState("")
     const [uploading,setUploading] = useState(false)
 
-
-
-
-
-
-
+    const [image1, setImage1] = useState('');
+    const [image2, setImage2] = useState('');
+    const [image3, setImage3] = useState('');
+    const [image4, setImage4] = useState('');
+    const [image5, setImage5] = useState('');
+    const [image6, setImage6] = useState('');
+    const [image7, setImage7] = useState('');
+    const [image8, setImage8] = useState('');
+    const [image9, setImage9] = useState('');
+    const [image10, setImage10] = useState('');
+    const [carousel, setCarousel] = useState(null);
 
 
     const dispatch = useDispatch()
@@ -61,8 +60,6 @@ function ProductEditScreen() {
     const userLogin = useSelector((state)=>state.userLogin)
     const { userInfo } = userLogin
 
-    const [images, setImages] = useState(Array.from({ length: 10 }, () => ''));
-    
     
     useEffect (() => {
 
@@ -80,7 +77,21 @@ function ProductEditScreen() {
                 setDescription(product.description || "")
                 // setImage(product.image || "")
                 setCountInStock(product.countInStock || 0)
-                setImages(product.images || Array.from({ length: 10 }, () => ''));
+                setCarousel(product.carousel || null);
+                // Assuming there are fields like 'image1', 'image2', etc. in the product model
+                setImage1(product.image1 || '');
+                setImage2(product.image2 || '');
+                setImage3(product.image3 || '');
+                setImage4(product.image4 || '');
+                setImage5(product.image5 || '');
+                setImage6(product.image6 || '');
+                setImage7(product.image7 || '');
+                setImage8(product.image8 || '');
+                setImage9(product.image9 || '');
+                setImage10(product.image10 || '');
+             
+
+
             }
         }}
      , [product,productId,navigate,dispatch,successUpdate])
@@ -91,11 +102,22 @@ function ProductEditScreen() {
             _id:productId,
             name,
             price,
-            images,
             brand,
             countInStock,
             category,
             description,
+            carousel,
+            image1,
+            image2,
+            image3,
+            image4,
+            image5,
+            image6,
+            image7,
+            image8,
+            image9,
+            image10,
+            
             }))
 
     }
@@ -103,9 +125,8 @@ function ProductEditScreen() {
    
 
 
-    const uploadFileHandler  = async(e,index) =>
+    const uploadFileHandler  = async(e,fieldName) =>
      {
-
         const file = e.target.files[0]
         const formData =new FormData()
 
@@ -128,15 +149,45 @@ function ProductEditScreen() {
             formData,
             config)
 
-            // setImage(data)
-            setImages((prevImages) => {
-                const newImages = [...prevImages];
-                newImages[index] = data;
-                return newImages;
-              });
+            if (fieldName === 'carousel') {
+                setCarousel(data);
+                } 
+            else if (fieldName === 'image1') {
+                setImage1(data);
+                } 
+            else if (fieldName === 'image2') {
+                setImage2(data);
+                } 
+            else if (fieldName === 'image3') {
+                setImage3(data);
+                }
+            else if (fieldName === 'image4') {
+                setImage1(data);
+                } 
+            else if (fieldName === 'image5') {
+                setImage2(data);
+                } 
+            else if (fieldName === 'image6') {
+                setImage3(data);
+                }
+            else if (fieldName === 'image7') {
+                setImage1(data);
+                } 
+            else if (fieldName === 'image8') {
+                setImage2(data);
+                } 
+            else if (fieldName === 'image9') {
+                setImage3(data);
+                }
+            else if (fieldName === 'image10') {
+                    setImage1(data);
+                    } 
+              
+            
             setUploading(false)
 
         }catch(error){
+            console.error('File upload error:', error);
             setUploading(false)
         }
     }
@@ -225,49 +276,178 @@ function ProductEditScreen() {
 
                     </Form.Group>  */}
 
-
-
-
-
-<Form.Group controlId="image">
-              <Form.Label>Image</Form.Label>
-
-              {images.map((image, index) => (
-                <Row key={index}>
-                  <Col>
+                <Form.Group controlId='image1'>
+                    <Form.Label>Image 1</Form.Label>
                     <Form.Control
-                      type="text"
-                      placeholder={`Enter Image ${index + 1}`}
-                      value={image}
-                      onChange={(e) => {
-                        setImages((prevImages) => {
-                          const newImages = [...prevImages];
-                          newImages[index] = e.target.value;
-                          return newImages;
-                        });
-                      }}
+                        type='text'
+                        placeholder='Enter Image 1 URL'
+                        value={image1}
+                        onChange={(e) => setImage1(e.target.value)}
                     />
-                  </Col>
-                  <Col>
-                    <Form.File
-                      id={`image-${index}`}
-                      label={`Choose Image ${index + 1}`}
-                      custom
-                      onChange={(e) => uploadFileHandler(e, index)}
+                   <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange ={ uploadFileHandler}>
+                            
+                        </Form.Control>
+                        {uploading && <Loader />}
+                </Form.Group>
+
+
+                {/* <Form.Group controlId='image2'>
+                <Form.Label>Image 2</Form.Label>
+                <Form.Control
+                    type='text'
+                    placeholder='Enter Image 2 URL'
+                    value={image2}
+                    onChange={(e) => setImage2(e.target.value)}
+                />
+                    <Form.File id='image-2' label='Choose Image 2' custom onChange={(e) => uploadFileHandler(e, 'image2')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+
+                {/* <Form.Group controlId='image3'>
+                    <Form.Label>Image 3</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Enter Image 3 URL'
+                        value={image3}
+                        onChange={(e) => setImage3(e.target.value)}
                     />
-                  </Col>
+                    <Form.File id='image-3' label='Choose Image 3' custom onChange={(e) => uploadFileHandler(e, 'image3')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+
+
+                {/* <Form.Group controlId='image4'>
+                    <Form.Label>Image 4</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Enter Image 4 URL'
+                        value={image4}
+                        onChange={(e) => setImage4(e.target.value)}
+                    />
+                    <Form.File id='image-4' label='Choose Image 4' custom onChange={(e) => uploadFileHandler(e, 'image4')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+{/* 
+                <Form.Group controlId='image5'>
+                <Form.Label>Image 5</Form.Label>
+                <Form.Control
+                    type='text'
+                    placeholder='Enter Image 5 URL'
+                    value={image5}
+                    onChange={(e) => setImage5(e.target.value)}
+                />
+                    <Form.File id='image-5' label='Choose Image 5' custom onChange={(e) => uploadFileHandler(e, 'image5')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+
+                {/* <Form.Group controlId='image6'>
+                    <Form.Label>Image 6</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Enter Image 6 URL'
+                        value={image6}
+                        onChange={(e) => setImage6(e.target.value)}
+                    />
+                    <Form.File id='image-6' label='Choose Image 6' custom onChange={(e) => uploadFileHandler(e, 'image6')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+
+
+
+
+{/* 
+                <Form.Group controlId='image7'>
+                    <Form.Label>Image 7</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Enter Image 7 URL'
+                        value={image7}
+                        onChange={(e) => setImage7(e.target.value)}
+                    />
+                    <Form.File id='image-7' label='Choose Image 7' custom onChange={(e) => uploadFileHandler(e, 'image7')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+
+                {/* <Form.Group controlId='image8'>
+                <Form.Label>Image 8</Form.Label>
+                <Form.Control
+                    type='text'
+                    placeholder='Enter Image 8 URL'
+                    value={image8}
+                    onChange={(e) => setImage8(e.target.value)}
+                />
+                    <Form.File id='image-8' label='Choose Image 8' custom onChange={(e) => uploadFileHandler(e, 'image8')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+
+
+
+                {/* <Form.Group controlId='image9'>
+                    <Form.Label>Image 9</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Enter Image 3 URL'
+                        value={image9}
+                        onChange={(e) => setImage9(e.target.value)}
+                    />
+                    <Form.File id='image-9' label='Choose Image 9' custom onChange={(e) => uploadFileHandler(e, 'image9')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+
+
+
+
+
+                {/* <Form.Group controlId='image10'>
+                    <Form.Label>Image 10</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Enter Image 10 URL'
+                        value={image10}
+                        onChange={(e) => setImage10(e.target.value)}
+                    />
+                    <Form.File id='image-10' label='Choose Image 10' custom onChange={(e) => uploadFileHandler(e, 'image10')} />
+                    {uploading && <Loader />}
+                </Form.Group> */}
+
+
+
+                {/* coroulesl */}
+
+                {/* <Form.Group controlId='carouselImage'>
+              <Form.Label>Carousel Image</Form.Label>
+              <Row>
+                <Col>
+                  <Form.Control
+                    type='text'
+                    placeholder='Enter Carousel Image URL'
+                    value={carousel || ''}
+                    onChange={(e) => setCarousel(e.target.value)}
+                  />
+                </Col>
+                <Col>
+                  <Form.File
+                    id='carousel-image'
+                    label='Choose Carousel Image'
+                    custom
+                    onChange={(e) => uploadFileHandler(e, 'carousel')}
+                  />
                   {uploading && <Loader />}
-                </Row>
-              ))}
-            </Form.Group>
-
-
-
-
-
-
-
-
+                </Col>
+              </Row>
+                </Form.Group> */}
 
                     <Form.Group controlId='brand'>
                         <Form.Label>

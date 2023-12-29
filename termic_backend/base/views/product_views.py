@@ -139,19 +139,54 @@ def deleteProduct(request,pk):
 @permission_classes([IsAdminUser])
 def uploadImage(request):
     data = request.data
-    # print('LOOK BELOW FOR DATA')
-    # print(data)
     product_id = data['product_id']
-
-
-   
-
+    
     product = Product.objects.get(_id=product_id)
 
 
     # Check if 'image' key exists in request.FILES
-    if 'image' in request.FILES:
-        product.image = request.FILES['image']
+    if  'corousel' in request.FILES:
+        product.corousel = request.FILES['corousel']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image1' in request.FILES:
+        product.image1 = request.FILES['image1']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image2' in request.FILES:
+        product.image2 = request.FILES['image2']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image3' in request.FILES:
+        product.image3 = request.FILES['image3']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image4' in request.FILES:
+        product.image4 = request.FILES['image4']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image5' in request.FILES:
+        product.image5 = request.FILES['image5']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image6' in request.FILES:    
+        product.image6 = request.FILES['image6']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image7' in request.FILES:
+        product.image7 = request.FILES['image7']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image8' in request.FILES:
+        product.image8 = request.FILES['image8']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image9' in request.FILES:
+        product.image9 = request.FILES['image9']
+        product.save()
+        return Response('Image was Uploaded')
+    elif  'image10' in request.FILES:
+        product.image10 = request.FILES['image10']
         product.save()
         return Response('Image was Uploaded')
     else:
