@@ -130,7 +130,7 @@ function ProductEditScreen() {
         const file = e.target.files[0]
         const formData =new FormData()
 
-        formData.append('image',file)
+        formData.append(fieldName,file)
         formData.append('product_id',productId)
         setUploading(true)
 
@@ -280,7 +280,7 @@ function ProductEditScreen() {
                     <Form.Label>Image 1</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Enter Image 1 URL'
+                        placeholder='Enter Image 1'
                         value={image1}
                         onChange={(e) => setImage1(e.target.value)}
                     />
@@ -288,166 +288,229 @@ function ProductEditScreen() {
                         type='file'
                         label ='Choose Image'
                         custom='true'
-                        onChange ={ uploadFileHandler}>
+                        onChange={(e) => uploadFileHandler(e, 'image1')} 
+                        required >
                             
                         </Form.Control>
                         {uploading && <Loader />}
                 </Form.Group>
 
 
-                {/* <Form.Group controlId='image2'>
+                <Form.Group controlId='image2'>
                 <Form.Label>Image 2</Form.Label>
                 <Form.Control
                     type='text'
-                    placeholder='Enter Image 2 URL'
+                    placeholder='Enter Image 2'
                     value={image2}
                     onChange={(e) => setImage2(e.target.value)}
                 />
-                    <Form.File id='image-2' label='Choose Image 2' custom onChange={(e) => uploadFileHandler(e, 'image2')} />
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image2')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
 
-                {/* <Form.Group controlId='image3'>
+                <Form.Group controlId='image3'>
                     <Form.Label>Image 3</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Enter Image 3 URL'
+                        placeholder='Enter Image 3'
                         value={image3}
                         onChange={(e) => setImage3(e.target.value)}
                     />
-                    <Form.File id='image-3' label='Choose Image 3' custom onChange={(e) => uploadFileHandler(e, 'image3')} />
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image3')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
 
 
-                {/* <Form.Group controlId='image4'>
+                <Form.Group controlId='image4'>
                     <Form.Label>Image 4</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Enter Image 4 URL'
+                        placeholder='Enter Image 4'
                         value={image4}
                         onChange={(e) => setImage4(e.target.value)}
                     />
-                    <Form.File id='image-4' label='Choose Image 4' custom onChange={(e) => uploadFileHandler(e, 'image4')} />
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image4')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
-{/* 
+
                 <Form.Group controlId='image5'>
                 <Form.Label>Image 5</Form.Label>
                 <Form.Control
                     type='text'
-                    placeholder='Enter Image 5 URL'
+                    placeholder='Enter Image 5'
                     value={image5}
                     onChange={(e) => setImage5(e.target.value)}
                 />
-                    <Form.File id='image-5' label='Choose Image 5' custom onChange={(e) => uploadFileHandler(e, 'image5')} />
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image5')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
 
-                {/* <Form.Group controlId='image6'>
+                <Form.Group controlId='image6'>
                     <Form.Label>Image 6</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Enter Image 6 URL'
+                        placeholder='Enter Image 6'
                         value={image6}
                         onChange={(e) => setImage6(e.target.value)}
                     />
-                    <Form.File id='image-6' label='Choose Image 6' custom onChange={(e) => uploadFileHandler(e, 'image6')} />
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image6')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
 
 
 
 
-{/* 
+
                 <Form.Group controlId='image7'>
                     <Form.Label>Image 7</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Enter Image 7 URL'
+                        placeholder='Enter Image 7'
                         value={image7}
                         onChange={(e) => setImage7(e.target.value)}
                     />
-                    <Form.File id='image-7' label='Choose Image 7' custom onChange={(e) => uploadFileHandler(e, 'image7')} />
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image7')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
 
-                {/* <Form.Group controlId='image8'>
+                <Form.Group controlId='image8'>
                 <Form.Label>Image 8</Form.Label>
                 <Form.Control
                     type='text'
-                    placeholder='Enter Image 8 URL'
+                    placeholder='Enter Image 8'
                     value={image8}
                     onChange={(e) => setImage8(e.target.value)}
                 />
-                    <Form.File id='image-8' label='Choose Image 8' custom onChange={(e) => uploadFileHandler(e, 'image8')} />
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image8')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
 
 
 
-                {/* <Form.Group controlId='image9'>
+                <Form.Group controlId='image9'>
                     <Form.Label>Image 9</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Enter Image 3 URL'
+                        placeholder='Enter Image 9'
                         value={image9}
                         onChange={(e) => setImage9(e.target.value)}
                     />
-                    <Form.File id='image-9' label='Choose Image 9' custom onChange={(e) => uploadFileHandler(e, 'image9')} />
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image9')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
 
 
 
 
 
-                {/* <Form.Group controlId='image10'>
+                <Form.Group controlId='image10'>
                     <Form.Label>Image 10</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Enter Image 10 URL'
+                        placeholder='Enter Image 10'
                         value={image10}
                         onChange={(e) => setImage10(e.target.value)}
                     />
-                    <Form.File id='image-10' label='Choose Image 10' custom onChange={(e) => uploadFileHandler(e, 'image10')} />
+                   <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image10')}  >
+                            
+                        </Form.Control>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
 
 
 
                 {/* coroulesl */}
 
-                {/* <Form.Group controlId='carouselImage'>
+                <Form.Group controlId='carouselImage'>
               <Form.Label>Carousel Image</Form.Label>
               <Row>
-                <Col>
                   <Form.Control
                     type='text'
-                    placeholder='Enter Carousel Image URL'
-                    value={carousel || ''}
+                    placeholder='Enter Carousel Image'
+                    value={carousel}
                     onChange={(e) => setCarousel(e.target.value)}
                   />
-                </Col>
-                <Col>
-                  <Form.File
-                    id='carousel-image'
-                    label='Choose Carousel Image'
-                    custom
-                    onChange={(e) => uploadFileHandler(e, 'carousel')}
-                  />
+              
+                
+                    <Form.Control
+                        type='file'
+                        label ='Choose Image'
+                        custom='true'
+                        onChange={(e) => uploadFileHandler(e, 'image10')}  >
+                            
+                    </Form.Control>
+                        
                   {uploading && <Loader />}
-                </Col>
+                
               </Row>
-                </Form.Group> */}
+                </Form.Group>
+
+
+
+
+
+
+
 
                     <Form.Group controlId='brand'>
                         <Form.Label>

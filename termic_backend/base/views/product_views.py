@@ -143,7 +143,7 @@ def uploadImage(request):
     
     product = Product.objects.get(_id=product_id)
 
-
+    print('request data', data)
     # Check if 'image' key exists in request.FILES
     if  'corousel' in request.FILES:
         product.corousel = request.FILES['corousel']
