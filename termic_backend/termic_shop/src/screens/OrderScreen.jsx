@@ -109,6 +109,24 @@ function OrderScreen() {
     }
 
 
+    const downloadImage = (imageUrl) => {
+        const fileName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+    
+        fetch(imageUrl)
+            .then((response) => response.blob())
+            .then((blob) => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', fileName);
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+            })
+            .catch((error) => console.error('Error downloading image:', error));
+    };
+    
+
     return (loading  ? (<Loader /> 
     ) : error ? (
         <Message variant='danger'>{error}</Message>
@@ -173,8 +191,10 @@ function OrderScreen() {
                                         <Col md={1}>
 
                                             <Image src={item.image1.replace(/.*\/images\/products\//, '/images/products/')}  alt={item.name} fluid rounded />  
-                                           
+                                            
+                                            
                                         </Col>
+                                        
                                         <Col variant='info'>
                                             <Link to={`/product/${item.product}`}>{item.name}</Link>
                                         </Col>
@@ -182,6 +202,24 @@ function OrderScreen() {
                                         <Col md={4}>
                                             {item.qty} x ${item.price} = ${(item.qty * item.price).toFixed(2)}
                                         </Col>
+                                    </Row>
+                                    <Row>
+                                    
+                                            <Button
+                                                variant="link"
+                                                style={{ marginTop: '10px',
+                                                backgroundColor: 'gray',
+                                                color: 'white',
+                                                fontSize: '16px',
+                                                textDecoration: 'none',
+                                                transition: 'background-color 0.3s ease-in-out',
+                                            }}                                           
+                                            onMouseOver={(e) => (e.target.style.backgroundColor = 'black')}
+                                            onMouseOut={(e) => (e.target.style.backgroundColor = 'gray')} 
+                                                onClick={() => downloadImage(item.image1)}
+                                                >Download
+                                            </Button>
+                                        
                                     </Row>
                                 </ListGroup.Item>
                             ))}
@@ -282,6 +320,7 @@ function OrderScreen() {
             </Card>
             
         </Col>
+        
       </Row>
     </div>
     )
