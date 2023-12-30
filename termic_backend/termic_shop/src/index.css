@@ -1,5 +1,6 @@
 main {
   min-height: 80vh;
+  
 }
 
 .rating span{
@@ -119,7 +120,7 @@ h2{
   border-radius: 15px;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
   overflow: hidden;
-  transition: box-shadow 0.3s ease-in-out;
+  
 }
 
 .carousel-item img {
@@ -155,18 +156,11 @@ h2{
   transform: scale(1.07);
 } */
 
-/* Additional carousel styling */
-.carousel-item-next,
-.carousel-item-prev,
-.carousel-item.active {
-  display: flex;
-  background-color:transparent,
-}
 
 
 .carousel-control-next .carousel-control-next-icon{
   border-radius: 18px;
-  background-color:rgb(0, 0, 0);
+  background-color:rgb(95, 95, 95);
 }
 .carousel-control-prev .carousel-control-prev-icon{
   background-color:rgb(0, 0, 0);
@@ -399,13 +393,11 @@ h2{
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
-  background-color: rgb(0, 0, 0); /* Change to your desired icon color */
+  background-color: rgb(102, 102, 102); /* Change to your desired icon color */
+  margin-top: 200%;
 }
 
 /* Optional: Hover effect */
 .carousel-control-prev:hover, .carousel-control-next:hover {
-  background-color: rgb(94, 94, 95); /* Change to your desired hover color */
-}
-.carousel-control-prev, .carousel-control-next {
-  padding: 1px; /* Adjust the padding to reduce the active area */
+  background-color:none; /* Change to your desired hover color */
 }
