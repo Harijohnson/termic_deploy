@@ -2,6 +2,11 @@ import React from 'react'
 import {Card} from 'react-bootstrap'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+
+
+
 
 function Product( {product}) {
   return (
@@ -25,8 +30,19 @@ function Product( {product}) {
                 {/* {Number(product.rating)} from {product.numReviews} reviews */}
                 <Rating value={product.rating} text={`${product.numReviews} reviews`} color={"#f8e825"} />
             </div>
-
+            
+            
         </Card.Text >
+
+        <Card.Text >
+        {product.digital && (  
+               <div className="digital-icon">
+               <FontAwesomeIcon icon={faDownload} title="Digital Product"></FontAwesomeIcon>
+              <lable> Digital Downlodable </lable>  
+             </div>
+          )}
+
+        </Card.Text>
 
         <Card.Text as='h3'>
             ${product.price}

@@ -45,6 +45,10 @@ function ProductEditScreen() {
     const [carousel, setCarousel] = useState(null);
 
 
+    const [isDigital, setIsDigital] = useState(false);
+    const [digitalResource, setDigitalResource] = useState('');
+    
+
     const dispatch = useDispatch()
 
     
@@ -509,9 +513,41 @@ function ProductEditScreen() {
 
 
 
+                <Form.Group controlId='isDigital'>
+                        <Form.Check
+                            type='checkbox'
+                            label='Digital Product'
+                            checked={isDigital}
+                            onChange={(e) => setIsDigital(e.target.checked)}
+                        />
+                    </Form.Group>
 
 
+                    {isDigital && (
+                        <Form.Group controlId='digitalResource'>
+                            <Form.Label>Digital Resource</Form.Label>
+                            <Row>
+                                <Form.Control
+                                    type='text'
+                                    placeholder='Enter Digital Resource'
+                                    value={digitalResource}
+                                    onChange={(e) => setDigitalResource(e.target.value)}
+                                />
 
+                                <Form.Control
+                                    type='file'
+                                    label='Choose Digital Resource'
+                                    custom='true'
+                                    onChange={(e) => uploadFileHandler(e, 'digitalResource')}
+                                />
+
+                                {uploading && <Loader />}
+                            </Row>
+                        </Form.Group>
+                    )}
+
+
+                    
                     <Form.Group controlId='brand'>
                         <Form.Label>
                             Brand

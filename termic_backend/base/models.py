@@ -9,9 +9,9 @@ class Product(models.Model):
     user = models.ForeignKey(User,on_delete=models.SET_NULL ,null=True)  # if the person who add the product in db the user is deleted buy product is not to be deleted
     name = models.CharField(max_length=200,null=True,blank=True)
     # image = models.ImageField(null=True,blank=True,default='/placeholder.png')
-    corousel = models.ImageField(upload_to='corousel/', null=True, blank=True)
-    image1 = models.ImageField(upload_to='products/', null=True, blank=True)
-    image2 = models.ImageField(upload_to='products/', null=True, blank=True)
+    corousel = models.ImageField(upload_to='corousel/', null=True, blank=True,)
+    image1 = models.ImageField(upload_to='products/', null=True, blank=True,default='/placeholder.png')
+    image2 = models.ImageField(upload_to='products/', null=True, blank=True,)
     image3 = models.ImageField(upload_to='products/', null=True, blank=True)
     image4 = models.ImageField(upload_to='products/', null=True, blank=True)
     image5 = models.ImageField(upload_to='products/', null=True, blank=True)
@@ -21,6 +21,9 @@ class Product(models.Model):
     image9 = models.ImageField(upload_to='products/', null=True, blank=True)
     image10 = models.ImageField(upload_to='products/', null=True, blank=True)
 
+    digital=models.BooleanField(default=False, null=True , blank=True)
+    # Make the digitalResource field conditionally editable
+    digitalResource = models.FileField(upload_to='digital_resources/', null=True, blank=True, editable=False)
     brand = models.CharField(max_length=200,null=True,blank=True)
     category = models.CharField(max_length=200,null=True,blank=True)
     description = models.TextField(null=True,blank=True)
@@ -30,12 +33,10 @@ class Product(models.Model):
     countInStock = models.IntegerField(null=True,blank=True,default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True,editable=False)
-
+   
     def __str__(self):
         return self.name
-
-
-
+  
 
 class Review(models.Model):
     product = models.ForeignKey(Product,on_delete=models.SET_NULL ,null=True) 

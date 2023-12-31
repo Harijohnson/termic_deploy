@@ -419,3 +419,26 @@ h2{
   background-color:#000000;
   color:black;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Add this to your CSS file or component's styles */
+.digital-icon {
+  color: #007bff; /* Set the color of the digital icon */
+  font-size: 20px; /* Adjust the font size as needed */
+  margin-top: 5px; /* Adjust the margin to position the icon */
+}
