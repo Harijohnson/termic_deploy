@@ -149,7 +149,11 @@ function ProductScreen(  ) {
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
-    
+
+                <ListGroup.Item>
+                  <h5>Category : {product.category}</h5>
+                </ListGroup.Item>
+
                 <ListGroup.Item>
                   <Rating value={product.rating} text={`${product.numReviews} reviews`}  color={'#f8e825'}/>
                 </ListGroup.Item>

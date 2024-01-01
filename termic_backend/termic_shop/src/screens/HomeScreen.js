@@ -5,7 +5,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
-import { useLocation } from 'react-router-dom';  // Import useLocation
+import { Link, useLocation } from 'react-router-dom';  // Import useLocation
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
 
@@ -15,19 +15,23 @@ function HomeScreen() {
     const dispatch =useDispatch()
     const productList  = useSelector(state =>state.productList)
     const {error,loading,products , page ,pages,  categories } = productList
-
+    console.log('Product List State:', productList);
     const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 
     let location = useLocation();
     let keyword = location.search;
-  
+    const uniqueCategories = [...new Set(products.map(product => product.category))];
 
 
+    console.log('Categories:', categories);
+ 
     // console.log(keyword)
   useEffect(()=>{
     dispatch(listProducts(keyword))
     
   },[dispatch,keyword])
+
+
   const handleCategoryDropdown = () => {
     setShowCategoryDropdown(!showCategoryDropdown);
   };
@@ -46,10 +50,10 @@ function HomeScreen() {
             Categories
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {categories.map((category) => (
-              <Dropdown.Item key={category} onClick={() => handleCategorySelection(category)}>
-                {category}
-              </Dropdown.Item>
+            {uniqueCategories && uniqueCategories.map((category) => (
+             <Dropdown.Item key={category} onClick={() => handleCategorySelection(category)}>
+              <Link to={`?category=${category}`}>{category}</Link>
+            </Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown> 
