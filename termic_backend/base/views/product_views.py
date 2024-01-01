@@ -147,58 +147,28 @@ def uploadImage(request):
     
     product = Product.objects.get(_id=product_id)
 
-    print('request data', data)
-    # Check if 'image' key exists in request.FILES
-    if  'corousel' in request.FILES:
-        product.corousel = request.FILES['corousel']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image1' in request.FILES:
-        product.image1 = request.FILES['image1']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image2' in request.FILES:
-        product.image2 = request.FILES['image2']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image3' in request.FILES:
-        product.image3 = request.FILES['image3']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image4' in request.FILES:
-        product.image4 = request.FILES['image4']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image5' in request.FILES:
-        product.image5 = request.FILES['image5']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image6' in request.FILES:    
-        product.image6 = request.FILES['image6']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image7' in request.FILES:
-        product.image7 = request.FILES['image7']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image8' in request.FILES:
-        product.image8 = request.FILES['image8']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image9' in request.FILES:
-        product.image9 = request.FILES['image9']
-        product.save()
-        return Response('Image was Uploaded')
-    elif  'image10' in request.FILES:
-        product.image10 = request.FILES['image10']
-        product.save()
-        return Response('Image was Uploaded')
-    else:
-        return Response('No image provided', status=400)
+    
+    # Define a list of possible image fields
+    image_fields = ['corousel', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10','digitalResource']
 
+    # Check if any of the image fields is present in request.FILES
+    for field in image_fields:
+        if field in request.FILES:
+            # Update the corresponding product field with the uploaded image
+            setattr(product, field, request.FILES[field])
+            product.save()
 
+            # Special handling for 'digitalResource' field
+            if field == 'digitalResource':
+                product.digital = True  # Set the 'digital' field to True when 'digitalResource' is uploaded
+                product.save()
 
+            return Response(f'Image for {field} was Uploaded')
 
+    # If no image field is found in request.FILES
+    return Response('No image provided', status=400)
+
+    
 
 
 

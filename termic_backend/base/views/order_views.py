@@ -59,7 +59,7 @@ def addOrderItems(request):
                 qty= i['qty'],
                 price = i['price'],
                 image1 = product.image1.url,
-
+                digital=product.digital,
             )
             print('details',item)
 

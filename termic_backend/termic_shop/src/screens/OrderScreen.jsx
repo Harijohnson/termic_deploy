@@ -203,7 +203,7 @@ function OrderScreen() {
                                             {item.qty} x ${item.price} = ${(item.qty * item.price).toFixed(2)}
                                         </Col>
                                     </Row>
-                                    <Row>
+                                    {/* <Row>
                                     
                                             <Button
                                                 variant="link"
@@ -220,7 +220,27 @@ function OrderScreen() {
                                                 >Download
                                             </Button>
                                         
-                                    </Row>
+                                    </Row> */}
+                                   <Row>
+                                        {item.digital && order.isPaid && (
+                                            <Button
+                                                variant='link'
+                                                style={{
+                                                    marginTop: '10px',
+                                                    backgroundColor: 'gray',
+                                                    color: 'white',
+                                                    fontSize: '16px',
+                                                    textDecoration: 'none',
+                                                    transition: 'background-color 0.3s ease-in-out',
+                                                }}
+                                                onMouseOver={(e) => (e.target.style.backgroundColor = 'black')}
+                                                onMouseOut={(e) => (e.target.style.backgroundColor = 'gray')}
+                                                onClick={() => downloadImage(item.image1)}
+                                            >
+                                            Download
+                                        </Button>
+                                    )}
+                                </Row>
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
