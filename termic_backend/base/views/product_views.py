@@ -149,7 +149,7 @@ def uploadImage(request):
 
     
     # Define a list of possible image fields
-    image_fields = ['corousel', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10','digitalResource']
+    image_fields = ['carousel', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10','digitalResource']
 
     # Check if any of the image fields is present in request.FILES
     for field in image_fields:

@@ -15,7 +15,7 @@ function HomeScreen() {
     const dispatch =useDispatch()
     const productList  = useSelector(state =>state.productList)
     const {error,loading,products , page ,pages,  categories } = productList
-    console.log('Product List State:', productList);
+    // console.log('Product List State:', productList);
     const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 
     let location = useLocation();
@@ -23,7 +23,7 @@ function HomeScreen() {
     const uniqueCategories = [...new Set(products.map(product => product.category))];
 
 
-    console.log('Categories:', categories);
+    // console.log('Categories:', categories/);
  
     // console.log(keyword)
   useEffect(()=>{

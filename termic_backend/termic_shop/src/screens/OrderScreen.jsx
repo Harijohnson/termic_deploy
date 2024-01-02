@@ -108,26 +108,46 @@ function OrderScreen() {
         dispatch(deliverOrder(order))
     }
 
+    const downloadFile = (fileUrl, fileName) => {
+        console.log('File URL:', fileUrl); // Add this line to check the value of fileUrl
 
-    const downloadImage = (imageUrl) => {
-        const fileName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-    
-        fetch(imageUrl)
-            .then((response) => response.blob())
-            .then((blob) => {
-                const url = window.URL.createObjectURL(new Blob([blob]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', fileName);
-                document.body.appendChild(link);
-                link.click();
-                link.parentNode.removeChild(link);
+        fetch(fileUrl)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Failed to download file: ${response.statusText}`);
+                }
+                return response.blob();
             })
-            .catch((error) => console.error('Error downloading image:', error));
+            .then((blob) => {
+                if (fileName.toLowerCase().endsWith('.pdf')) {
+                    // Handle PDF files
+                    const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', fileName);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.parentNode.removeChild(link);
+                } else if (fileName.toLowerCase().endsWith('.jpg') || fileName.toLowerCase().endsWith('.jpeg')) {
+                    // Handle JPG files
+                    const url = window.URL.createObjectURL(new Blob([blob], { type: 'image/jpeg' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', fileName);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.parentNode.removeChild(link);
+                } else {
+                    // Handle other file types
+                    console.error('Unsupported file type:', fileName);
+                }
+            })
+            .catch((error) => console.error('Error downloading resource:', error));
     };
     
+    
 
-    return (loading  ? (<Loader /> 
+return (loading  ? (<Loader /> 
     ) : error ? (
         <Message variant='danger'>{error}</Message>
     ): (
@@ -203,25 +223,8 @@ function OrderScreen() {
                                             {item.qty} x ${item.price} = ${(item.qty * item.price).toFixed(2)}
                                         </Col>
                                     </Row>
-                                    {/* <Row>
-                                    
-                                            <Button
-                                                variant="link"
-                                                style={{ marginTop: '10px',
-                                                backgroundColor: 'gray',
-                                                color: 'white',
-                                                fontSize: '16px',
-                                                textDecoration: 'none',
-                                                transition: 'background-color 0.3s ease-in-out',
-                                            }}                                           
-                                            onMouseOver={(e) => (e.target.style.backgroundColor = 'black')}
-                                            onMouseOut={(e) => (e.target.style.backgroundColor = 'gray')} 
-                                                onClick={() => downloadImage(item.image1)}
-                                                >Download
-                                            </Button>
-                                        
-                                    </Row> */}
-                                   <Row>
+                                  
+                                    <Row>
                                         {item.digital && order.isPaid && (
                                             <Button
                                                 variant='link'
@@ -235,7 +238,17 @@ function OrderScreen() {
                                                 }}
                                                 onMouseOver={(e) => (e.target.style.backgroundColor = 'black')}
                                                 onMouseOut={(e) => (e.target.style.backgroundColor = 'gray')}
-                                                onClick={() => downloadImage(item.image1)}
+                                                onClick={() => {
+                                                    console.log('Product:', item); // Log the product details
+                                                    console.log('Digital Resource:', item.digitalResource); // Log the digitalResource details
+                                                    if (item.digitalResource) {
+                                                        console.log('Digital Resource URL:', item.digitalResource);
+                                                        downloadFile(item.digitalResource, item.name);
+                                                    } else {
+                                                        console.error('Digital Resource URL is undefined.');
+                                                    }
+                                                }}
+                                                
                                             >
                                             Download
                                         </Button>

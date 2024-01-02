@@ -42,7 +42,7 @@
         const [image8, setImage8] = useState('');
         const [image9, setImage9] = useState('');
         const [image10, setImage10] = useState('');
-        const [carousel, setCarousel] = useState(null);
+        const [carousel, setCarousel] = useState('');
 
 
         const [isDigital, setIsDigital] = useState('False');
@@ -607,7 +607,7 @@
                             type='file'
                             label ='Choose Image'
                             custom='true'
-                            onChange={(e) => uploadFileHandler(e, 'image10')}  >
+                            onChange={(e) => uploadFileHandler(e, 'carousel')}  >
                                 
                         </Form.Control>
                             
