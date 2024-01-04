@@ -88,7 +88,7 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields =  '__all__'
-
+        
     def get_orderItems(self,obj):
         items = obj.order_items.all()
         serializer = OrderItemSerializer(items,many=True)
