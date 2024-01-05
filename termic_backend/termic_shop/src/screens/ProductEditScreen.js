@@ -1,6 +1,6 @@
     import React,{ useEffect,useState } from 'react'
     import { Link, useLocation,useNavigate,useParams } from 'react-router-dom'
-    import { Form,Button,Col,Row } from 'react-bootstrap'
+    import { Form,Button,Col,Row,Dropdown } from 'react-bootstrap'
     import  Loader   from '../components/Loader'
     import  Message   from '../components/Message'
     import { useDispatch,useSelector } from 'react-redux'
@@ -210,6 +210,13 @@
     };
 
 
+    const [selectedCategory, setSelectedCategory] = useState('');
+
+    // ... (other code)
+
+    const categoryOptions = ['Electronics', 'Photos', 'Paintings','Home Decors']; // Add your actual category options here
+
+
     return (
 
         <div>
@@ -321,7 +328,7 @@
                             </Form.Control>
                         </Form.Group>
 
-                        <Form.Group controlId='category'>
+                        {/* <Form.Group controlId='category'>
                             <Form.Label>
                                 Category
                             </Form.Label>
@@ -332,7 +339,27 @@
                             onChange={(e)=>setCategory(e.target.value)}>
 
                             </Form.Control>
-                        </Form.Group>
+                        </Form.Group> */}
+
+                            <Form.Group controlId='category'>
+                                <Form.Label>Category</Form.Label>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="category-dropdown">
+                                        {selectedCategory || 'Select Category'}
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        {categoryOptions.map((category) => (
+                                            <Dropdown.Item
+                                                key={category}
+                                                onClick={() => setSelectedCategory(category)}
+                                            >
+                                                {category}
+                                            </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Form.Group>
 
                         <Form.Group controlId='description'>
                             <Form.Label>

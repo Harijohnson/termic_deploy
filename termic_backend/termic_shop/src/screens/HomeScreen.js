@@ -40,13 +40,18 @@ function HomeScreen() {
     dispatch(listProducts(`?category=${category}`));
     setShowCategoryDropdown(false);
   };
+
+  const handleElectronicsCategory = () => {
+    dispatch(listProducts('?category=Electronics'));
+    setShowCategoryDropdown(false);
+};
   return (
     <div className="container">
 
 
 <div className="mb-4">
-        <Dropdown show={showCategoryDropdown} onMouseEnter={handleCategoryDropdown} onMouseLeave={handleCategoryDropdown}>
-          <Dropdown.Toggle as={Button} variant="info" id="category-dropdown">
+        <Dropdown show={showCategoryDropdown} onMouseOver={() => setShowCategoryDropdown(true)} onMouseOut={() => setShowCategoryDropdown(false)}>
+          <Dropdown.Toggle as={Button} variant="info" id="category-dropdown"  className="custom-category-dropdown">
             Categories
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -55,6 +60,9 @@ function HomeScreen() {
               <Link to={`?category=${category}`}>{category}</Link>
             </Dropdown.Item>
             ))}
+            <Dropdown.Item onClick={handleElectronicsCategory}>
+                            <Link to="?category=Electronics">Electronics</Link>
+                        </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown> 
       </div>
