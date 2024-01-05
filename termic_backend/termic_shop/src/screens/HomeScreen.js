@@ -41,10 +41,6 @@ function HomeScreen() {
     setShowCategoryDropdown(false);
   };
 
-  const handleElectronicsCategory = () => {
-    dispatch(listProducts('?category=Electronics'));
-    setShowCategoryDropdown(false);
-};
   return (
     <div className="container">
 
@@ -54,7 +50,7 @@ function HomeScreen() {
           <Dropdown.Toggle as={Button} variant="info" id="category-dropdown"  className="custom-category-dropdown">
             Categories
           </Dropdown.Toggle>
-          <Dropdown.Menu>
+          <Dropdown.Menu  style={{ width: 'auto', minWidth: '200px' }}>
             {uniqueCategories && uniqueCategories.map((category) => (
              <Dropdown.Item key={category} onClick={() => handleCategorySelection(category)}>
               <Link to={`?category=${category}`}>{category}</Link>
@@ -64,7 +60,6 @@ function HomeScreen() {
           </Dropdown.Menu>
         </Dropdown> 
       </div>
-
 
 
 
