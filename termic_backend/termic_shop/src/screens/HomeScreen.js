@@ -60,9 +60,7 @@ function HomeScreen() {
               <Link to={`?category=${category}`}>{category}</Link>
             </Dropdown.Item>
             ))}
-            <Dropdown.Item onClick={handleElectronicsCategory}>
-                            <Link to="?category=Electronics">Electronics</Link>
-                        </Dropdown.Item>
+            
           </Dropdown.Menu>
         </Dropdown> 
       </div>

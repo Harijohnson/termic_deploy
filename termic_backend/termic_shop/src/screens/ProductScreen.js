@@ -195,7 +195,7 @@ function ProductScreen(  ) {
                           <Col>
                           Quantity
                           </Col>
-                          <Col className='my-1'>
+                          {/* <Col className='my-1'>
                             <Form.Control  
                             as='select'
                             value={qty}
@@ -210,7 +210,21 @@ function ProductScreen(  ) {
                                 ))
                               }
                             </Form.Control>
-                          </Col>
+                          </Col> */}
+                          <Col className='my-1'>
+                    <Form.Control  
+                        as='select'
+                        value={qty}
+                        onChange={(e) => setQty(Math.min(Number(e.target.value), 10))}
+                        max={10} // Add this line to set the maximum value
+                    >
+                        {[...Array(Math.min(10, product.countInStock)).keys()].map((x) => (
+                            <option value={x + 1} key={x + 1}>
+                                {x + 1}
+                            </option>
+                        ))}
+                    </Form.Control>
+                </Col>
                         </Row>
                       </ListGroup.Item> 
                     ) }
