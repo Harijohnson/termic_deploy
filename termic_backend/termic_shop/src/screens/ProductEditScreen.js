@@ -45,7 +45,7 @@
         const [carousel, setCarousel] = useState('');
 
 
-        const [isDigital, setIsDigital] = useState('False');
+        const [isDigital, setIsDigital] = useState(false);
         const [digitalResource, setDigitalResource] = useState('');
 
         const [previewData, setPreviewData] = useState(null);
@@ -264,6 +264,7 @@
                                 label='Digital Product'
                                 checked={isDigital}
                                 onChange={(e) => setIsDigital(e.target.checked)}
+                                
                             />
                         </Form.Group>
 
