@@ -184,10 +184,10 @@ switch(action.type){
 export const productCategoryReducer = (state = {products:[]},action) => {
     switch(action.type){
         case PRODUCT_CATEGORY_REQUEST:
-            return {loading:true,products:[]}
+            return {...state,loading:true,products:[]}
     
         case PRODUCT_CATEGORY_SUCCESS:
-            return {loading:false,products:action.payload}
+            return {...state,loading:false,products:action.payload}
     
         case PRODUCT_CATEGORY_FAIL:
             return {loading:false,error:action.payload}
