@@ -20,4 +20,7 @@ urlpatterns = [
     
     path('delete/<str:pk>/', views.deleteProduct, name='product-delete'),
 
+    path('category/<str:category>/', views.getCategory, name='product-caetgory'),
+
+
 ]

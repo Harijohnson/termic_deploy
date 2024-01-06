@@ -85,6 +85,18 @@ def getProduct(request,pk):
 
 
 
+
+@api_view(['GET'])
+def getCategory(request,category):
+    category = Product.objects.filter(category = category)
+    # print('category op is ',category)
+    serializer = ProductSerializer(category,many =  True)
+    return Response(serializer.data)
+
+
+
+
+
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createProduct(request):
