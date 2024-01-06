@@ -304,11 +304,11 @@ export  const  createProductReview= (productId,review) => async (dispatch,getSta
 
 
 
-export const listCategoryDetails = (category) => async (dispatch) => {
+export const listProductsByCategory = (category) => async (dispatch) => {
     try{
         dispatch({type:PRODUCT_CATEGORY_REQUEST})
-        const { data } = await axios.get(`/api/products/category/electronics/`)
-        console.log('data from backed is',data)
+        const { data } = await axios.get(`/api/products/${category}`)
+        // console.log('data from backed is',data)
         dispatch({
             type:PRODUCT_CATEGORY_SUCCESS,
             payload:data,

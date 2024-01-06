@@ -44,7 +44,7 @@ function App() {
               <Route  path='/admin/orderlist' element={ <OrderListScreen />} />
 
 
-              <Route  path='/category' element={ <CategoryScreen />} />
+              <Route path="/category/:name" element={<CategoryScreen />} />
 
             </Routes>
           </Container>  

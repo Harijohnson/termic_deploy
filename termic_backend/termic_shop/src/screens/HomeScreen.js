@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
 import {Row,Col,Dropdown,Button} from 'react-bootstrap'
 import  Product   from '../components/Product'
 import { useDispatch,useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
-import { Link, useLocation } from 'react-router-dom';  // Import useLocation
+import { Link, useLocation,useNavigate } from 'react-router-dom';  // Import useLocation
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
+
 
 
 
@@ -21,6 +22,7 @@ function HomeScreen() {
     let location = useLocation();
     let keyword = location.search;
     const uniqueCategories = [...new Set(products.map(product => product.category))];
+    const navigate = useNavigate();
 
 
     // console.log('Categories:', categories/);
@@ -36,9 +38,10 @@ function HomeScreen() {
     setShowCategoryDropdown(!showCategoryDropdown);
   };
 
+
   const handleCategorySelection = (category) => {
-    dispatch(listProducts(`?category=${category}`));
-    setShowCategoryDropdown(false);
+    // Example: Navigating to the category screen
+    navigate(`/category/${category}`);
   };
 
   return (
@@ -46,20 +49,21 @@ function HomeScreen() {
 
 
 <div className="mb-4">
-        <Dropdown show={showCategoryDropdown} onMouseOver={() => setShowCategoryDropdown(true)} onMouseOut={() => setShowCategoryDropdown(false)}>
-          <Dropdown.Toggle as={Button} variant="info" id="category-dropdown"  className="custom-category-dropdown">
+<Dropdown show={showCategoryDropdown} onToggle={handleCategoryDropdown}>
+          <Dropdown.Toggle as={Button} variant="info" id="category-dropdown" className="custom-category-dropdown">
             Categories
           </Dropdown.Toggle>
-          <Dropdown.Menu  style={{ width: 'auto', minWidth: '200px' }}>
-            {uniqueCategories && uniqueCategories.map((category) => (
-             <Dropdown.Item key={category} onClick={() => handleCategorySelection(category)}>
-              <Link to={`?category=${category}`}>{category}</Link>
-            </Dropdown.Item>
-            ))}
-            
+          <Dropdown.Menu>
+            {uniqueCategories &&
+              uniqueCategories.map((category) => (
+                <Dropdown.Item key={category} onClick={() => handleCategorySelection(category)}>
+                  <Link to={`?category=${category}`}>{category}</Link>
+                </Dropdown.Item>
+              ))}
           </Dropdown.Menu>
-        </Dropdown> 
+        </Dropdown>
       </div>
+
 
 
 

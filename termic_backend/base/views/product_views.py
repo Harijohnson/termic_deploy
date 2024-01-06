@@ -88,10 +88,12 @@ def getProduct(request,pk):
 
 @api_view(['GET'])
 def getCategory(request,category):
+    # print('request from frontend is',request)
     category = Product.objects.filter(category = category)
     # print('category op is ',category)
+    # print('filtered result is :',category)
     serializer = ProductSerializer(category,many =  True)
-    return Response(serializer.data)
+    return Response({'products': serializer.data})
 
 
 
