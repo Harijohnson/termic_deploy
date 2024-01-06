@@ -5,6 +5,8 @@ from base.views import product_views as views
 urlpatterns = [
     path('', views.getProducts, name='products'),
 
+    path('category/<str:category>/', views.getCategory, name='product-caetgory'),
+
     path('upload/', views.uploadImage, name='image-upload'),
     
     path('create/', views.createProduct, name='product-create'),
@@ -20,7 +22,7 @@ urlpatterns = [
     
     path('delete/<str:pk>/', views.deleteProduct, name='product-delete'),
 
-    path('category/<str:category>/', views.getCategory, name='product-caetgory'),
+    
 
 
 ]
