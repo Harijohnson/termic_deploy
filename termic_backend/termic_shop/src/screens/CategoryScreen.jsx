@@ -40,10 +40,7 @@ function CategoryScreen() {
                     
                   <Col key={product._id} className='mb-3'>
                     <Product product={product} />
-                    
                   </Col>
-
-                    
                 ))}
               </Row>
          

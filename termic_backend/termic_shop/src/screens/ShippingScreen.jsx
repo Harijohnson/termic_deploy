@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Form,Button } from 'react-bootstrap'
 import { useDispatch,useSelector } from 'react-redux'
@@ -18,6 +18,12 @@ function ShippingScreen() {
   const [postalCode  ,setPostalCode] = useState(shippingAddress.postalCode)
 
   const dispatch = useDispatch()
+  
+
+
+
+
+
 
   const submitHandeler = (e) =>{
     e.preventDefault()
