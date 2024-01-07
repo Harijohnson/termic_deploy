@@ -64,12 +64,7 @@ def getProducts(request):
 
 @api_view(['GET'])
 def getTopProducts(request):
-
     products = Product.objects.filter(rating__gte=4).order_by('-rating')[0:5] #change this to corousel images
-
-
-
-    
     serializer = ProductSerializer(products,many =  True)
     return Response(serializer.data)
 
@@ -87,11 +82,11 @@ def getProduct(request,pk):
 
 
 @api_view(['GET'])
-def getCategory(request):
-    # print('request from frontend is',request)
-    category_pk = request.object.get('category')
+def getCategory(request,category):
+    print('request from frontend is',category)
+    # category_pk = request.object.get('category')
 
-    category = Product.objects.filter(category = category_pk)
+    category = Product.objects.filter(category = category)
     # print('category op is ',category)
     # print('filtered result is :',category)
     serializer = ProductSerializer(category,many =  True)

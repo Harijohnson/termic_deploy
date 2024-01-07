@@ -5,7 +5,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';  
 import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
-import {  useLocation } from 'react-router-dom';  // Import useLocation
+import {  useLocation,Link } from 'react-router-dom';  // Import useLocation
 import { listProductsByCategory } from '../actions/productActions';
 
 function CategoryScreen() {
@@ -27,15 +27,16 @@ function CategoryScreen() {
       return (
         <>
             {/* {console.log("inside the screen ",products)} */}
-          <h1>Category Screen: {category}</h1>
+          
+            <Link to='/' className='btn btn-light  text-start' style={{backgroundColor:'lightblue'}}>Go Back</Link>
           {loading ? (
             <Loader />
           ) : error ? (
             <Message variant='danger'>{error}</Message>
-          ) : products ?(
+          ) :  products && products.products && Array.isArray(products.products) && products.products.length > 0 ?(
             
               <Row xs={2} sm={2} md={3} lg={4} xl={4} className='g-4'>
-                {products.map((product) => (
+                {products.products.map((product) => (
                     
                   <Col key={product._id} className='mb-3'>
                     <Product product={product} />
