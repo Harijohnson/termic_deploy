@@ -307,7 +307,7 @@ export  const  createProductReview= (productId,review) => async (dispatch,getSta
 export const listProductsByCategory = (category) => async (dispatch) => {
     try{
         dispatch({type:PRODUCT_CATEGORY_REQUEST})
-        const { data } = await axios.get(`/api/products/${category}`)
+        const { data } = await axios.get(`/api/products/category/${category}`)
 
         dispatch({
             type:PRODUCT_CATEGORY_SUCCESS,

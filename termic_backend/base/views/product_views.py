@@ -35,9 +35,9 @@ def getProducts(request):
     # print('products          :',products)
     page = request.query_params.get('page')
     
-    paginator = Paginator(products,15)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
+    paginator = Paginator(products,6)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
 
-
+    print("paginator op is ",paginator)
    
     try:
         products = paginator.page(page)
@@ -83,13 +83,19 @@ def getProduct(request,pk):
 
 @api_view(['GET'])
 def getCategory(request,category):
-    print('request from frontend is',category)
-    # category_pk = request.object.get('category')
+    # print('request from frontend is',category)
+    # # category_pk = request.object.get('category')
 
-    category = Product.objects.filter(category = category)
-    # print('category op is ',category)
+    # category = Product.objects.filter(category = category)
+    # # print('category op is ',category)
     # print('filtered result is :',category)
-    serializer = ProductSerializer(category,many =  True)
+        # Use request.query_params.get to get the category from the URL
+    category_param = request.query_params.get('category', '')
+
+    # Use category__iexact for case-insensitive filtering
+    products = Product.objects.filter(category__iexact=category_param)
+
+    serializer = ProductSerializer(products,many =  True)
     return Response({'products': serializer.data})
 
 

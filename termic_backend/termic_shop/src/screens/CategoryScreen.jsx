@@ -16,9 +16,9 @@ function CategoryScreen() {
     const location = useLocation();
     const category = location.pathname.split('/').pop()
 
-
+    console.log('categorys from function :',category)
     useEffect(() => {
-        dispatch(listProductsByCategory(`/category/${category}`));
+        dispatch(listProductsByCategory(`/${category}`));
       }, [dispatch, category]);
 
      
