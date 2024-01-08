@@ -49,10 +49,7 @@ export const listProducts = (keyword = "") => async (dispatch) => {
 
         dispatch({
             type:PRODUCT_LIST_SUCCESS,
-            payload: {
-                products: data.products,
-                categories: data.categories,
-            },
+            payload:data,
         })
         
     }catch(error){
