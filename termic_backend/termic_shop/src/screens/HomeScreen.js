@@ -59,7 +59,7 @@ function HomeScreen() {
               
               
               
-        <Paginate page={page} pages={pages}  keyword={keyword ? `?keyword=${keyword}` : '' }  isAdmin={userInfo.isAdmin}/>
+        <Paginate page={page} pages={pages}  keyword={keyword ? `?keyword=${keyword}` : '' }  />
         </Row>  
         
         </div>
