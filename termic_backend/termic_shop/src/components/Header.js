@@ -60,12 +60,23 @@
                             <NavDropdown.Item onClick={ logoutHandeler }>
                                 Logout
                             </NavDropdown.Item>
-                          </NavDropdown>
+                          </NavDropdown>        
+                          
                         ) : (
                           <LinkContainer to='/login'>
                             <Nav.Link><i className='fas fa-user fa-lg me-1'></i> Login</Nav.Link>
                           </LinkContainer>
                         ) }
+
+                        {userInfo ?(
+                          
+                          <LinkContainer to='/'>
+                            <Nav.Link><i className="fa-solid fa-dollar-sign"></i> </Nav.Link>
+                          </LinkContainer>
+                        ):
+                        <></>
+                        }
+
 
 
                     {userInfo && userInfo.isAdmin &&  (

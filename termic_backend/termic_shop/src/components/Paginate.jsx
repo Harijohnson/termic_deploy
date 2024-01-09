@@ -61,7 +61,6 @@
 
 // // http://127.0.0.1:3000/#/?keyword=&page=2 working
 
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -77,20 +76,22 @@ function Paginate({ pages, page, keyword = '', isAdmin = false }) {
   };
 
   return pages > 1 && (
-    <div className="pagination">
-      {[...Array(pages).keys()].map((x) => {
-        const pageNumber = x + 1;
+    <div className="pagination-container">
+      <div className="pagination">
+        {[...Array(pages).keys()].map((x) => {
+          const pageNumber = x + 1;
 
-        return (
-          <Link
-            key={pageNumber}
-            className={`page-link ${pageNumber === Number(page) ? 'active' : ''}`}
-            to={generatePageLink(pageNumber)}
-          >
-            {pageNumber}
-          </Link>
-        );
-      })}
+          return (
+            <Link
+              key={pageNumber}
+              className={`page-link ${pageNumber === Number(page) ? 'active' : ''}`}
+              to={generatePageLink(pageNumber)}
+            >
+              {pageNumber}
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

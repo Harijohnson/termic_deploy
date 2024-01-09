@@ -1,5 +1,6 @@
 main {
   min-height: 80vh;
+  background-color:#ffffff;
   
 }
 
@@ -20,7 +21,6 @@ h2{
   padding: 0.5rem 0;
   
 }
-
 
 
 
@@ -471,6 +471,9 @@ h2{
   border: 1px solid #333;
 }
 
+.pagination-container {
+  position: relative;
+}
 
 
 
@@ -478,10 +481,31 @@ h2{
 
 
 
+.pagination-container {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding: 10px; /* Adjust padding for styling */
+  background-color: white; /* Set background color if needed */
+  z-index: 1000; /* Set a high z-index to ensure it's on top of other elements */
+}
 
+.pagination {
+  display: inline-block; /* Ensure pagination links are displayed in a line */
+}
 
+.page-link {
+  /* Add your styling for the pagination links here */
+  margin: 0 5px; /* Adjust margin for spacing between links */
+}
 
+.page-link.active {
+  /* Add styling for the active pagination link here */
+  background-color: gray;
+  color: white;
+  border: 1px solid #333;
+}
 
-
-
-
+.products-container {
+  min-height: calc(100vh - 100px); /* Adjust as needed, considering pagination height */
+}
