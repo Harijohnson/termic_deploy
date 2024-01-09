@@ -71,7 +71,7 @@
                         {userInfo ?(
                           
                           <LinkContainer to='/'>
-                            <Nav.Link><i className="fa-solid fa-dollar-sign"></i> </Nav.Link>
+                            <Nav.Link><i className="fa-solid fa-comments-dollar"></i></Nav.Link>
                           </LinkContainer>
                         ):
                         <></>
