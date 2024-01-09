@@ -128,3 +128,13 @@ def deleteUser(request,pk):
     userForDeletion = User.objects.get(id=pk)
     userForDeletion.delete()
     return Response('User is Deleted')
+
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser,IsAuthenticated])
+def companyDetails(request,pk):
+    userForDeletion = User.objects.get(id=pk)
+    userForDeletion.delete()
+    return Response('User is Deleted')

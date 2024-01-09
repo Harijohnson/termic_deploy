@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Product,Order,OrderItem,ShippingAddress,Product,Review
+from .models import CompanyDetails, Product,Order,OrderItem,ShippingAddress,Product,Review
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class UserSerializer(serializers.ModelSerializer):
@@ -109,7 +109,10 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 
-
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyDetails
+        fields =  '__all__'
 
 
 
