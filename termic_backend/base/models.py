@@ -168,16 +168,3 @@ class ShippingAddress(models.Model):
 
 
 
-class CompanyDetails(models.Model):
-    companyName = models.CharField(max_length=200,primary_key = True )
-    aboutCompany = models.TextField(blank=True,null = True )
-    user = models.ForeignKey(User,on_delete=models.SET_NULL ,null=True) 
-    companyLogo =models.ImageField(upload_to='companylogo/', null=True, blank=True)
-    products = models.ForeignKey(Product,on_delete=models.SET_NULL ,null=True) 
-    startedAt = models.DateTimeField(auto_now_add=True)
-    # orders = models.ForeignKey(Order,on_delete=models.SET_NULL ,null=True)
-  
-
-
-    def __str__(self):
-        return str(self.companyName)
