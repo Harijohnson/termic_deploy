@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from base.models import Product,Review
-from base.serializers import ProductSerializer
+from base.models import CompanyDetails, Product,Review
+from base.serializers import CompanySerializer, ProductSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.decorators import api_view,permission_classes
 from django.views.decorators.csrf import csrf_exempt
@@ -12,6 +12,29 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 
 
+
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def companyDetails(request):
+    data = request.data
+    user = request.user
+    print('user details',user)
+    print('data details',data)
+    try :
+        company = CompanyDetails.objects.create(
+            user = user,
+            companyName = data['companyname'],
+            aboutCompany = data['aboutcompany'],
+            companyLogo=request.FILES.get('logo'),
+        )
+        serializer = CompanySerializer(company,many=False)
+        return Response(serializer.data)
+    except:
+        message = {'detail':'Company with this name alread exist'}
+        return Response(message,status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -104,16 +127,16 @@ def getProduct(request,pk):
 
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated,IsAdminUser])
 def createProduct(request):
     user = request.user
-
+    company_details = request.company
     product  = Product.objects.create(
-        user = user,
+        company = company_details,
         name = 'Sample Name',
         price = 0,
         brand = 'Sample Brand',
-        countInStock = 0,
+        countInStock = 0, 
         category = 'Sample category',
         description = 'Sample Discription',
         rating = 0,
@@ -125,7 +148,7 @@ def createProduct(request):
 @csrf_exempt
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
-def updateProduct(request,pk):
+def updateProduct(request,pk): 
     # print('the pk is '+pk)
     data =request.data
 

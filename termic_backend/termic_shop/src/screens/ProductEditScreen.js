@@ -214,7 +214,7 @@
 
     // ... (other code)
 
-    const categoryOptions = ['Electronics', 'Photo', 'Painting','Home Decor']; // Add your actual category options here
+    const categoryOptions = ['Electronics', 'Photo', 'Painting','Homedecor']; // Add your actual category options here
 
 
     return (

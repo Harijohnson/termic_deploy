@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
-from base.models import User
-from base.serializers import UserSerializer,UserSerializerWithToken
+from base.models import CompanyDetails, User
+from base.serializers import CompanySerializer, UserSerializer,UserSerializerWithToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -38,7 +38,6 @@ def registerUser(request):
             email = data['email'],
             password = make_password(data['password']),
         )
-
         serializer = UserSerializerWithToken(user,many=False)
         return Response(serializer.data)
     except:
@@ -46,6 +45,45 @@ def registerUser(request):
         return Response(message,status=status.HTTP_400_BAD_REQUEST)
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def updateUserProfile(request):
@@ -132,9 +170,3 @@ def deleteUser(request,pk):
 
 
 
-@api_view(['POST'])
-@permission_classes([IsAdminUser,IsAuthenticated])
-def companyDetails(request,pk):
-    userForDeletion = User.objects.get(id=pk)
-    userForDeletion.delete()
-    return Response('User is Deleted')
