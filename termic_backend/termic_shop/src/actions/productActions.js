@@ -38,7 +38,18 @@ import {
 
     PRODUCT_CATEGORY_REQUEST,
     PRODUCT_CATEGORY_SUCCESS,
-    PRODUCT_CATEGORY_FAIL,} from '../constants/productConstants'
+    PRODUCT_CATEGORY_FAIL,
+
+
+
+
+
+    COMPANY_CREATE_REQUEST,
+    COMPANY_CREATE_FAIL,
+    COMPANY_CREATE_SUCCESS,
+} from '../constants/productConstants'
+
+
 
 import axios from 'axios'
 
@@ -321,3 +332,48 @@ export const listProductsByCategory = (category) => async (dispatch) => {
         })
     }
 }
+
+
+
+
+
+
+
+export  const  registerCompany = (companyname,aboutcompany,logo) => async (dispatch,getState) => {
+    try{
+        dispatch({
+            type:COMPANY_CREATE_REQUEST,
+    })
+    
+    const {
+        userLogin : { userInfo },
+    } = getState()
+
+
+
+    const config = {
+        headers:{
+            'Content-type':'application/json',
+            Authorization  :`Bearer ${userInfo.token}`
+        }
+
+    }
+    const {data} = await axios.post(
+        '/api/users/register/',
+        {'companyname':companyname,'aboutcompany':aboutcompany,'logo':logo},
+        config
+        )
+    
+    }
+    catch(error){
+        dispatch({
+            type:    COMPANY_CREATE_FAIL,
+            payload:error.response && error.response.data.detail
+            ?
+            error.response.data.detail:
+            error.detail,
+        })
+    }
+}
+
+

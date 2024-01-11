@@ -44,7 +44,15 @@ import {
 
     PRODUCT_CATEGORY_REQUEST,
     PRODUCT_CATEGORY_SUCCESS,
-    PRODUCT_CATEGORY_FAIL,} from '../constants/productConstants'
+    PRODUCT_CATEGORY_FAIL,
+
+    COMPANY_CREATE_REQUEST,
+    COMPANY_CREATE_FAIL,
+    COMPANY_CREATE_SUCCESS,
+
+
+
+} from '../constants/productConstants'
 
 
 
@@ -196,6 +204,21 @@ export const productCategoryReducer = (state = {products:[]},action) => {
             return state
     }
     }
+    
+
+export const companyRegisterReducer = (state = {},action) => {
+    switch(action.type){
+        case COMPANY_CREATE_REQUEST:
+            return {loading:true}
+        case COMPANY_CREATE_SUCCESS:
+            return {loading:false,companyInfo:action.payload}
+        case COMPANY_CREATE_FAIL:
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}
+    
     
         
     

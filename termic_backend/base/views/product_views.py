@@ -21,8 +21,8 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 def companyDetails(request):
     data = request.data
     user = request.user
-    print('user details',user)
-    print('data details',data)
+    # print('user details',user)
+    # print('data details',data)
     try :
         company = CompanyDetails.objects.create(
             user = user,
@@ -33,7 +33,7 @@ def companyDetails(request):
         serializer = CompanySerializer(company,many=False)
         return Response(serializer.data)
     except:
-        message = {'detail':'Company with this name alread exist'}
+        message = {'detail':'Company with this name alread exist or this email is connected with other company name'}
         return Response(message,status=status.HTTP_400_BAD_REQUEST)
 
 
