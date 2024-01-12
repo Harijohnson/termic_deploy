@@ -4,27 +4,46 @@ import { Form,Button,Col,Row } from 'react-bootstrap'
 import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
 import { useDispatch,useSelector } from 'react-redux'
-import { login } from '../actions/userActions'
+import { registerCompany } from '../actions/productActions'
 import  FormContainer   from '../components/FormContainer'
 function SellerScreen() {
     const [companyname,setCompanyName] = useState('')
-    const [aboutCompany,setAboutCompany] = useState('')
+    const [aboutcompany,setAboutCompany] = useState('')
     
     const dispatch = useDispatch()
 
     const location = useLocation();
     const navigate = useNavigate();
-    const redirect =  location.search ? location.search.split('=')[1]  : '/'
 
     const userLogin = useSelector(state => state.userLogin)
     const { error,loading,userInfo } = userLogin
 
-    useEffect (() => {
-        if (userInfo){
-            navigate(redirect)
-        }
-    },[navigate,userInfo,redirect])
 
+    // const [uploading,setUploading] = useState(false)
+
+    // const [logo, setLogo] = useState('');
+
+
+
+
+
+
+
+
+    useEffect (() => {
+        if (!userInfo){
+            navigate('/login')
+            // console.log("s")
+        }
+    },[navigate,userInfo,])
+
+
+    const submitHandeler = ((e)=>
+    {
+        e.preventDefault()
+        dispatch(registerCompany(companyname,aboutcompany,))
+
+    })
   return (
     
 
@@ -44,7 +63,7 @@ function SellerScreen() {
             <Form.Control 
             type='text'
             placeholder='Company Name'
-            value={email}
+            value={companyname}
             onChange={(e)=>setCompanyName(e.target.value)}>
 
             </Form.Control>
@@ -58,8 +77,8 @@ function SellerScreen() {
             <Form.Control 
             type='textarea'
             placeholder='About Company'
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}>
+            value={aboutcompany}
+            onChange={(e)=>setAboutCompany(e.target.value)}>
 
             </Form.Control>
         </Form.Group>
@@ -67,19 +86,19 @@ function SellerScreen() {
         <Button 
         type='submit'
         variant='primary' >
-            Sign In
+            Submit
         </Button>
 
 
       </Form>
 
-      <Row className = 'py-3'>
+      {/* <Row className = 'py-3'>
         <Col>
         New Customer ? <Link to ={redirect ? `/register?redirect = ${redirect}` : '/register'}>
             Register
         </Link>
         </Col>
-      </Row>
+      </Row> */}
     </FormContainer>
 
 

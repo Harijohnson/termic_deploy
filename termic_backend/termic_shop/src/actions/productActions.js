@@ -339,7 +339,7 @@ export const listProductsByCategory = (category) => async (dispatch) => {
 
 
 
-export  const  registerCompany = (companyname,aboutcompany,logo) => async (dispatch,getState) => {
+export  const  registerCompany = (companyname,aboutcompany) => async (dispatch,getState) => {
     try{
         dispatch({
             type:COMPANY_CREATE_REQUEST,
@@ -359,11 +359,14 @@ export  const  registerCompany = (companyname,aboutcompany,logo) => async (dispa
 
     }
     const {data} = await axios.post(
-        '/api/users/register/',
-        {'companyname':companyname,'aboutcompany':aboutcompany,'logo':logo},
+        '/api/products/company/',
+        {'companyname':companyname,'aboutcompany':aboutcompany},
         config
         )
-    
+        dispatch({
+            type: COMPANY_CREATE_SUCCESS,
+            payload: data, // Assuming the API response contains the created company details
+        });
     }
     catch(error){
         dispatch({

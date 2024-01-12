@@ -16,27 +16,31 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 
 
+from django.db import IntegrityError
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def companyDetails(request):
     data = request.data
     user = request.user
-    # print('user details',user)
-    # print('data details',data)
-    try :
+    try:
+        print('before')
         company = CompanyDetails.objects.create(
-            user = user,
-            companyName = data['companyname'],
-            aboutCompany = data['aboutcompany'],
-            companyLogo=request.FILES.get('logo'),
+            user=user,
+            companyName=data['companyname'],
+            aboutCompany=data['aboutcompany'],
         )
-        serializer = CompanySerializer(company,many=False)
+        print('company obj', company)
+        serializer = CompanySerializer(company, many=False)
         return Response(serializer.data)
-    except:
-        message = {'detail':'Company with this name alread exist or this email is connected with other company name'}
-        return Response(message,status=status.HTTP_400_BAD_REQUEST)
-
-
+    except IntegrityError as e:
+        print('IntegrityError:', e)
+        message = {'detail': 'Company for this user already exists'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        print('Exception:', e)
+        message = {'detail': 'Company creation failed'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
 
