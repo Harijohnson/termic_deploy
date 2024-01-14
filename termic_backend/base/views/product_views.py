@@ -43,6 +43,16 @@ def companyDetails(request):
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated,IsAdminUser])
+def getCompany(request):
+    # print('the pk is '+pk)
+    user = request.user
+    company = CompanyDetails.objects.get(user = user)
+    serializer = CompanySerializer(company,many =  False)
+    return Response(serializer.data)
+
+
 
 
 

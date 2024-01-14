@@ -8,6 +8,11 @@ urlpatterns = [
 
     path('company/',views.companyDetails,name='company-details'),
     # path('category/<str:category>/', views.getCategory, name='product-caetgory'),
+    path('company/seller/',views.getCompany,name='company-seller'),
+
+
+
+
 
     path('upload/', views.uploadImage, name='image-upload'),
     
