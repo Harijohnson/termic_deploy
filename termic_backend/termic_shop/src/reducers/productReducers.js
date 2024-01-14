@@ -51,7 +51,9 @@ import {
     COMPANY_CREATE_SUCCESS,
 
 
-
+    COMPANY_DETAILS_REQUEST,
+    COMPANY_DETAILS_FAIL,
+    COMPANY_DETAILS_SUCCESS,
 } from '../constants/productConstants'
 
 
@@ -224,7 +226,19 @@ export const companyRegisterReducer = (state = {},action) => {
     
     
 
-
+export const companyDetailsReducer = (state = {},action) => {
+    switch(action.type){
+        case COMPANY_DETAILS_REQUEST:
+            return {loading:true,...state}
+        case COMPANY_DETAILS_SUCCESS:
+            return {loading:false,...action.payload}
+        case COMPANY_DETAILS_FAIL:
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+    }
+    
 
 
 

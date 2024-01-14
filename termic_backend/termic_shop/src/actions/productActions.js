@@ -47,6 +47,11 @@ import {
     COMPANY_CREATE_REQUEST,
     COMPANY_CREATE_FAIL,
     COMPANY_CREATE_SUCCESS,
+
+
+    COMPANY_DETAILS_REQUEST,
+    COMPANY_DETAILS_FAIL,
+    COMPANY_DETAILS_SUCCESS,
 } from '../constants/productConstants'
 
 
@@ -379,4 +384,30 @@ export  const  registerCompany = (companyname,aboutcompany) => async (dispatch,g
     }
 }
 
+
+
+
+
+
+
+export const companyDetails = () => async (dispatch) => {
+    try{
+        dispatch({type:COMPANY_DETAILS_REQUEST})
+        const { data } = await axios.get(`/api/products/company/seller`)
+
+        dispatch({
+            type:COMPANY_DETAILS_SUCCESS,
+            payload: { companyDetails: data },
+        })
+        
+    }catch(error){
+        dispatch({
+            type:COMPANY_DETAILS_FAIL,
+            payload:error.response && error.response.data.detail
+            ?
+            error.response.data.detail:
+            error.detail,
+        })
+    }
+}
 

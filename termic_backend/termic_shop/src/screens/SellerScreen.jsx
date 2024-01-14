@@ -4,7 +4,7 @@ import { Form,Button,Col,Row } from 'react-bootstrap'
 import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
 import { useDispatch,useSelector } from 'react-redux'
-import { registerCompany } from '../actions/productActions'
+import { registerCompany,companyDetails } from '../actions/productActions'
 import  FormContainer   from '../components/FormContainer'
 function SellerScreen() {
     const [companyname,setCompanyName] = useState('')
@@ -27,18 +27,18 @@ function SellerScreen() {
 
 
 
-    const companyRegister = useSelector(state => state.companyRegister)
-    const { companynameBack,aboutcompanyBacck} = companyRegister  
-    
-        console.log('seller info from backed',companynameBack,aboutcompanyBacck)
-
 
     useEffect (() => {
         if (!userInfo){
             navigate('/login')
             // console.log("s")
+        }else{
+            dispatch(companyDetails(userInfo));
         }
-    },[navigate,userInfo,])
+    },[navigate,userInfo,dispatch])
+
+
+        console.log('seller info from backed',companyDetails)
 
 
     const submitHandeler = ((e)=>

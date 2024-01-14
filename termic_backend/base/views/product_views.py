@@ -46,7 +46,7 @@ def companyDetails(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated,IsAdminUser])
 def getCompany(request):
-    # print('the pk is '+pk)
+    print('the pk is '+request)
     user = request.user
     company = CompanyDetails.objects.get(user = user)
     serializer = CompanySerializer(company,many =  False)
