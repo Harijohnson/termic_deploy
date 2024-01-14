@@ -27,7 +27,10 @@ function SellerScreen() {
 
 
 
-
+    const companyRegister = useSelector(state => state.companyRegister)
+    const { companynameBack,aboutcompanyBacck} = companyRegister  
+    
+        console.log('seller info from backed',companynameBack,aboutcompanyBacck)
 
 
     useEffect (() => {
@@ -50,56 +53,56 @@ function SellerScreen() {
     
 
 
-    <FormContainer>
-      <h1>Create Company</h1>
+              <FormContainer>
+                <h1>Create Company</h1>
 
-      {error && <Message variant='danger'>{error}</Message>}
-        {loading && <Loader />}
-      <Form onSubmit={ submitHandeler }>
-        <Form.Group controlId='companyname'>
-            <Form.Label>
-                Company Name
-            </Form.Label>
-            <Form.Control 
-            type='text'
-            placeholder='Company Name'
-            value={companyname}
-            onChange={(e)=>setCompanyName(e.target.value)}>
+                {error && <Message variant='danger'>{error}</Message>}
+                  {loading && <Loader />}
+                <Form onSubmit={ submitHandeler }>
+                  <Form.Group controlId='companyname'>
+                      <Form.Label>
+                          Company Name
+                      </Form.Label>
+                      <Form.Control 
+                      type='text'
+                      placeholder='Company Name'
+                      value={companyname}
+                      onChange={(e)=>setCompanyName(e.target.value)}>
 
-            </Form.Control>
-        </Form.Group>
-
-
-        <Form.Group controlId='aboutcompany'>
-            <Form.Label>
-                About Company
-            </Form.Label>
-            <Form.Control 
-            type='textarea'
-            placeholder='About Company'
-            value={aboutcompany}
-            onChange={(e)=>setAboutCompany(e.target.value)}>
-
-            </Form.Control>
-        </Form.Group>
-
-        <Button 
-        type='submit'
-        variant='primary' >
-            Submit
-        </Button>
+                      </Form.Control>
+                  </Form.Group>
 
 
-      </Form>
+                  <Form.Group controlId='aboutcompany'>
+                      <Form.Label>
+                          About Company
+                      </Form.Label>
+                      <Form.Control 
+                      type='textarea'
+                      placeholder='About Company'
+                      value={aboutcompany}
+                      onChange={(e)=>setAboutCompany(e.target.value)}>
 
-      {/* <Row className = 'py-3'>
-        <Col>
-        New Customer ? <Link to ={redirect ? `/register?redirect = ${redirect}` : '/register'}>
-            Register
-        </Link>
-        </Col>
-      </Row> */}
-    </FormContainer>
+                      </Form.Control>
+                  </Form.Group>
+
+                  <Button 
+                  type='submit'
+                  variant='primary' >
+                      Submit
+                  </Button>
+
+
+                </Form>
+
+                {/* <Row className = 'py-3'>
+                  <Col>
+                  New Customer ? <Link to ={redirect ? `/register?redirect = ${redirect}` : '/register'}>
+                      Register
+                  </Link>
+                  </Col>
+                </Row> */}
+              </FormContainer>
 
 
   )
