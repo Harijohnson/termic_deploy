@@ -390,19 +390,61 @@ export  const  registerCompany = (companyname,aboutcompany) => async (dispatch,g
 
 
 
-export const companyDetails = () => async (dispatch) => {
-    try{
-        dispatch({type:COMPANY_DETAILS_REQUEST})
-        const { data } = await axios.get(`/api/products/company/seller`)
+// export const companyDetails = () => async (dispatch) => {
+//     try{
+//         dispatch({type:COMPANY_DETAILS_REQUEST})
+//         const { data } = await axios.get(`/api/products/company/seller`)
 
+//         dispatch({
+//             type:COMPANY_DETAILS_SUCCESS,
+//             payload: { companyDetails: data },
+//         })
+        
+//     }catch(error){
+//         dispatch({
+//             type:COMPANY_DETAILS_FAIL,
+//             payload:error.response && error.response.data.detail
+//             ?
+//             error.response.data.detail:
+//             error.detail,
+//         })
+//     }
+// }
+
+
+
+export  const  companyDetails= () => async (dispatch,getState) => {
+    try{
+        dispatch({
+            type:COMPANY_DETAILS_REQUEST,
+        })
+
+        const {
+            userLogin : { userInfo },
+        } = getState()
+
+
+
+        const config = {
+            headers:{
+                'Content-type':'application/json',
+                Authorization  :`Bearer ${userInfo.token}`
+            }
+
+        }
+        const {data} = await axios.get(
+            `/api/products/company/seller`,
+            config
+            )
+        
         dispatch({
             type:COMPANY_DETAILS_SUCCESS,
             payload: { companyDetails: data },
         })
-        
-    }catch(error){
+    }   
+    catch(error){
         dispatch({
-            type:COMPANY_DETAILS_FAIL,
+            type:    COMPANY_DETAILS_FAIL,
             payload:error.response && error.response.data.detail
             ?
             error.response.data.detail:
@@ -410,4 +452,6 @@ export const companyDetails = () => async (dispatch) => {
         })
     }
 }
+
+
 

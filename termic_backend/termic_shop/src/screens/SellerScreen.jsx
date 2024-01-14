@@ -7,8 +7,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import { registerCompany,companyDetails } from '../actions/productActions'
 import  FormContainer   from '../components/FormContainer'
 function SellerScreen() {
-    const [companyname,setCompanyName] = useState('')
-    const [aboutcompany,setAboutCompany] = useState('')
+    
     
     const dispatch = useDispatch()
 
@@ -38,21 +37,37 @@ function SellerScreen() {
     },[navigate,userInfo,dispatch])
 
 
-        console.log('seller info from backed',companyDetails)
+
+
+
+
+    const companyDetailsFromSelector = useSelector(state => state.companyDetails)
+    const {companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}} = companyDetailsFromSelector
+
+    // const {loadingData, companyDetails: { companyName: companyNameBack, aboutCompany: aboutCompanyBack } } = useSelector(state => state.companyDetails);
+
+    // console.log('companyName and aboutCompany from redux store',comname,abtCom)
+
+
+
+
+
+    const [companyName,setCompanyName] = useState('')
+    const [aboutCompany,setAboutCompany] = useState('')
+
+
+
+
 
 
     const submitHandeler = ((e)=>
     {
         e.preventDefault()
-        dispatch(registerCompany(companyname,aboutcompany,))
+        dispatch(registerCompany(companyName,aboutCompany,))
 
     })
   return (
-    
-
-    
-
-
+    <>       { !companyNameBackend ? (
               <FormContainer>
                 <h1>Create Company</h1>
 
@@ -66,7 +81,7 @@ function SellerScreen() {
                       <Form.Control 
                       type='text'
                       placeholder='Company Name'
-                      value={companyname}
+                      value={companyName}
                       onChange={(e)=>setCompanyName(e.target.value)}>
 
                       </Form.Control>
@@ -80,7 +95,7 @@ function SellerScreen() {
                       <Form.Control 
                       type='textarea'
                       placeholder='About Company'
-                      value={aboutcompany}
+                      value={aboutCompany}
                       onChange={(e)=>setAboutCompany(e.target.value)}>
 
                       </Form.Control>
@@ -103,9 +118,17 @@ function SellerScreen() {
                   </Col>
                 </Row> */}
               </FormContainer>
-
-
-  )
+        )
+        :
+        (
+             <>
+             <h3>
+             {companyNameBackend}
+             </h3></>
+             )}
+    </>
+ 
+    )
 }
 
 
