@@ -1,5 +1,5 @@
 import React,{ useEffect,useState } from 'react'
-import { Link,useLocation,useNavigate } from 'react-router-dom'
+import { Link,redirect,useLocation,useNavigate } from 'react-router-dom'
 import { Form,Button,Col,Row } from 'react-bootstrap'
 import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
@@ -42,14 +42,16 @@ function SellerScreen() {
 
 
     const companyDetailsFromSelector = useSelector(state => state.companyDetails)
-    const {companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}} = companyDetailsFromSelector
+    const {companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}={}} = companyDetailsFromSelector
 
     // const {loadingData, companyDetails: { companyName: companyNameBack, aboutCompany: aboutCompanyBack } } = useSelector(state => state.companyDetails);
 
     // console.log('companyName and aboutCompany from redux store',comname,abtCom)
 
 
-
+    if (companyDetailsFromSelector){
+        redirect('/seller/details')
+    }
 
 
     const [companyName,setCompanyName] = useState('')
