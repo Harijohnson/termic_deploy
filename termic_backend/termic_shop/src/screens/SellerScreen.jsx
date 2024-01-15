@@ -32,9 +32,15 @@ function SellerScreen() {
             navigate('/login')
             // console.log("s")
         }else{
-            dispatch(companyDetails(userInfo));
+            dispatch(companyDetails());
         }
     },[navigate,userInfo,dispatch])
+
+
+
+    const [companyName,setCompanyName] = useState('')
+    const [aboutCompany,setAboutCompany] = useState('')
+
 
 
 
@@ -50,14 +56,8 @@ function SellerScreen() {
 
 
     if (companyDetailsFromSelector){
-        redirect('/seller/details')
+        navigate('/seller/details')
     }
-
-
-    const [companyName,setCompanyName] = useState('')
-    const [aboutCompany,setAboutCompany] = useState('')
-
-
 
 
 
@@ -66,6 +66,11 @@ function SellerScreen() {
     {
         e.preventDefault()
         dispatch(registerCompany(companyName,aboutCompany,))
+        const success = true 
+
+        if (success){
+            navigate('seller/details')
+        }
 
     })
   return (
