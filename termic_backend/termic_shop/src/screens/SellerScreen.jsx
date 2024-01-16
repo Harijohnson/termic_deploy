@@ -1,5 +1,5 @@
 import React,{ useEffect,useState } from 'react'
-import { Link,useLocation,useNavigate } from 'react-router-dom'
+import { Link,redirect,useLocation,useNavigate } from 'react-router-dom'
 import { Form,Button,Col,Row } from 'react-bootstrap'
 import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
@@ -32,23 +32,9 @@ function SellerScreen() {
             navigate('/login')
             // console.log("s")
         }else{
-            dispatch(companyDetails(userInfo));
+            dispatch(companyDetails());
         }
     },[navigate,userInfo,dispatch])
-
-
-
-
-
-
-    const companyDetailsFromSelector = useSelector(state => state.companyDetails)
-    const {companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}} = companyDetailsFromSelector
-
-    // const {loadingData, companyDetails: { companyName: companyNameBack, aboutCompany: aboutCompanyBack } } = useSelector(state => state.companyDetails);
-
-    // console.log('companyName and aboutCompany from redux store',comname,abtCom)
-
-
 
 
 
@@ -60,10 +46,31 @@ function SellerScreen() {
 
 
 
+
+    const companyDetailsFromSelector = useSelector(state => state.companyDetails)
+    const {companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}={}} = companyDetailsFromSelector
+
+    // const {loadingData, companyDetails: { companyName: companyNameBack, aboutCompany: aboutCompanyBack } } = useSelector(state => state.companyDetails);
+
+    // console.log('companyName and aboutCompany from redux store',comname,abtCom)
+
+
+    if (companyDetailsFromSelector){
+        navigate('/seller/details')
+    }
+
+
+
+
     const submitHandeler = ((e)=>
     {
         e.preventDefault()
         dispatch(registerCompany(companyName,aboutCompany,))
+        const success = true 
+
+        if (success){
+            navigate('seller/details')
+        }
 
     })
   return (
