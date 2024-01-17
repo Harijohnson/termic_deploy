@@ -3,19 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import './bootstrap.css'
+import './bootstrap.css'
 import { Provider } from 'react-redux'
 import store from './store'
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import  './bootstrap.min.css'
+// import  './bootstrap.min.css'
 
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const root = document.getElementById('root')
+ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>
+  </Provider>,
+  root
 );
 
 //
