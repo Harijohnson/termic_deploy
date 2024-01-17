@@ -16,7 +16,7 @@ function HomeScreen() {
     const dispatch =useDispatch()
     const productList  = useSelector(state =>state.productList)
     const {error,loading,products , page ,pages,  } = productList
-    console.log('Product page and pages  :', page,pages);
+    // console.log('Product page and pages  :', page,pages);
   
     const location = useLocation();
     const keyword = location.search;

@@ -31,10 +31,8 @@ function SellerScreen() {
         if (!userInfo){
             navigate('/login')
             // console.log("s")
-        }else{
-            dispatch(companyDetails());
         }
-    },[navigate,userInfo,dispatch])
+    },[navigate,userInfo])
 
 
 
@@ -74,7 +72,8 @@ function SellerScreen() {
 
     })
   return (
-    <>       { !companyNameBackend ? (
+    <>  
+         { !companyNameBackend ? (
               <FormContainer>
                 <h1>Create Company</h1>
 
@@ -129,9 +128,8 @@ function SellerScreen() {
         :
         (
              <>
-             <h3>
-             {companyNameBackend}
-             </h3></>
+            {navigate('/seller/details')}
+            </>
              )}
     </>
  
