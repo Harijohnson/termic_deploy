@@ -29,25 +29,25 @@ function App() {
         <main>
           <Container fluid>
             <Routes>
-              <Route  path='/' element={ <HomeScreen />} exact />
-              <Route  path='/product/:id' element={ <ProductScreen />} />
-              <Route  path='/cart/:id?' element={ <CartScreen />} />
-              <Route  path='/login' element={ <LoginScreen />} />
-              <Route  path='/register' element={ <RegisterScreen />} />
-              <Route  path='/profile' element={ <ProfileScreen />} />
-              <Route  path='/shipping' element={ <ShippingScreen />} />
-              <Route  path='/payment' element={ <PaymentScreen />} />
-              <Route  path='/placeorder' element={ <PlaceOrderScreen />} />
-              <Route  path='/order/:id' element={ <OrderScreen />} />
-              <Route  path='/admin/product/:id/edit' element={ <ProductEditScreen />} />
+              <Route  path='/' Component={HomeScreen} exact />
+              <Route  path='/product/:id' Component={ ProductScreen } />
+              <Route  path='/cart/:id?' Component={ CartScreen } />
+              <Route  path='/login' Component={ LoginScreen } />
+              <Route  path='/register' Component={ RegisterScreen } />
+              <Route  path='/profile' Component={ ProfileScreen } />
+              <Route  path='/shipping' Component={ ShippingScreen } />
+              <Route  path='/payment' Component={ PaymentScreen} />
+              <Route  path='/placeorder' Component={ PlaceOrderScreen } />
+              <Route  path='/order/:id' Component={ OrderScreen } />
+              <Route  path='/admin/product/:id/edit' Component={ ProductEditScreen } />
 
-              <Route  path='/admin/userlist' element={ <UserListScreen />} />
-              <Route  path='/admin/users/:id/edit' element={ <UserEditScreen />} />
-              <Route  path='/admin/productlist' element={ <ProductListScreen />} />
+              <Route  path='/admin/userlist' Component={ UserListScreen } />
+              <Route  path='/admin/users/:id/edit' Component={ UserEditScreen } />
+              <Route  path='/admin/productlist' Component={ ProductListScreen} />
             
-              <Route  path='/admin/orderlist' element={ <OrderListScreen />} />
-              <Route  path='/seller' element={ <SellerScreen />} />
-              <Route  path='/seller/details' element={ <SellerDetailsScreen />} />
+              <Route  path='/admin/orderlist' Component={ OrderListScreen } />
+              <Route  path='/seller' Component={ SellerScreen } />
+              <Route  path='/seller/details' Component={ SellerDetailsScreen } />
 
              
             </Routes>

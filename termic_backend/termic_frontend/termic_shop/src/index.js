@@ -11,12 +11,12 @@ import store from './store'
 
 
 
-const root = document.getElementById('root')
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  root
+  document.getElementById('root')
 );
 
 //
