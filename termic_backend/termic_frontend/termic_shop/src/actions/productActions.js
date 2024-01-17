@@ -60,15 +60,17 @@ import axios from 'axios'
 
 export const listProducts = (keyword = "") => async (dispatch) => {
     try{
+        console.log('api called before list products')
         dispatch({type:PRODUCT_LIST_REQUEST})
-        const { data } = await axios.get(`/api/products${keyword}`)
-
+        const { data } = await axios.get(`http://localhost:8000/api/products${keyword}`)
+        console.log('api called after',data)
         dispatch({
             type:PRODUCT_LIST_SUCCESS,
             payload:data,
         })
         
     }catch(error){
+        console.error('Error in API call:', error)
         dispatch({
             type:PRODUCT_LIST_FAIL,
             payload:error.response && error.response.data.detail
@@ -84,15 +86,17 @@ export const listProducts = (keyword = "") => async (dispatch) => {
 
 export const listTopProducts = () => async (dispatch) => {
     try{
+        console.log('api called before top products')
         dispatch({type:PRODUCT_TOP_REQUEST})
-        const { data } = await axios.get(`/api/products/top/`)
-
+        const { data } = await axios.get(`http://localhost:8000/api/products/top/`)
+        console.log('api called after',data)
         dispatch({
             type:PRODUCT_TOP_SUCCESS,
             payload:data,
         })
         
     }catch(error){
+        console.error('Error in API call:', error)
         dispatch({
             type:PRODUCT_TOP_FAIL,
             payload:error.response && error.response.data.detail
