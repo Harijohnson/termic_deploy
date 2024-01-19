@@ -173,9 +173,9 @@ def createProduct(request):
     return Response(serializer.data)
 
 
-@csrf_exempt
+
 @api_view(['PUT'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAdminUser,IsAuthenticated])
 def updateProduct(request,pk): 
     # print('the pk is '+pk)
     data =request.data
@@ -209,7 +209,7 @@ def deleteProduct(request,pk):
 
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAdminUser,IsAuthenticated])
 def uploadImage(request):
     data = request.data
     product_id = data['product_id']
