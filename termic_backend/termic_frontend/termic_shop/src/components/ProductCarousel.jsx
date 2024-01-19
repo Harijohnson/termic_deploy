@@ -16,6 +16,7 @@ function ProductCarousel( { maxProducts } ) {
     const productTopRated =useSelector((state) => state.productTopRated)
     const { error,loading,products } = productTopRated
 
+    console.log(products)
 
     useEffect((e) => {
         dispatch(listTopProducts())
@@ -32,7 +33,7 @@ function ProductCarousel( { maxProducts } ) {
         {products.slice(0, maxProducts).map(product => (
             <Carousel.Item key={product._id}>
                 <Link to={`/product/${product._id}`} className="text-decoration-none">
-                    <Image src={product.carousel} alt = {product.name} fluid='true'/>
+                    <Image src={product.corousel} alt = {product.name} fluid='true'/>
                     {/* <Carousel.Caption  className='carousel.caption'>
                         <h4>{product.name} (${product.price})</h4>
                     </Carousel.Caption> */}
