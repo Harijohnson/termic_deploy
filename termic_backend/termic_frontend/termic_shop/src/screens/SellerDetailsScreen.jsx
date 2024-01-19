@@ -33,10 +33,14 @@ function SellerDetailsScreen() {
 
   return (
     <div>
+        
+        <Link to='/'>Go Back</Link>
 
-    <Link to='/admin/productlist'>Go Back</Link>
+       
+        {companyNameBackend}
+        
 
-</div>
+    </div>
 
 )
 

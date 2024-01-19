@@ -18,11 +18,6 @@ function SellerScreen() {
     const { error,loading,userInfo } = userLogin
 
 
-    // const [uploading,setUploading] = useState(false)
-
-    // const [logo, setLogo] = useState('');
-
-
 
 
 
@@ -30,16 +25,17 @@ function SellerScreen() {
     useEffect (() => {
         if (!userInfo){
             navigate('/login')
-            // console.log("s")
+        }else{
+            dispatch(companyDetails())
         }
-    },[navigate,userInfo])
+    },[navigate,userInfo,dispatch])
 
-
+     
 
     const [companyName,setCompanyName] = useState('')
     const [aboutCompany,setAboutCompany] = useState('')
 
-
+    
 
 
 
@@ -47,16 +43,6 @@ function SellerScreen() {
 
     const companyDetailsFromSelector = useSelector(state => state.companyDetails)
     const {companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}={}} = companyDetailsFromSelector
-
-    // const {loadingData, companyDetails: { companyName: companyNameBack, aboutCompany: aboutCompanyBack } } = useSelector(state => state.companyDetails);
-
-    // console.log('companyName and aboutCompany from redux store',comname,abtCom)
-
-
-    if (companyDetailsFromSelector){
-        navigate('/seller/details')
-    }
-
 
 
 

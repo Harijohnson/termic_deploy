@@ -24,13 +24,13 @@ def companyDetails(request):
     data = request.data
     user = request.user
     try:
-        print('before')
+        # print('before')
         company = CompanyDetails.objects.create(
             user=user,
-            companyName=data['companyname'],
-            aboutCompany=data['aboutcompany'],
+            companyName=data['companyName'],
+            aboutCompany=data['aboutCompany'],
         )
-        print('company obj', company)
+        # print('company obj', company)
         serializer = CompanySerializer(company, many=False)
         return Response(serializer.data)
     except IntegrityError as e:
@@ -43,14 +43,28 @@ def companyDetails(request):
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
+
+
+
+
+
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated,IsAdminUser])
 def getCompany(request):
-    # print('the pk is '+ request)
+    
     user = request.user
+    # print('request user is ', user)
     company = CompanyDetails.objects.get(user = user)
+    # print('company details',company)
     serializer = CompanySerializer(company,many =  False)
     return Response(serializer.data)
+
+
+
+
+
+
+
 
 
 

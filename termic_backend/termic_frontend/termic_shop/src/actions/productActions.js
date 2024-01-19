@@ -348,7 +348,7 @@ export const listProductsByCategory = (category) => async (dispatch) => {
 
 
 
-export  const  registerCompany = (companyname,aboutcompany) => async (dispatch,getState) => {
+export  const  registerCompany = (companyName,aboutCompany) => async (dispatch,getState) => {
     try{
         dispatch({
             type:COMPANY_CREATE_REQUEST,
@@ -369,7 +369,7 @@ export  const  registerCompany = (companyname,aboutcompany) => async (dispatch,g
     }
     const {data} = await axios.post(
         '/api/products/company/',
-        {'companyname':companyname,'aboutcompany':aboutcompany},
+        {'companyName':companyName,'aboutCompany':aboutCompany},
         config
         )
         dispatch({
@@ -389,31 +389,6 @@ export  const  registerCompany = (companyname,aboutcompany) => async (dispatch,g
 }
 
 
-
-
-
-
-
-// export const companyDetails = () => async (dispatch) => {
-//     try{
-//         dispatch({type:COMPANY_DETAILS_REQUEST})
-//         const { data } = await axios.get(`/api/products/company/seller`)
-
-//         dispatch({
-//             type:COMPANY_DETAILS_SUCCESS,
-//             payload: { companyDetails: data },
-//         })
-        
-//     }catch(error){
-//         dispatch({
-//             type:COMPANY_DETAILS_FAIL,
-//             payload:error.response && error.response.data.detail
-//             ?
-//             error.response.data.detail:
-//             error.detail,
-//         })
-//     }
-// }
 
 
 
