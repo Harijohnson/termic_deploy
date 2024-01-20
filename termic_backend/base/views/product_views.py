@@ -61,8 +61,68 @@ def getCompany(request):
 
 
 
+@api_view(['GET'])
+# @permission_classes([IsAuthenticated,IsAdminUser])
+def getProductsByCompany(request):
+    # query = request.query_params.get('')
 
 
+    # if query  == None:
+    #     query=""
+    
+
+
+    # products = Product.objects.filter(name__icontains=query)  
+    # #if the name of the product contains any values in side of the query  filter it and return it back
+    user = request.user
+    print('user data',user)
+    # Retrieve the company details for the logged-in user
+    try:
+        company_details = CompanyDetails.objects.get(user=user)
+        print('company details',company_details)
+    except CompanyDetails.DoesNotExist:
+        message = {'detail': 'Company details not found for this user'}
+        return Response(message, status=status.HTTP_404_NOT_FOUND)
+
+    # Use the company details to filter products
+    query = request.query_params.get('')
+
+    if query == None:
+        query = ""
+
+    products = Product.objects.filter(company=company_details, name__icontains=query)
+
+    # Pagination logic remains the same
+
+    
+    # print('products          :',products)
+    page = request.query_params.get('page')
+    
+    paginator = Paginator(products,16)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
+
+    # print("paginator op is ",page)
+   
+    try:
+        products = paginator.page(page)
+        
+    except PageNotAnInteger:
+        products =  paginator.page(1)
+        
+    
+    
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+    
+    if page == None:
+        page=1
+
+    page = int(page)
+    
+    # serializer = ProductSerializer(products,many =  True)
+    # # print('serilizer output is :',serializer)
+    # return Response({'products':serializer.data,'page':page,'pages':paginator.num_pages})
+    serializer = ProductSerializer(products, many=True)
+    return Response({'products': serializer.data, 'page': page, 'pages': paginator.num_pages})
 
 
 

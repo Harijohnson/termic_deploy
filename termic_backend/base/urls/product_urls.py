@@ -11,7 +11,7 @@ urlpatterns = [
     path('company/seller/',views.getCompany,name='company-seller'),
 
 
-
+    path('company/seller/products/',views.getProductsByCompany,name='company-seller-products'),
 
 
     path('upload/', views.uploadImage, name='image-upload'),

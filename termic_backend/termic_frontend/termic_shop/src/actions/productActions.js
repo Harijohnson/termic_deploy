@@ -3,7 +3,7 @@ import {
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAIL,
 
-    PRODUCT_DETAILS_REQUEST,
+    PRODUCT_z_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
 
@@ -52,6 +52,10 @@ import {
     COMPANY_DETAILS_REQUEST,
     COMPANY_DETAILS_FAIL,
     COMPANY_DETAILS_SUCCESS,
+
+    COMPANY_PRODUCTS_REQUEST,
+    COMPANY_PRODUCTS_FAIL,
+    COMPANY_PRODUCTS_SUCCESS,
 } from '../constants/productConstants'
 
 
@@ -434,3 +438,45 @@ export  const  companyDetails= () => async (dispatch,getState) => {
 
 
 
+
+
+
+export  const  getProductsByCompany= () => async (dispatch,getState) => {
+    try{
+        dispatch({
+            type:COMPANY_PRODUCTS_REQUEST,
+        })
+
+        const {
+            userLogin : { userInfo },
+        } = getState()
+
+
+
+        const config = {
+            headers:{
+                'Content-type':'application/json',
+                Authorization  :`Bearer ${userInfo.token}`
+            }
+
+        }
+        const {data} = await axios.get(
+            `/api/products/company/seller/products`,
+            config
+            )
+        
+        dispatch({
+            type:COMPANY_PRODUCTS_SUCCESS,
+            payload: { companyDetails: data },
+        })
+    }   
+    catch(error){
+        dispatch({
+            type:    COMPANY_PRODUCTS_FAIL,
+            payload:error.response && error.response.data.detail
+            ?
+            error.response.data.detail:
+            error.detail,
+        })
+    }
+}
