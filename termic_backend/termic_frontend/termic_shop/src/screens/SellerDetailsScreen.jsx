@@ -15,11 +15,13 @@ import { useLocation } from 'react-router-dom';
 
 
 function SellerDetailsScreen() {
+    
     const navigate = useNavigate()
      
     const userLogin = useSelector((state)=>state.userLogin)
     const { userInfo } = userLogin
     const dispatch = useDispatch()
+
     
     useEffect (() => {
         if (!userInfo){
@@ -32,21 +34,21 @@ function SellerDetailsScreen() {
     },[navigate,userInfo,dispatch])
     const companyDetailsFromSelector = useSelector(state => state.companyDetails)
     const {companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}={}} = companyDetailsFromSelector
-
+    
     // const dispatch =useDispatch()
     // const navigate = useNavigate();
 
     const  { id } = useParams();
     // const orderId = match.params.id
-
+    // const { loading ,error, companyDetails: { products },page,pages } = companyProducts
     const userId  = id
 
+   console.log('above product')
+    const companyProducts  = useSelector(state => state.companyProducts)
+    const { loading ,error, companyDetails: { products } ,page,pages } = companyProducts
+    console.log('below product')
 
-    const productList  = useSelector(state => state.companyProducts)
-    const { loading ,error, products,page,pages } = productList
-
-
-
+    console.log('companyProducts op is ',companyProducts)
     const productDelete  = useSelector(state => state.productDelete)
     const { loading:loadingDelete ,error:errorDelete, success:successDelete } = productDelete
 
@@ -131,6 +133,8 @@ function SellerDetailsScreen() {
           (<Message variant='danger'>{error}</Message> )
           : (
             <div>
+
+                <p>Company : {companyNameBackend}</p>
                 <Table striped bordered hover responsive className='table-sm'>
 
                   <thead>
@@ -146,7 +150,7 @@ function SellerDetailsScreen() {
 
 
                   <tbody>
-                    {products.map(product => (
+                    {products && products.map(product => (
                       <tr key={product._id}>
                         <td>{product._id}</td>
                         <td>{product.name}</td>
