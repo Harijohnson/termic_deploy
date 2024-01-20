@@ -54,6 +54,11 @@ import {
     COMPANY_DETAILS_REQUEST,
     COMPANY_DETAILS_FAIL,
     COMPANY_DETAILS_SUCCESS,
+
+
+    COMPANY_PRODUCTS_REQUEST,
+    COMPANY_PRODUCTS_FAIL,
+    COMPANY_PRODUCTS_SUCCESS,
 } from '../constants/productConstants'
 
 
@@ -242,6 +247,22 @@ export const companyDetailsReducer = (state = {},action) => {
 
 
 
+    export const companyProductsDetailsReducer = (state = {},action) => {
+        switch(action.type){
+            case COMPANY_PRODUCTS_REQUEST:
+                return {loading:true,...state}
+            case COMPANY_PRODUCTS_SUCCESS:
+                return {loading:false,...action.payload}
+            case COMPANY_PRODUCTS_FAIL:
+                return {loading:false,error:action.payload}
+            default:
+                return state
+        }
+        }
+        
+    
+    
+    
 
 
 

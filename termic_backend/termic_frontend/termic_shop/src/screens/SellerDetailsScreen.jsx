@@ -6,7 +6,7 @@ import { Table,Button,Row,Col } from 'react-bootstrap'
 import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
 import { LinkContainer } from 'react-router-bootstrap'
-import { listProducts,deleteProduct,createProduct } from '../actions/productActions'
+import { listProducts,deleteProduct,createProduct,getProductsByCompany } from '../actions/productActions'
 import { useNavigate,useParams } from 'react-router-dom'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import Paginate from '../components/Paginate'
@@ -27,6 +27,7 @@ function SellerDetailsScreen() {
             // console.log("s")
         }else{
             dispatch(companyDetails());
+            dispatch(getProductsByCompany())
         }
     },[navigate,userInfo,dispatch])
     const companyDetailsFromSelector = useSelector(state => state.companyDetails)
@@ -41,7 +42,7 @@ function SellerDetailsScreen() {
     const userId  = id
 
 
-    const productList  = useSelector(state => state.productList)
+    const productList  = useSelector(state => state.companyProducts)
     const { loading ,error, products,page,pages } = productList
 
 

@@ -3,7 +3,7 @@ import {
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAIL,
 
-    PRODUCT_z_REQUEST,
+    PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
 
@@ -460,6 +460,7 @@ export  const  getProductsByCompany= () => async (dispatch,getState) => {
             }
 
         }
+        console.log("getProductsByCompany is triggred")
         const {data} = await axios.get(
             `/api/products/company/seller/products`,
             config
