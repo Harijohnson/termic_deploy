@@ -473,7 +473,7 @@ export  const  getProductsByCompany= () => async (dispatch,getState) => {
     }   
     catch(error){
         dispatch({
-            type:    COMPANY_PRODUCTS_FAIL,
+            type:COMPANY_PRODUCTS_FAIL,
             payload:error.response && error.response.data.detail
             ?
             error.response.data.detail:
