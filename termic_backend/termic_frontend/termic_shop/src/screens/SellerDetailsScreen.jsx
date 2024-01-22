@@ -159,7 +159,10 @@
 // }
 
 // export default SellerDetailsScreen;
-import React, { useEffect, useCallback } from 'react';
+
+
+
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { companyDetails } from '../actions/productActions';
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -179,11 +182,19 @@ import { useLocation } from 'react-router-dom';
 
 function SellerDetailsScreen() {
   const navigate = useNavigate();
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
   const dispatch = useDispatch();
   const { id } = useParams();
   const userId = id;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const companyDetailsFromSelector = useSelector((state) => state.companyDetails);
+  const {
+    companyDetails: { companyName: companyNameBackend, aboutCompanyBackend: abtCom } = {},
+  } = companyDetailsFromSelector;
+
+  const companyProducts = useSelector((state) => state.companyProducts);
 
   const productDelete = useSelector((state) => state.productDelete);
   const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete;
@@ -200,19 +211,19 @@ function SellerDetailsScreen() {
   let keyword = location.search;
 
   useEffect(() => {
-    console.log('SellerDetailsScreen useEffect triggered')
+    console.log('SellerDetailsScreen useEffect triggered');
     const fetchData = async () => {
       try {
         // Check if companyDetails and products are already loaded
         if (!companyDetailsFromSelector.companyDetails || !companyProducts.companyDetails.products) {
-           dispatch(getProductsByCompany());
-           dispatch(companyDetails());
+          dispatch(getProductsByCompany());
+          dispatch(companyDetails());
         }
-  
+
         dispatch({ type: PRODUCT_CREATE_RESET });
-  
-        const createProductAction =  dispatch(createProduct());
-  
+
+        const createProductAction = dispatch(createProduct());
+
         if (createProductAction.success) {
           navigate(`/product/${createProductAction.product._id}/edit`);
         } else {
@@ -221,29 +232,24 @@ function SellerDetailsScreen() {
       } catch (error) {
         // Handle errors here
         console.error('Error fetching data:', error);
-
       }
     };
-  
+
     if (userInfo) {
       fetchData();
     } else {
       navigate('/login');
     }
-  }, [companyDetails,companyProducts.companyDetails.products, dispatch, keyword, navigate]);
-  
+  }, [companyDetailsFromSelector, companyProducts.companyDetails.products, dispatch, keyword, navigate, userInfo]);
 
-
-  const companyDetailsFromSelector = useSelector((state) => state.companyDetails);
   const {
-    companyDetails: { companyName: companyNameBackend, aboutCompanyBackend: abtCom } = {},
-  } = companyDetailsFromSelector;
+    loading,
+    error,
+    companyDetails: { products },
+    page,
+    pages,
+  } = companyProducts;
 
-  const companyProducts = useSelector((state) => state.companyProducts);
-  const { loading, error, companyDetails: { products }, page, pages } = companyProducts;
-  console.log('companyDetailsFromSelector', companyDetailsFromSelector);
-//   console.log('companyProducts', companyProducts);
-  
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       dispatch(deleteProduct(id));
@@ -261,11 +267,7 @@ function SellerDetailsScreen() {
           <h1>Products</h1>
         </Col>
         <Col className='d-flex justify-content-end'>
-          <Button
-            className='btn'
-            style={{ marginRight: '40px' }}
-            onClick={createProductHandler}
-          >
+          <Button className='btn' style={{ marginRight: '40px' }} onClick={createProductHandler}>
             <i className='fas fa-plus'> </i> {'  '} Create Product
           </Button>
         </Col>
