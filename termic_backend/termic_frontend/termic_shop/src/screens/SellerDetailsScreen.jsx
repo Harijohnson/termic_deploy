@@ -31,7 +31,7 @@ function SellerDetailsScreen() {
     } = companyDetailsFromSelector;
 
     const productDetails = useSelector((state) => state.companyProducts)   
-    const {products, loading: productLoading, error: productError } = productDetails;
+    const {companyDetails: { products } = {}, loading: productLoading, error: productError } = productDetails;
 
     console.log(productLoading,productError,products)
     
@@ -44,7 +44,7 @@ function SellerDetailsScreen() {
     if(userInfo){
         dispatch(companyDetails())
         dispatch(getProductsByCompany())
-    }},[])
+    }},[dispatch])
 
    
 
