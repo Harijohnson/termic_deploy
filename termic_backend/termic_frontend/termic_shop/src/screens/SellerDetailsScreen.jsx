@@ -184,7 +184,7 @@ function SellerDetailsScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const userId = id;
+
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
