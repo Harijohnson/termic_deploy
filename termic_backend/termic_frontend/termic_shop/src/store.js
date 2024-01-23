@@ -78,13 +78,9 @@ const initialState =  {
         cartItems:cartItemsFromStorage,
         shippingAddress:shippingAddressFromStorage,
     },
-    userLogin:{userInfo:userInfoFromStorage},
+
     userLogin: { userInfo: userInfoFromStorage },
-    companyProducts: {
-      
-      products: [], 
-      
-    },
+    
 
 }
 

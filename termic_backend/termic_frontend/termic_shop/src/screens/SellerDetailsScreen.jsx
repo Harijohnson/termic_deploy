@@ -31,12 +31,21 @@ function SellerDetailsScreen() {
     } = companyDetailsFromSelector;
 
     const productDetails = useSelector((state) => state.companyProducts)   
-    const {products, loading: productLoading, error: productError } = productDetails;
+    const {companyDetails: { products,page,pages } = {}, loading: productLoading, error: productError } = productDetails;
 
-    console.log(productLoading,productError,products)
-    
+    const navigate = useNavigate();
 
-    console.log("products from backend",products)
+
+    let location = useLocation();
+   let keyword = location.search
+  
+   const productDelete  = useSelector(state => state.productDelete)
+   const { loading:loadingDelete ,error:errorDelete, success:successDelete } = productDelete
+
+
+
+   const productCreate  = useSelector(state => state.productCreate)
+   const { loading:loadingCreate ,error:errorCreate, success:successCreate ,product:createdProduct } = productCreate
 
 
     // const products = []
@@ -44,10 +53,40 @@ function SellerDetailsScreen() {
     if(userInfo){
         dispatch(companyDetails())
         dispatch(getProductsByCompany())
-    }},[])
+    }},[dispatch])
 
-   
+    const deleteHandler =(id) => {
+        if(window.confirm('Are you sure you want to delete this product ?')){
+        // delete product
+        dispatch(deleteProduct(id))
+        }
+      }
+      useEffect (() => {
 
+
+        dispatch({type:PRODUCT_CREATE_RESET})
+  
+  
+        if( !userInfo.isAdmin){
+          navigate('/login')
+        }
+  
+  
+        if (successCreate){
+          navigate(`/admin/product/${createdProduct._id}/edit`)
+        }else{
+          dispatch(listProducts(keyword))
+        }
+      },[dispatch,navigate,userInfo,successDelete,successCreate,createdProduct,keyword])
+  
+  
+  
+  
+      const createProductHandler = () => {
+        //create product
+        dispatch(createProduct())
+
+    }
 
   return (
     
@@ -56,7 +95,7 @@ function SellerDetailsScreen() {
         <Col>
           <h1>Products</h1>
         </Col>
-        {/* <Col className='d-flex justify-content-end'>
+        <Col className='d-flex justify-content-end'>
           <Button
             className='btn'
             style={{ marginRight: '40px' }}
@@ -64,14 +103,14 @@ function SellerDetailsScreen() {
           >
             <i className='fas fa-plus'> </i> {'  '} Create Product
           </Button>
-        </Col> */}
+        </Col> 
       </Row>
 
-      {/* {loadingDelete && <Loader />}
+      {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
 
       {loadingCreate && <Loader />}
-      {errorCreate && <Message variant='danger'>{errorCreate}</Message>} */}
+      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 
 {loading ? (
         <Loader />
@@ -110,6 +149,7 @@ function SellerDetailsScreen() {
           ) : (
             <Message variant='info'>No products available.</Message>
           )}
+          <Paginate page={page} pages={pages} isAdmin={true}></Paginate>
         </div>
       )}
     </div>

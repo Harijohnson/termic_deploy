@@ -53,7 +53,7 @@ function CartScreen( ) {
                     <Col md={2}>
                       <Image src={item.image1} alt={item.name} fluid rounded/>
                     </Col>
-                    {console.log('items arguments',item)}
+                    {/* {console.log('items arguments',item)} */}
                     <Col md={3}>
                       <Link to={`/products/${item.product}`}>{item.name}</Link>
                     </Col>

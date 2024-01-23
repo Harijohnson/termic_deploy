@@ -16,7 +16,7 @@ function ProductCarousel( { maxProducts } ) {
     const productTopRated =useSelector((state) => state.productTopRated)
     const { error,loading,products } = productTopRated
 
-    console.log(products)
+    // console.log(products)
 
     useEffect((e) => {
         dispatch(listTopProducts())

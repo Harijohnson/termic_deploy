@@ -42,7 +42,7 @@ function PlaceOrderScreen() {
     },[success,navigate,order,dispatch])
 
     const placeOrder = () =>{
-        console.log(cart)
+        // console.log(cart)
         if (!cart.paymentMethod) {
             navigate('/payment');
         }

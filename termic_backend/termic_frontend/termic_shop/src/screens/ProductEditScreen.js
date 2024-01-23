@@ -51,8 +51,12 @@
         const [previewData, setPreviewData] = useState(null);
         const dispatch = useDispatch()
 
+        const companyDetailsFromSelector = useSelector((state) => state.companyDetails);
+        const {
+          companyDetails: { companyName: companyNameBackend } = {},
+        } = companyDetailsFromSelector;
         
-
+        const company = companyNameBackend
         const productDetails = useSelector((state) => state.productDetails)
         const { error,loading,product } = productDetails
 
@@ -69,7 +73,12 @@
 
             if(successUpdate){
                 dispatch({type:PRODUCT_UPDATE_RESET})
+                if (userInfo.isAdmin){
                 navigate('/admin/productlist')
+                }
+                else{
+                    navigate('/seller/details')
+                }
             }else{
                 if(!product.name || product._id !== Number(productId)) {
                 dispatch(listProductDetails(productId))
@@ -110,6 +119,7 @@
                 countInStock,
                 category,
                 description,
+                company,
                 carousel,
                 image1,
                 image2,
