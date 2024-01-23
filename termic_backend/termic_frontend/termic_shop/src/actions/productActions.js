@@ -460,7 +460,7 @@ export  const  getProductsByCompany= () => async (dispatch,getState) => {
             }
 
         }
-        console.log("getProductsByCompany is triggred")
+        // console.log("getProductsByCompany is triggred")
         const {data} = await axios.get(
             `/api/products/company/seller/products`,
             config
@@ -468,7 +468,7 @@ export  const  getProductsByCompany= () => async (dispatch,getState) => {
         
         dispatch({
             type:COMPANY_PRODUCTS_SUCCESS,
-            payload: { companyDetails: data },
+                payload: { companyDetails: data },
         })
     }   
     catch(error){
