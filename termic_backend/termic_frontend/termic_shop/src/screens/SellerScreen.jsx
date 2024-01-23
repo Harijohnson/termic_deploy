@@ -142,7 +142,7 @@ function SellerScreen() {
   const { error, loading, userInfo } = userLogin;
 
   const companyDetailsFromSelector = useSelector((state) => state.companyDetails);
-  const { companyDetails: { companyName: companyNameBackend, aboutCompanyBackend: abtCom } = {} } = companyDetailsFromSelector;
+  const { loading:companyLoading,error:companyError,companyDetails: { companyName: companyNameBackend, aboutCompanyBackend: abtCom } = {} } = companyDetailsFromSelector;
 
   useEffect(() => {
     if (!userInfo) {
@@ -165,12 +165,17 @@ function SellerScreen() {
   };
 
   return (
+
+
     <div>
+        {companyNameBackend ? (navigate('/seller/details')) :(
+
       <FormContainer>
         <h1>Create Company</h1>
-
-        {error && <Message variant='danger'>{error}</Message>}
-        {loading && <Loader />}
+        {loading ?( <Loader />) :
+            error ? (<Message variant='danger'>{error}</Message>)
+            :(
+       
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='companyname'>
             <Form.Label>Company Name</Form.Label>
@@ -196,12 +201,15 @@ function SellerScreen() {
             Submit
           </Button>
         </Form>
+            )}
       </FormContainer>
-      {companyNameBackend && (
-        <Message variant='info'>
-          Company already exists. You will be redirected to the seller details page.
-        </Message>
+    //   {companyNameBackend && (
+    //     <Message variant='info'>
+    //       Company already exists. You will be redirected to the seller details page.
+    //     </Message>
+    //     navigate('/seller/details')
       )}
+
     </div>
   );
 }
