@@ -79,6 +79,12 @@ const initialState =  {
         shippingAddress:shippingAddressFromStorage,
     },
     userLogin:{userInfo:userInfoFromStorage},
+    userLogin: { userInfo: userInfoFromStorage },
+    companyProducts: {
+      
+      products: [], 
+      
+    },
 
 }
 
