@@ -109,7 +109,7 @@ function OrderScreen() {
     }
 
     const downloadFile = (fileUrl, fileName) => {
-        console.log('File URL:', fileUrl); // Add this line to check the value of fileUrl
+        // console.log('File URL:', fileUrl); // Add this line to check the value of fileUrl
 
         fetch(fileUrl)
             .then((response) => {
@@ -239,10 +239,10 @@ return (loading  ? (<Loader />
                                                 onMouseOver={(e) => (e.target.style.backgroundColor = 'black')}
                                                 onMouseOut={(e) => (e.target.style.backgroundColor = 'gray')}
                                                 onClick={() => {
-                                                    console.log('Product:', item); // Log the product details
-                                                    console.log('Digital Resource:', item.digitalResource); // Log the digitalResource details
+                                                    // console.log('Product:', item); // Log the product details
+                                                    // console.log('Digital Resource:', item.digitalResource); // Log the digitalResource details
                                                     if (item.digitalResource) {
-                                                        console.log('Digital Resource URL:', item.digitalResource);
+                                                        // console.log('Digital Resource URL:', item.digitalResource);
                                                         downloadFile(item.digitalResource, item.name);
                                                     } else {
                                                         console.error('Digital Resource URL is undefined.');

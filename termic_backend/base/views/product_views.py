@@ -8,19 +8,12 @@ from rest_framework.decorators import api_view,permission_classes
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
-
-
-
-
-
-
-
-
 from django.db import IntegrityError
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsAdminUser])
 def companyDetails(request):
+    print('your  inn companyDetails')
     data = request.data
     user = request.user
     try:
@@ -34,11 +27,11 @@ def companyDetails(request):
         serializer = CompanySerializer(company, many=False)
         return Response(serializer.data)
     except IntegrityError as e:
-        print('IntegrityError:', e)
+        # print('IntegrityError:', e)
         message = {'detail': 'Company for this user already exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
-        print('Exception:', e)
+        # print('Exception:', e)
         message = {'detail': 'Company creation failed'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
@@ -51,7 +44,7 @@ def companyDetails(request):
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated,IsAdminUser])
 def getCompany(request):
-    
+    print('your  inn getCompany')
     user = request.user
     # print('request user is ', user)
     company = CompanyDetails.objects.get(user = user)
@@ -64,6 +57,7 @@ def getCompany(request):
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated,IsAdminUser])
 def getProductsByCompany(request):
+    print('your  inn getProductsByCompany')
     # query = request.query_params.get('')
 
 
@@ -75,11 +69,11 @@ def getProductsByCompany(request):
     # products = Product.objects.filter(name__icontains=query)  
     # #if the name of the product contains any values in side of the query  filter it and return it back
     user = request.user
-    print('user data',user)
+    # print('user data',user)
     # Retrieve the company details for the logged-in user
     try:
         company_details = CompanyDetails.objects.get(user=user)
-        print('company details',company_details)
+        # print('company details',company_details)
     except CompanyDetails.DoesNotExist:
         message = {'detail': 'Company details not found for this user'}
         return Response(message, status=status.HTTP_404_NOT_FOUND)
@@ -132,7 +126,7 @@ def getProductsByCompany(request):
 
 @api_view(['GET'])
 def getProducts(request):
-    # print('request object :',request)
+
     query = request.query_params.get('keyword')
 
 
@@ -144,12 +138,12 @@ def getProducts(request):
     products = Product.objects.filter(name__icontains=query)  
     #if the name of the product contains any values in side of the query  filter it and return it back
     
-    # print('products          :',products)
+
     page = request.query_params.get('page')
     
     paginator = Paginator(products,16)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
 
-    # print("paginator op is ",page)
+  
    
     try:
         products = paginator.page(page)
@@ -168,7 +162,7 @@ def getProducts(request):
     page = int(page)
     
     serializer = ProductSerializer(products,many =  True)
-    # print('serilizer output is :',serializer)
+   
     return Response({'products':serializer.data,'page':page,'pages':paginator.num_pages})
 
 
@@ -217,10 +211,11 @@ def getProduct(request,pk):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated,IsAdminUser])
 def createProduct(request):
+    # print('request output is ',request.company)
     user = request.user
-    company_details = request.company
+    # company_details = request.company
     product  = Product.objects.create(
-        company = company_details,
+        company = CompanyDetails.objects.get(user = user),
         name = 'Sample Name',
         price = 0,
         brand = 'Sample Brand',
