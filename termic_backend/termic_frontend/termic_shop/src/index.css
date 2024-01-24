@@ -43,8 +43,8 @@ h2{
 
 /* carousel effects */
 
-
-/* .carousel-item {
+/* 
+ .carousel-item {
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -64,8 +64,8 @@ h2{
 }
 
 .carousel-item h5 {
-  height: 2.5rem; Set a fixed height for the title */
-  /* overflow: hidden;
+  height: 2.5rem; 
+  overflow: hidden;
 }
 
 .carousel-item p {
@@ -109,11 +109,8 @@ h2{
   .carousel-caption h2 {
     font-size: 2.5vw;
   }
-} */
+}  */
 
-
-/* Carousel effects and styling */
-/* Carousel effects and styling */
 
 .carousel-item {
   border: 1px solid #6b6b6b;
@@ -181,7 +178,7 @@ h2{
   display: block;
   height: 350px;
   width: 100%;
-  /* padding: 30px; */
+  padding: 30px;
   margin: 40px;
   border-radius: 8px;
   margin-left: auto;

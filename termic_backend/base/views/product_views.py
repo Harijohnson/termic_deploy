@@ -13,7 +13,7 @@ from django.db import IntegrityError
 @api_view(['POST'])
 @permission_classes([IsAuthenticated,IsAdminUser])
 def companyDetails(request):
-    print('your  inn companyDetails')
+    # print('your  inn companyDetails')
     data = request.data
     user = request.user
     try:
