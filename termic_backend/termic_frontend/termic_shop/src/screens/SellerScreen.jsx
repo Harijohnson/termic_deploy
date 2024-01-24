@@ -143,14 +143,17 @@ function SellerScreen() {
 
   const companyDetailsFromSelector = useSelector((state) => state.companyDetails);
   const { loading:companyLoading,error:companyError,companyDetails: { companyName: companyNameBackend, aboutCompanyBackend: abtCom } = {} } = companyDetailsFromSelector;
+  useEffect(() => {
+    if (companyNameBackend) {
+      navigate('/seller/details');
+    }
+  }, [companyNameBackend, navigate]);
 
   useEffect(() => {
-    if (!userInfo) {
-      navigate('/login');
-    } else {
+    
       dispatch(companyDetails());
     }
-  }, [navigate, userInfo, dispatch]);
+  , [navigate, userInfo, dispatch]);
 
   const [companyName, setCompanyName] = useState('');
   const [aboutCompany, setAboutCompany] = useState('');
@@ -168,7 +171,7 @@ function SellerScreen() {
 
 
     <div>
-        {companyNameBackend ? (navigate('/seller/details')) :(
+   
 
       <FormContainer>
         <h1>Create Company</h1>
@@ -203,15 +206,13 @@ function SellerScreen() {
         </Form>
             )}
       </FormContainer>
-    //   {companyNameBackend && (
-    //     <Message variant='info'>
-    //       Company already exists. You will be redirected to the seller details page.
-    //     </Message>
-    //     navigate('/seller/details')
-      )}
-
+     
     </div>
   );
 }
 
 export default SellerScreen;
+// {companyLoading ? (<Loader />) :
+// companyError ?((<Message variant='danger'>{companyError}</Message>))
+// : companyNameBackend ?(navigate('/seller/details'))
+// :(
