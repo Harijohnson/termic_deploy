@@ -11,7 +11,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.db import IntegrityError
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsAdminUser])
 def companyDetails(request):
     print('your  inn companyDetails')
     data = request.data
@@ -43,7 +43,7 @@ def companyDetails(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsAdminUser])
 def getCompany(request):
     print('your  inn getCompany')
     user = request.user
@@ -56,7 +56,7 @@ def getCompany(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsAdminUser])
 def getProductsByCompany(request):
     print('your  inn getProductsByCompany')
     # query = request.query_params.get('')
