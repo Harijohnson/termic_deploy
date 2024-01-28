@@ -106,14 +106,12 @@ function SellerScreen() {
 
         dispatch({type:PRODUCT_CREATE_RESET})
   
-  
-        if( !userInfo.isAdmin){
-          navigate('/login')
-        }
+
   
   
         if (successCreate){
           navigate(`/admin/product/${createdProduct._id}/edit`)
+          console.log('nothing')
         }else{
           dispatch(listProducts())
         }
