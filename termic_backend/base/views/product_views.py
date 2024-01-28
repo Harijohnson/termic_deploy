@@ -231,7 +231,7 @@ def createProduct(request):
 
 
 @api_view(['PUT'])
-@permission_classes([IsAdminUser,IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def updateProduct(request,pk): 
     # print('the pk is '+pk)
     data =request.data

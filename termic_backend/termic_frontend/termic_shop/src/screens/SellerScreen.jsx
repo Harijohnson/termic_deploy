@@ -110,7 +110,7 @@ function SellerScreen() {
   
   
         if (successCreate){
-          navigate(`/admin/product/${createdProduct._id}/edit`)
+          navigate(`/product/${createdProduct._id}/edit`)
           console.log('nothing')
         }else{
           dispatch(listProducts())
@@ -237,13 +237,7 @@ function SellerScreen() {
 
                 </Form>
 
-                {/* <Row className = 'py-3'>
-                  <Col>
-                  New Customer ? <Link to ={redirect ? `/register?redirect = ${redirect}` : '/register'}>
-                      Register
-                  </Link>
-                  </Col>
-                </Row> */}
+
               </FormContainer>
         )}
 
