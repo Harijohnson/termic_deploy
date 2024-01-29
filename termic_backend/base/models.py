@@ -31,7 +31,7 @@ class Product(models.Model):
 
     digital=models.BooleanField(default=False, null=True , blank=True)
 
-    digitalResource = models.FileField(upload_to='digital_resources/', null=True, blank=True, editable=False,)
+    digitalResource = models.FileField(upload_to='digital_resources/', null=True, blank=True,)
     brand = models.CharField(max_length=200,null=True,blank=True)
     category = models.CharField(max_length=200,null=True,blank=True)
     description = models.TextField(null=True,blank=True)
