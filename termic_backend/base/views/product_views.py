@@ -254,9 +254,10 @@ def updateProduct(request,pk):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def deleteProduct(request,pk):
     product = Product.objects.get(_id=pk)
+ 
     product.delete()
     return Response('Product is deleted')
 
