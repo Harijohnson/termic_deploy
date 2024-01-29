@@ -40,7 +40,7 @@ function ProductCarousel( { maxProducts } ) {
                 </Link>
             </Carousel.Item>
            
-        ))}
+        ))}       
     </Carousel>
     </div>
   )
