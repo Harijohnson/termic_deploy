@@ -40,11 +40,13 @@ function App() {
               <Route  path='/placeorder' Component={ PlaceOrderScreen } />
               <Route  path='/order/:id' Component={ OrderScreen } />
               <Route  path='/admin/product/:id/edit' Component={ ProductEditScreen } />
+              <Route  path='/product/:id/edit' Component={ ProductEditScreen } />
 
+              
               <Route  path='/admin/userlist' Component={ UserListScreen } />
               <Route  path='/admin/users/:id/edit' Component={ UserEditScreen } />
+              <Route  path='/admin/productlist' Component={ ProductListScreen} />
               <Route  path='/productlist' Component={ ProductListScreen} />
-            
               <Route  path='/admin/orderlist' Component={ OrderListScreen } />
               <Route  path='/seller' Component={ SellerScreen } />
               <Route  path='/seller/details' Component={ SellerDetailsScreen } />

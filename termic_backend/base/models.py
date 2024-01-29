@@ -30,7 +30,7 @@ class Product(models.Model):
     image10 = models.ImageField(upload_to='products/', null=True, blank=True)
 
     digital=models.BooleanField(default=False, null=True , blank=True)
-    # Make the digitalResource field conditionally editable
+
     digitalResource = models.FileField(upload_to='digital_resources/', null=True, blank=True, editable=False,)
     brand = models.CharField(max_length=200,null=True,blank=True)
     category = models.CharField(max_length=200,null=True,blank=True)
@@ -43,7 +43,7 @@ class Product(models.Model):
     _id = models.AutoField(primary_key=True,editable=False)
    
     def __str__(self):
-        return (self.name,self._id)
+        return str(self._id)
   
 
 class Review(models.Model):
