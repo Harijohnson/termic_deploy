@@ -74,7 +74,7 @@
             if(successUpdate){
                 dispatch({type:PRODUCT_UPDATE_RESET})
                 if (userInfo.isAdmin){
-                navigate('/admin/productlist')
+                navigate('/productlist')
                 }
                 else{
                     navigate('/seller/details')
