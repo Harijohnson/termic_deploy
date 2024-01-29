@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from base.models import CompanyDetails, Product,Review
 from base.serializers import CompanySerializer, ProductSerializer
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view,permission_classes
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
@@ -139,6 +139,8 @@ def getProducts(request):
     products = Product.objects.filter(name__icontains=query)  
     #if the name of the product contains any values in side of the query  filter it and return it back
     
+    print('product details ',products)
+
 
     page = request.query_params.get('page')
     
@@ -182,6 +184,7 @@ def getTopProducts(request):
 def getProduct(request,pk):
     # print('the pk is '+pk)
     product = Product.objects.get(_id=pk)
+    print('product details on one product ',product)
     serializer = ProductSerializer(product,many =  False)
     return Response(serializer.data)
 
@@ -266,7 +269,7 @@ def deleteProduct(request,pk):
 
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser,IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def uploadImage(request):
     data = request.data
     product_id = data['product_id']
