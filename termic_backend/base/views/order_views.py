@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
-from base.models import User,Order,OrderItem,ShippingAddress,Product
+from base.models import CompanyDetails, User,Order,OrderItem,ShippingAddress,Product
 from base.serializers import UserSerializer,UserSerializerWithToken,OrderSerializer,OrderItemSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -104,10 +104,10 @@ def getOrderById(request, pk):
 
     try:
         order = Order.objects.get( _id=pk )
-        # print('order is :',order)
+        print('order is :',order)
         if user.is_staff or order.user == user :
             serializer =  OrderSerializer(order,many=False)
-            # print('serializer is :',serializer)
+            print('serializer is :',serializer)
             return Response(serializer.data)
         else:
             Response({'detail':'Not authorized to view this order'},status=status.HTTP_400_BAD_REQUEST)
@@ -144,9 +144,24 @@ def updateOrderToDelivered(request,pk):
 
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def myOrders(request):
+    user = request.user
+    
+    try:
+        # Assuming each user has one associated company
+        company = CompanyDetails.objects.get(user=user)
 
+        # Filter OrderItem based on the user's company
+        my_orders = OrderItem.objects.filter(product__company=company)
 
+        # Serialize the data
+        serializer = OrderItemSerializer(my_orders, many=True)
 
+        return Response(serializer.data)
+    except CompanyDetails.DoesNotExist:
+        return Response({'detail': 'User does not have an associated company'}, status=400)
 
 
 

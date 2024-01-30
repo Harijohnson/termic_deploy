@@ -29,6 +29,7 @@ import {
     orderListMyReducer,
     orderListReducer,
     ordeDeliveredReducer,
+    myOrderReducer,
      } from './reducers/orderReducer'
 
 const reducer = combineReducers({
@@ -57,6 +58,7 @@ const reducer = combineReducers({
     companyRegister:companyRegisterReducer,
     companyDetails :companyDetailsReducer,
     companyProducts:companyProductsDetailsReducer,
+    myOrders:myOrderReducer,
 
 })
 

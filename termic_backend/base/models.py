@@ -31,7 +31,7 @@ class Product(models.Model):
 
     digital=models.BooleanField(default=False, null=True , blank=True)
 
-    digitalResource = models.FileField(upload_to='digital_resources/', null=True, blank=True, editable=False,)
+    digitalResource = models.FileField(upload_to='digital_resources/', null=True, blank=True,)
     brand = models.CharField(max_length=200,null=True,blank=True)
     category = models.CharField(max_length=200,null=True,blank=True)
     description = models.TextField(null=True,blank=True)
@@ -90,7 +90,7 @@ class OrderItem(models.Model):
     price = models.DecimalField(max_digits=20,decimal_places=2,null=True,blank=True)
     image1 = models.ImageField(null=True,blank=True)
     digital = models.BooleanField(default=False)
-    digitalResource = models.FileField(upload_to='digital_resources/', null=True, blank=True, editable=False)
+    # digitalResource = models.FileField(upload_to='digital_resources/', null=True, blank=True, editable=False)
     _id = models.AutoField(primary_key=True,editable=False)
 
     def __str__(self):

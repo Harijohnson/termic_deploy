@@ -36,7 +36,6 @@ function CartScreen( ) {
 
   return (
     <Row>
-      <Link to='/' className='btn btn-light  text-start' style={{backgroundColor:'lightblue'}}>Continue to Shopping</Link>
       <Col md={8}>
         <h1>Shopping cart</h1>
           {cartItems.length === 0 ? (
@@ -47,6 +46,8 @@ function CartScreen( ) {
           (
             
           <ListGroup variant = 'flush'>
+                
+              <Link to='/' className='btn btn-light  text-start' style={{backgroundColor:'lightblue'}}>Continue to Shopping</Link>
               {cartItems.map((item) => (
                   <ListGroup.Item >
                   <Row key={item.productId} item={item} >
@@ -91,9 +92,9 @@ function CartScreen( ) {
       </Col>
 
       <Col md={4}>
-        <Card >
+        <Card  className='m-5'>
           <ListGroup variant='flush'>
-            <ListGroup.Item>
+            <ListGroup.Item >
               <h2>
                 Subtotal ({cartItems.reduce((acc,item) => acc + item.qty ,0 )}) items
               </h2>
@@ -102,7 +103,7 @@ function CartScreen( ) {
           </ListGroup>
 
 
-          <ListGroup.Item>
+          <ListGroup.Item className="d-grid">
             <Button
             type='button'
             className='btn-black'

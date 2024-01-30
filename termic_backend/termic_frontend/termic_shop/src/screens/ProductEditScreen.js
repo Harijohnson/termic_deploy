@@ -231,7 +231,9 @@
 
         <div>
 
-            <Link to='/admin/productlist'>Go Back</Link>
+            {userInfo.isAdmin ?(<Link to='/admin/productlist'>Go Back</Link>)
+            : !userInfo.isAdmin ? (<Link to='/productlist'>Go Back</Link>)
+            : <Link to='/'>Go Back</Link>}
 
             <FormContainer>
                 <h1>Edit Product</h1>
