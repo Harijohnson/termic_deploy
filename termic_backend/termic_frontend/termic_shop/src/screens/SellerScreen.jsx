@@ -13,7 +13,7 @@ import {
   createProduct,
   getProductsByCompany,
 } from '../actions/productActions';
-
+import {  myOrders } from '../actions/orderActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 import Paginate from '../components/Paginate';
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -30,7 +30,8 @@ function SellerScreen() {
     const { error,loading,userInfo } = userLogin
 
 
-
+    const orderList  = useSelector(state => state.myOrders)
+    const { loading:myOrderLoading ,error:myOrderError, orders } = orderList
 
 
 
@@ -39,6 +40,7 @@ function SellerScreen() {
             navigate('/login')
         }else{
             dispatch(companyDetails())
+            dispatch(myOrders())
         }
     },[navigate,userInfo,dispatch])
 
@@ -49,7 +51,7 @@ function SellerScreen() {
 
     
 
-
+console.log('order details',orders)
 
 
 
@@ -94,6 +96,7 @@ function SellerScreen() {
     if(userInfo){
         dispatch(companyDetails())
         dispatch(getProductsByCompany())
+        // dispatch(myOrders())  
     }},[dispatch])
 
     const deleteHandler =(id) => {
@@ -112,14 +115,14 @@ function SellerScreen() {
   
         if (successCreate){
           navigate(`/product/${createdProduct._id}/edit`)
-          console.log('nothing')
+          // console.log('nothing')
         }else{
           dispatch(listProducts())
         }
       },[dispatch,navigate,userInfo,successDelete,successCreate,createdProduct])
   
   
-  const myOrders = () => {
+  const myOrdersHandeler = () => {
     navigate('/seller/myorders')
   }
   
@@ -130,6 +133,7 @@ function SellerScreen() {
     }
   return (
     <>  
+    <Link to='/' className='btn btn-light  text-start' style={{backgroundColor:'rgb(80, 117, 104)',color:'white'}}>Go Back</Link>
          { conpanyLoading ?( <Loader />) :
             cpmpanyError ? (<Message variant='danger'>{cpmpanyError}</Message>) :
             
@@ -139,18 +143,32 @@ function SellerScreen() {
                   <h1>Products</h1>
                 </Col>
                 <Col className='d-flex justify-content-end'>
-                  <Button
+                  {/* <Button
                     className='btn'
-                    style={{ marginRight: '40px' }}
-                    onClick={myOrders}
+                    style={{ marginRight: '40px',backgroundColor:'rgb(80, 117, 104)',color:'white' }}
+                    onClick={myOrdersHandeler}
+                    
                   >
                  Youre Orders
-                  </Button>
+                  </Button> */}
+                  <Button
+                        className='btn'
+                        style={{ marginRight: '40px', backgroundColor: 'rgb(80, 117, 104)', color: 'white' }}
+                        onClick={myOrdersHandeler}
+                      >
+                         Your Orders{' '}
+                              {orders && orders.length > 0 && (
+                                <span className="badge bg-danger ml-1 rounded">
+                                  {orders.filter(order => !order.isDelivered).length}
+                                </span>
+                              )}
+                    </Button>
+
                 </Col> 
                 <Col className='d-flex justify-content-end'>
                   <Button
                     className='btn'
-                    style={{ marginRight: '40px' }}
+                    style={{ marginRight: '40px' ,backgroundColor:'rgb(80, 117, 104)',color:'white'}}
                     onClick={createProductHandler}
                   >
                     <i className='fas fa-plus'> </i> {'  '} Create Product

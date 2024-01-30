@@ -5,7 +5,7 @@ import  Message   from '../components/Message'
 import { useDispatch,useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import {  myOrders } from '../actions/orderActions'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 // import Paginate from '../components/Paginate'
 
 function MyOrders() {
@@ -36,6 +36,7 @@ function MyOrders() {
 
   return (
     <div>
+        <Link to='/seller' className='btn btn-light  text-start' style={{backgroundColor:'black',color:'white'}}>Go Back</Link>
     <h1>Orders</h1>
         {loading ?
         (<Loader />)
@@ -48,21 +49,24 @@ function MyOrders() {
 
                 <thead>
                   <tr>
-                      <th>                    ID                 </th>
+                      <th>                    ID                    </th>
+                      <th>                    Product               </th>
                       <th>                    User                  </th>
                       <th>                    Date                  </th>
-                      <th>                    Total                  </th>
+                      <th>                    Total                 </th>
                       <th>                    Paid                  </th>
-                      <th>                    Delivered                  </th>
-                      <th>              </th>
+                      <th>                    Delivered             </th>
+                      <th>                                          </th>
                   </tr>
                 </thead>
-
+                {console.log("order details" ,orders)}
 
                 <tbody>
                   {orders.map(order => (
+                    
                     <tr key={order._id}>
                       <td>{order._id}</td>
+                      <td>{order.orderItems.length > 0 ? order.orderItems[0].name : 'N/A'}</td>
                       <td>{order.user && order.user.name}</td>
                       <td>{ order.createdAt && order.createdAt.substring(0,10)}</td>
                       <td>${order.totalPrice}</td>
