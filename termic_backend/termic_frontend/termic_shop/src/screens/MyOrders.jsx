@@ -4,7 +4,7 @@ import  Loader   from '../components/Loader'
 import  Message   from '../components/Message'
 import { useDispatch,useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { listOrders } from '../actions/orderActions'
+import {  myOrders } from '../actions/orderActions'
 import { useNavigate } from 'react-router-dom'
 // import Paginate from '../components/Paginate'
 
@@ -12,8 +12,8 @@ function MyOrders() {
     const dispatch =useDispatch()
     const navigate = useNavigate();
 
-    const orderList  = useSelector(state => state.orderList)
-    const { loading ,error, orders ,page,pages} = orderList
+    const orderList  = useSelector(state => state.myOrders)
+    const { loading ,error, orders } = orderList
 
 
     const userLogin  = useSelector(state => state.userLogin)  //get the user info 
@@ -27,7 +27,7 @@ function MyOrders() {
 
     useEffect (() => {
       if(userInfo){
-        dispatch(listOrders())
+        dispatch(myOrders())
       }else{
         navigate('/login')
       }
@@ -98,9 +98,6 @@ function MyOrders() {
                   ))}
                 </tbody>
               </Table>
-           
-             {/* <Paginate pages={pages} page={page} isAdmin={true}>
-             </Paginate> */}
              </div>
           ) }
     </div>
