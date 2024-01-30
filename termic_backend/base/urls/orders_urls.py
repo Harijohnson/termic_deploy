@@ -16,4 +16,8 @@ urlpatterns = [
     path('<str:pk>/',views.getOrderById,name='user-order'),
     path('<str:pk>/pay/',views.updateOrderToPaid,name='pay'),
 
+
+
+    path('myorders/',views.myOrders,name='myorders'),
+
 ]

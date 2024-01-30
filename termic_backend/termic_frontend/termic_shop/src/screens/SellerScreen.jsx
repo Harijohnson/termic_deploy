@@ -119,7 +119,9 @@ function SellerScreen() {
       },[dispatch,navigate,userInfo,successDelete,successCreate,createdProduct])
   
   
-  
+  const myOrders = () => {
+    console.log('my orders clicked')
+  }
   
       const createProductHandler = () => {
         //create product
@@ -140,11 +142,21 @@ function SellerScreen() {
                   <Button
                     className='btn'
                     style={{ marginRight: '40px' }}
+                    onClick={myOrders}
+                  >
+                 Youre Orders
+                  </Button>
+                </Col> 
+                <Col className='d-flex justify-content-end'>
+                  <Button
+                    className='btn'
+                    style={{ marginRight: '40px' }}
                     onClick={createProductHandler}
                   >
                     <i className='fas fa-plus'> </i> {'  '} Create Product
                   </Button>
                 </Col> 
+
               </Row>
         
               {loadingDelete && <Loader />}
