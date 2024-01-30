@@ -19,7 +19,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import SellerScreen from './screens/SellerScreen'
 import SellerDetailsScreen from './screens/SellerDetailsScreen';
-
+import MyOrders from './screens/MyOrders'
 
 
 function App() {
@@ -51,7 +51,8 @@ function App() {
               <Route  path='/seller' Component={ SellerScreen } />
               <Route  path='/seller/details' Component={ SellerDetailsScreen } />
 
-             
+              <Route  path='/seller/myorders' Component={ MyOrders } />
+
             </Routes>
           </Container>  
         </main>

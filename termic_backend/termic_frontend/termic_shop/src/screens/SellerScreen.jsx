@@ -120,7 +120,7 @@ function SellerScreen() {
   
   
   const myOrders = () => {
-    console.log('my orders clicked')
+    navigate('/seller/myorders')
   }
   
       const createProductHandler = () => {
