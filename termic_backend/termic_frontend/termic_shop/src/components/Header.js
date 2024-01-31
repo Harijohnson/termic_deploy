@@ -16,18 +16,27 @@
 
   import { logout } from '../actions/userActions'
 
-
+  import { companyDetails } from '../actions/productActions'
 
   function Header() {
 
     const  userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
 
+
+    const companyDetailsFromSelector = useSelector(state => state.companyDetails)
+    const {loading:conpanyLoading,error:cpmpanyError,companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}={}} = companyDetailsFromSelector
+
+
     const dispatch = useDispatch()
 
     const logoutHandeler = () => {
       dispatch(logout())
+      dispatch(companyDetails())
     }
+
+
+
 
     return (
       <header>
@@ -68,9 +77,14 @@
                           </LinkContainer>
                         ) }
 
-                        {userInfo ?(
+                        {userInfo && !companyNameBackend ?(
                           
                           <LinkContainer to='/seller'>
+                            <Nav.Link><i className="fa-solid fa-comments-dollar"></i></Nav.Link>
+                          </LinkContainer>
+                        ):
+                        userInfo  && companyNameBackend ? (
+                        <LinkContainer to='/seller/details'>
                             <Nav.Link><i className="fa-solid fa-comments-dollar"></i></Nav.Link>
                           </LinkContainer>
                         ):
