@@ -137,7 +137,7 @@ console.log('order details',orders)
          { conpanyLoading ?( <Loader />) :
             cpmpanyError ? (<Message variant='danger'>{cpmpanyError}</Message>) :
             
-            companyDetails ?(<div>
+            companyNameBackend ?(<div>
               <Row className='align-items-center'>
                 <Col>
                   <h1>Products</h1>
@@ -183,7 +183,7 @@ console.log('order details',orders)
               {loadingCreate && <Loader />}
               {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
         
-        {loading ? (
+              {conpanyLoading ? (
                 <Loader />
               ) : error ? (
                 <Message variant='danger'>{error}</Message>
@@ -231,7 +231,7 @@ console.log('order details',orders)
                   ) : (
                     <Message variant='info'>No products available.</Message>
                   )}
-                  <Paginate page={page} pages={pages} isAdmin={false}></Paginate>
+                  {/* <Paginate page={page} pages={pages} isAdmin={false}></Paginate> */}
                 </div>
               )}
             </div>):(
