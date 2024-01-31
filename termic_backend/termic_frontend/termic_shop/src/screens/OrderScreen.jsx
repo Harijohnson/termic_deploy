@@ -1,13 +1,13 @@
-    import React,{ useEffect, useState } from 'react'
-    import { Row,Col,ListGroup,Card,Image, Button } from 'react-bootstrap'
-    import { useDispatch,useSelector } from 'react-redux'
-    import { Link,useParams,useNavigate } from 'react-router-dom'
-    import Message from '../components/Message'
-    import { getOrderDetails,payOrder,deliverOrder} from '../actions/orderActions'
-    import Loader from '../components/Loader'
-    import { PayPalButton } from 'react-paypal-button-v2'
-    import { ORDER_PAY_RESET,ORDER_DELIVERED_RESET } from '../constants/OrderConstant'
-
+import React,{ useEffect, useState } from 'react'
+import { Row,Col,ListGroup,Card,Image, Button } from 'react-bootstrap'
+import { useDispatch,useSelector } from 'react-redux'
+import { Link,useParams,useNavigate } from 'react-router-dom'
+import Message from '../components/Message'
+import { getOrderDetails,payOrder,deliverOrder} from '../actions/orderActions'
+import Loader from '../components/Loader'
+import { PayPalButton } from 'react-paypal-button-v2'
+import { ORDER_PAY_RESET,ORDER_DELIVERED_RESET } from '../constants/OrderConstant'
+import {listProductDetails} from '../actions/productActions'
 
 
 
@@ -57,6 +57,11 @@
 
         
         }
+
+
+        const productDetails = useSelector((state) => state.productDetails)
+        const { errorProduct,loadingProduct,product } = productDetails
+
     
         useEffect(() => {
             if(!userInfo){
@@ -77,6 +82,7 @@
                         }
                         )
                     dispatch(getOrderDetails(Number(orderId)));
+                    dispatch(listProductDetails(Number(orderId)))
                     }
 
                     else if(!order.isPaid ){
@@ -108,44 +114,49 @@
             dispatch(deliverOrder(order))
         }
 
-        const downloadFile = (fileUrl, fileName) => {
-            console.log('File URL:', fileUrl);
-            console.log('File Name:', fileName);
-            // console.log('File URL:', fileUrl); // Add this line to check the value of fileUrl
+    const downloadFile = (fileUrl, fileName) => {
+        console.log('File URL:', fileUrl);
+        console.log('File Name:', fileName);
 
-            fetch(fileUrl)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`Failed to download file: ${response.statusText}`);
-                    }
-                    return response.blob();
-                })
-                .then((blob) => {
-                    if (fileName.toLowerCase().endsWith('.pdf')) {
-                        // Handle PDF files
-                        const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', fileName);
-                        document.body.appendChild(link);
-                        link.click();
-                        link.parentNode.removeChild(link);
-                    } else if (fileName.toLowerCase().endsWith('.jpg') || fileName.toLowerCase().endsWith('.jpeg')) {
-                        // Handle JPG files
-                        const url = window.URL.createObjectURL(new Blob([blob], { type: 'image/jpeg' }));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', fileName);
-                        document.body.appendChild(link);
-                        link.click();
-                        link.parentNode.removeChild(link);
-                    } else {
-                        // Handle other file types
-                        console.error('Unsupported file type:', fileName);
-                    }
-                })
-                .catch((error) => console.error('Error downloading resource:', error));
+        const getFileExtension = (filename) => {
+            return filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2);
         };
+        
+    
+        const fileExtension = getFileExtension(fileUrl);
+        console.log('file extention name',fileExtension)
+        fetch(fileUrl)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Failed to download file: ${response.statusText}`);
+                }
+                return response.blob();
+            })
+            .then((blob) => {
+                if (fileExtension.toLowerCase() === 'pdf') {
+                    const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', fileName);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.parentNode.removeChild(link);
+                } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension.toLowerCase())) {
+                    const url = window.URL.createObjectURL(new Blob([blob], { type: `image/${fileExtension}` }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', fileName);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.parentNode.removeChild(link);
+                } else {
+                    // console.error('Unsupported file type:', fileName);
+                    alert('Unsupported file type');
+                }
+            })
+            .catch((error) => console.error('Error downloading resource:', error));
+    };
+    
         
         
 
@@ -241,16 +252,12 @@
                                                     onMouseOver={(e) => (e.target.style.backgroundColor = 'black')}
                                                     onMouseOut={(e) => (e.target.style.backgroundColor = 'gray')}
                                                     onClick={() => {
-                                                        console.log('Digital Resource URL:', item.product.digitalResource); 
-                                                        if (item.product.digitalResource) {
-                                                            
-                                                            downloadFile(item.product.digitalResource, item.name);
-                                                        } else {    
-                                                            console.error('Digital Resource URL is undefined.');
-                                                        }           
+                            
+                                                        const fileUrl = product.digitalResource;
+                                                        downloadFile(fileUrl, product.name);     
                                                     }}
                                                     
-                                                >
+                                                >   
                                                 Download
                                             </Button>
                                         )}

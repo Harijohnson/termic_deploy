@@ -167,6 +167,11 @@
                                     <th>
                                         ID
                                     </th>
+
+                                    <th> 
+                                        Product 
+                                    </th>
+
                                     <th>
                                         Date
                                     </th>
@@ -189,6 +194,7 @@
                                         <td>
                                             {order._id}
                                         </td>
+                                        <td>{order.orderItems.length > 0 ? order.orderItems[0].name : 'N/A'}</td>
                                         <td>
                                             {order.createdAt &&  order.createdAt.substring(0,10)}
                                         </td>
