@@ -26,8 +26,8 @@ IMAGES_DIR = os.path.join(BASE_DIR2,"base/static/images/products")
 
 
 
-print('look below')
-print('directry is  ' , TEMPLATES_DIR)
+# print('look below')
+# print('directry is  ' , TEMPLATES_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -137,8 +137,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-        #    os.path.join(BASE_DIR , 'termic_shop/build'),
-            TEMPLATES_DIR,
+           os.path.join(BASE_DIR , 'termic_frontend/termic_shop/build'),
+            # TEMPLATES_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -241,7 +241,10 @@ STATIC_URL = 'static/' # this is a folder to stores  static file for project ine
 MEDIA_URL = 'images/' # this folder stores images for frontend to render
 
 STATICFILES_DIRS =[
-    STATIC_DIR  # inherited from static files
+    # STATIC_DIR,  # inherited from static files
+    BASE_DIR / 'staticfiles',
+    BASE_DIR / 'termic_frontend/termic_shop/build/static'
+
     
 ]
 

@@ -115,8 +115,8 @@ import {listProductDetails} from '../actions/productActions'
         }
 
     const downloadFile = (fileUrl, fileName) => {
-        console.log('File URL:', fileUrl);
-        console.log('File Name:', fileName);
+        // console.log('File URL:', fileUrl);
+        // console.log('File Name:', fileName);
 
         const getFileExtension = (filename) => {
             return filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2);
@@ -124,7 +124,7 @@ import {listProductDetails} from '../actions/productActions'
         
     
         const fileExtension = getFileExtension(fileUrl);
-        console.log('file extention name',fileExtension)
+        // console.log('file extention name',fileExtension)
         fetch(fileUrl)
             .then((response) => {
                 if (!response.ok) {
@@ -236,7 +236,7 @@ import {listProductDetails} from '../actions/productActions'
                                                 {item.qty} x ${item.price} = ${(item.qty * item.price).toFixed(2)}
                                             </Col>
                                         </Row>
-                                        {console.log("products details ",item)}
+                                        {/* {console.log("products details ",item)} */}
                                         <Row>
                                             {item.digital && order.isPaid && (
                                                 <Button
