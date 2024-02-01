@@ -68,14 +68,12 @@
                           </LinkContainer>
                         ) }
 
-                        {userInfo ?(
+                        {userInfo && (
                           
                           <LinkContainer to='/seller'>
                             <Nav.Link><i className="fa-solid fa-comments-dollar"></i></Nav.Link>
                           </LinkContainer>
-                        ):
-                        <></>
-                        }
+                        ) }
 
 
 
