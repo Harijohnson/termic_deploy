@@ -5,10 +5,10 @@
   import Navbar from 'react-bootstrap/Navbar';
   import { LinkContainer } from 'react-router-bootstrap'
 
-  import React from 'react'
+  import React,{useEffect} from 'react'
 
-  import { useDispatch,useSelector } from 'react-redux'
-  import { NavDropdown } from 'react-bootstrap';
+  import { useDispatch,useSelector, } from 'react-redux'
+  import { Button, NavDropdown } from 'react-bootstrap';
 
 
   import SearchBox from './SearchBox'
@@ -17,24 +17,44 @@
   import { logout } from '../actions/userActions'
 
   import { companyDetails } from '../actions/productActions'
-
+  import { useNavigate, } from 'react-router-dom'
+  import  Loader   from '../components/Loader'
+  import  Message   from '../components/Message'
   function Header() {
 
     const  userLogin = useSelector(state => state.userLogin)
+    const dispatch = useDispatch()
     const {userInfo} = userLogin
 
-
+    const navigate = useNavigate();
     const companyDetailsFromSelector = useSelector(state => state.companyDetails)
     const {loading:conpanyLoading,error:cpmpanyError,companyDetails:{ companyName:companyNameBackend,aboutCompanyBackend:abtCom}={}} = companyDetailsFromSelector
 
+    useEffect(() => {
+      if (userInfo) {
+        dispatch(companyDetails())
+      }
+    }, [dispatch, userInfo])
 
-    const dispatch = useDispatch()
 
     const logoutHandeler = () => {
       dispatch(logout())
-      dispatch(companyDetails())
     }
 
+
+
+    const sellerHandeler = ( ()=>{
+
+      if (userInfo && !companyNameBackend ){
+        navigate('/seller')
+      }else if (userInfo && companyNameBackend){
+        navigate('/seller/details')
+      }else{
+        navigate('/')
+      }
+     
+    })
+      
 
 
 
@@ -77,23 +97,21 @@
                           </LinkContainer>
                         ) }
 
-                        {userInfo && !companyNameBackend ?(
-                          
-                          <LinkContainer to='/seller'>
-                            <Nav.Link><i className="fa-solid fa-comments-dollar"></i></Nav.Link>
-                          </LinkContainer>
-                        ):
-                        userInfo  && companyNameBackend ? (
-                        <LinkContainer to='/seller/details'>
-                            <Nav.Link><i className="fa-solid fa-comments-dollar"></i></Nav.Link>
-                          </LinkContainer>
-                        ):
-                        <></>
-                        }
 
 
 
-                    {userInfo && userInfo.isAdmin &&  (
+                          {userInfo && (
+                            <NavDropdown title = {<i className="fa-solid fa-comments-dollar"></i>} id='mystore'>
+                                      <NavDropdown.Item   onClick={sellerHandeler}>
+                                          My Store
+                                        </NavDropdown.Item>
+                          </NavDropdown>
+                          )}
+                        
+                       
+
+
+                        {userInfo && userInfo.isAdmin &&  (
                       <NavDropdown title = {<> <i className="fas fa-crown fa-lg me-1"> </i> Admin</>} id='adminmenue'>
                       <LinkContainer to='/admin/userlist'>
                         <NavDropdown.Item>
@@ -114,6 +132,7 @@
                       </LinkContainer>
                     </NavDropdown>
                     )}
+                    
 
                   </Nav>
                   </Navbar.Collapse>
