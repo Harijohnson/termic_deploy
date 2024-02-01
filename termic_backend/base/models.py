@@ -18,7 +18,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200,null=True,blank=True)
     # image = models.ImageField(null=True,blank=True,default='/placeholder.png')
     corousel = models.ImageField(upload_to='corousel/', null=True, blank=True,)
-    image1 = models.ImageField(upload_to='products/', null=True, blank=True,default='/placeholder.png')
+    image1 = models.ImageField(upload_to='products/', null=True, blank=True,default='placeholder/placeholder.png')
     image2 = models.ImageField(upload_to='products/', null=True, blank=True,)
     image3 = models.ImageField(upload_to='products/', null=True, blank=True)
     image4 = models.ImageField(upload_to='products/', null=True, blank=True)
