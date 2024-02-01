@@ -13,10 +13,10 @@ from django.db import IntegrityError
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def companyDetails(request):
-    print('your  inn companyDetails')
+    # print('your  inn companyDetails')
     data = request.data
     user = request.user
-    print('data from company details',data,user)
+    # print('data from company details',data,user)
     try:
         # print('before')
         company = CompanyDetails.objects.create(
@@ -45,7 +45,7 @@ def companyDetails(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getCompany(request):
-    print('your  inn getCompany')
+    # print('your  inn getCompany')
     user = request.user
     # print('request user is ', user)
     company = CompanyDetails.objects.get(user = user)
@@ -58,7 +58,7 @@ def getCompany(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getProductsByCompany(request):
-    print('your  inn getProductsByCompany')
+    # print('your  inn getProductsByCompany')
     # query = request.query_params.get('')
 
 
@@ -139,7 +139,7 @@ def getProducts(request):
     products = Product.objects.filter(name__icontains=query)  
     #if the name of the product contains any values in side of the query  filter it and return it back
     
-    print('product details ',products)
+    # print('product details ',products)
 
 
     page = request.query_params.get('page')
@@ -184,7 +184,7 @@ def getTopProducts(request):
 def getProduct(request,pk):
     # print('the pk is '+pk)
     product = Product.objects.get(_id=pk)
-    print('product details on one product ',product)
+    # print('product details on one product ',product)
     serializer = ProductSerializer(product,many =  False)
     return Response(serializer.data)
 
