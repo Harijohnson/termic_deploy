@@ -48,8 +48,12 @@ def getCompany(request):
     # print('your  inn getCompany')
     user = request.user
     # print('request user is ', user)
-    company = CompanyDetails.objects.get(user = user)
+    try:
+        company = CompanyDetails.objects.get(user = user)
     # print('company details',company)
+    except:
+        
+        return Response(None)
     serializer = CompanySerializer(company,many =  False)
     return Response(serializer.data)
 
@@ -87,15 +91,12 @@ def getProductsByCompany(request):
 
     products = Product.objects.filter(company=company_details, name__icontains=query)
 
-    # Pagination logic remains the same
-
-    
-    # print('products          :',products)
     page = request.query_params.get('page')
     
-    paginator = Paginator(products,16)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
+    paginator = Paginator(products,16)  
+    # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
 
-    # print("paginator op is ",page)
+
    
     try:
         products = paginator.page(page)
@@ -113,9 +114,7 @@ def getProductsByCompany(request):
 
     page = int(page)
     
-    # serializer = ProductSerializer(products,many =  True)
-    # # print('serilizer output is :',serializer)
-    # return Response({'products':serializer.data,'page':page,'pages':paginator.num_pages})
+
     serializer = ProductSerializer(products, many=True)
     return Response({'products': serializer.data, 'page': page, 'pages': paginator.num_pages})
 
@@ -135,8 +134,9 @@ def getProducts(request):
         query=""
     
 
+    products = Product.objects.filter(name__icontains=query).order_by('_id')      #add the specific order for shoe the products by _id in here change if you want any othere fields
 
-    products = Product.objects.filter(name__icontains=query)  
+    # products = Product.objects.filter(name__icontains=query)  
     #if the name of the product contains any values in side of the query  filter it and return it back
     
     # print('product details ',products)
@@ -144,7 +144,8 @@ def getProducts(request):
 
     page = request.query_params.get('page')
     
-    paginator = Paginator(products,16)  # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
+    paginator = Paginator(products,16) 
+     # this Paginatow will decide how many product are in one page second parameter is the thing will have to set 
 
   
    
