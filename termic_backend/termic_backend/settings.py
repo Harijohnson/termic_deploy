@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',    # this is for config the backends in django
     'rest_framework',
     "corsheaders",
-
+    'storages',
 ]
 
 # this is for authenticate the user from jwtAuthentcation
@@ -169,14 +169,26 @@ WSGI_APPLICATION = 'termic_backend.wsgi.application'
 # this configured for mysql database db bd named termic 
 # create database termic.     and use this 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'termic',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'termic',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'termicdb',
+        'USER': 'harikrishnan',
+        'PASSWORD': 'Harikrishnan1',
+        'HOST': 'termic-identifier.cl2wgi84ya05.eu-north-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -185,18 +197,6 @@ DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'termic',
-#         'USER': 'postgres',
-#         'PASSWORD': 'root',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
 #         'USER': 'postgres',
 #         'PASSWORD': os.environ.get('DB_PASS'),
 #         'HOST': 'monorail.proxy.rlwy.net',
@@ -260,6 +260,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # STATIC_ROOT = STATIC_DIR
 # allow the react ot access the urls in django
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+AWS_QUERYSTRING_AUTH =False
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+
+
+
+
+AWS_ACCESS_KEY_ID="AKIAYMUD47Q5WSBEP3FR"
+
+
+AWS_SECRET_ACCESS_KEY="rl7iV6TsVPXmOV4DfVNr+wAp7KfhAU4nhUfgIOIS"
+
+
+AWS_STORAGE_BUCKET_NAME = 'termic-bucket'
 
 
 # if os.getcwd() == "/app":
