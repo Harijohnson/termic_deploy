@@ -259,7 +259,7 @@ h2{
 	bottom: 0;
 	left: 0;
 	z-index: 20;
-	display: flow-root;
+	display: none;
 	justify-content: center;
 	padding: 0;
 	margin-right: 15%;
