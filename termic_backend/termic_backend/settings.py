@@ -35,9 +35,9 @@ IMAGES_DIR = os.path.join(BASE_DIR2,"base/static/images/products")
 SECRET_KEY = 'django-insecure-iy#in_a@gd+4yx_f_k#-0bie_xg&zh8ev0t774g1w=@vgor$hj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','termic.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','termic.onrender.com','https://termic-shop-8832b5f0d171.herokuapp.com']
 
 
 # Application definition
@@ -242,7 +242,7 @@ MEDIA_URL = 'images/' # this folder stores images for frontend to render
 
 STATICFILES_DIRS =[
     # STATIC_DIR,  # inherited from static files
-    BASE_DIR / 'staticfiles',
+    BASE_DIR / 'base/static',
     BASE_DIR / 'termic_frontend/termic_shop/build/static'
 
     
@@ -257,7 +257,7 @@ MEDIA_ROOT = IMAGES_DIR # this for set the images
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# STATIC_ROOT = STATIC_DIR
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # allow the react ot access the urls in django
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -280,3 +280,4 @@ AWS_STORAGE_BUCKET_NAME = 'termic-bucket'
 
 # if os.getcwd() == "/app":
 #     DEBUG = False
+DEBUG = False 
