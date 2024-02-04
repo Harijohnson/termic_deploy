@@ -35,7 +35,7 @@ IMAGES_DIR = os.path.join(BASE_DIR2,"base/static/images/products")
 SECRET_KEY = 'django-insecure-iy#in_a@gd+4yx_f_k#-0bie_xg&zh8ev0t774g1w=@vgor$hj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost','termic.onrender.com','https://termic-shop-8832b5f0d171.herokuapp.com']
 
@@ -173,7 +173,7 @@ WSGI_APPLICATION = 'termic_backend.wsgi.application'
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'termic',
-#         'USER': 'root',
+#         'USER': os.environ.get('MYSQL_DB_PASS'),
 #         'PASSWORD': 'root',
 #         'HOST': '127.0.0.1',
 #         'PORT': '3306',
@@ -186,7 +186,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'termicdb',
         'USER': 'harikrishnan',
-        'PASSWORD': 'Harikrishnan1',
+        'PASSWORD': os.environ.get('DB_PASS'),
         'HOST': 'termic-identifier.cl2wgi84ya05.eu-north-1.rds.amazonaws.com',
         'PORT': '5432',
     }
@@ -269,15 +269,15 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
 
 
 
-AWS_ACCESS_KEY_ID="AKIAYMUD47Q5WSBEP3FR"
+AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
 
 
-AWS_SECRET_ACCESS_KEY="rl7iV6TsVPXmOV4DfVNr+wAp7KfhAU4nhUfgIOIS"
+AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 AWS_STORAGE_BUCKET_NAME = 'termic-bucket'
 
 
-# if os.getcwd() == "/app":
-#     DEBUG = False
-DEBUG = False 
+if os.getcwd() == "/app":
+    DEBUG = False
+# DEBUG = False 
