@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-TEMPLATES_DIR =  os.path.join(BASE_DIR,'termic_shop/build')
+TEMPLATES_DIR =  os.path.join(BASE_DIR,'build')
 
 STATIC_DIR = os.path.join(BASE_DIR2,"base/static") # locate the static file like image and js and css file and images for project
 
@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-iy#in_a@gd+4yx_f_k#-0bie_xg&zh8ev0t774g1w=@vgor$hj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','termic.onrender.com','https://termic-shop-8832b5f0d171.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','termic.onrender.com','termic-shop-8832b5f0d171.herokuapp.com']
 
 
 # Application definition
@@ -137,7 +137,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-           os.path.join(BASE_DIR , 'termic_frontend/termic_shop/build'),
+           os.path.join(BASE_DIR , 'termic_frontend/build'),
             # TEMPLATES_DIR,
         ],
         'APP_DIRS': True,
@@ -243,7 +243,7 @@ MEDIA_URL = 'images/' # this folder stores images for frontend to render
 STATICFILES_DIRS =[
     # STATIC_DIR,  # inherited from static files
     BASE_DIR / 'base/static',
-    BASE_DIR / 'termic_frontend/termic_shop/build/static'
+    BASE_DIR / 'termic_frontend/build/static'
 
     
 ]
@@ -278,6 +278,6 @@ AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'termic-bucket'
 
 
-if os.getcwd() == "/app":
-    DEBUG = False
+# if os.getcwd() == "/app":
+#     DEBUG = False
 # DEBUG = False 
