@@ -248,14 +248,9 @@ STATICFILES_DIRS =[
     
 ]
 
-# print('static file dir is  : ' ,STATICFILES_DIRS)
 
 MEDIA_ROOT = IMAGES_DIR # this for set the images
-# print('media root dir i s :',MEDIA_ROOT)
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 # allow the react ot access the urls in django
