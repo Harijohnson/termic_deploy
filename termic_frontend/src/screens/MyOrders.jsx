@@ -36,7 +36,7 @@ function MyOrders() {
 
   return (
     <div>
-        <Link to='/seller' className='btn btn-light  text-start' style={{backgroundColor:'black',color:'white'}}>Go Back</Link>
+        <Link to='/seller'  className='btn btn-light  text-start' style={{backgroundColor:'black',color:'white'}}>Go Back</Link>
     <h1>Orders</h1>
         {loading ?
         (<Loader />)

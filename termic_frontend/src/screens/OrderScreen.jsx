@@ -371,7 +371,3 @@ import {listProductDetails} from '../actions/productActions'
 
 
     export default OrderScreen
-
-
-    // client id from paypal site
-    // AZkuuNMjCrMWUvFBVKsyt3TlS3fQCdt4rTUdkpI5CCyUvnTKdjO1Qxx_VFPhwqmoStJE1LWDvUtGPKJh
