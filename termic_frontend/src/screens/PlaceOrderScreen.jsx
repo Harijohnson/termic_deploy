@@ -107,6 +107,7 @@ function PlaceOrderScreen() {
                                     <Row>
                                         <Col md={1}>
                                             <Image src={item.image1}  alt={item.name} fluid rounded/>
+                                            {/* <Image src={item.digitalResource}  alt={item.name} fluid rounded/> */}
 
                                         </Col>
                                         <Col varient='info'>

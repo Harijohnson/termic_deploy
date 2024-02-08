@@ -47,7 +47,7 @@ def addOrderItems(request):
             country = data['shippingAddress']['country'],
         )
         #order and connect to orderItems relationship
-
+        digital = 'null'
         for i in orderItems:
             product = Product.objects.get(_id=i['product'])
 
