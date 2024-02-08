@@ -35,6 +35,7 @@ def addOrderItems(request):
             taxPrice = data['taxPrice'],
             shippingPrice = data['shippingPrice'],
             totalPrice = data['totalPrice'],
+            
         )
 
         #create shipping address
