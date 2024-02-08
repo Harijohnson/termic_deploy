@@ -15,8 +15,6 @@ function UserEditScreen() {
 
   
 
-
-
     const  { id } = useParams();
     // const orderId = match.params.id
 
