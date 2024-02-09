@@ -61,6 +61,7 @@ def addOrderItems(request):
                 price = i['price'],
                 image1 = product.image1.url,
                 digital=product.digital,
+                digitalResource = product.digitalResource,
             )
             # print('details',item)
 

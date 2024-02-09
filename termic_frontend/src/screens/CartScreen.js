@@ -115,7 +115,6 @@ function CartScreen( ) {
           </ListGroup.Item>
         </Card>                 
 
-
       </Col>
 
     </Row>
