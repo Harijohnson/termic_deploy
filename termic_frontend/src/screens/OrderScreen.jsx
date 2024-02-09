@@ -172,8 +172,16 @@ import {listProductDetails} from '../actions/productActions'
                 return response.blob();
             })
             .then((blob) => {
-                const contentType = blob.type;
-                if (contentType && contentType.toLowerCase().includes('image')) {
+                if (fileExtension.toLowerCase() === 'pdf') {
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', fileName);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.parentNode.removeChild(link);
+                } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension.toLowerCase())) {
+                    const contentType = blob.type;
                     const url = window.URL.createObjectURL(blob);
                     const link = document.createElement('a');
                     link.href = url;
@@ -182,12 +190,12 @@ import {listProductDetails} from '../actions/productActions'
                     link.click();
                     link.parentNode.removeChild(link);
                 } else {
-                    // Handle other file types as needed
                     alert('Unsupported file type');
                 }
             })
             .catch((error) => console.error('Error downloading resource:', error));
     };
+    
     
         
 
