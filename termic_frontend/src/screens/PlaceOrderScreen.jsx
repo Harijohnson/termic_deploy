@@ -52,6 +52,7 @@ function PlaceOrderScreen() {
             shippingAddress:cart.shippingAddress,
             paymentMethod:cart.paymentMethod,
             itemsPrice:cart.itemsPrice,
+            digitalResource:cart.digitalResource,
             shippingPrice:cart.shippingPrice,
             taxPrice:cart.taxPrice,
             totalPrice:cart.totalPrice,

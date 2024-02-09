@@ -114,17 +114,56 @@ import {listProductDetails} from '../actions/productActions'
             dispatch(deliverOrder(order))
         }
 
-    const downloadFile = (fileUrl, fileName) => {
-        // console.log('File URL:', fileUrl);
-        // console.log('File Name:', fileName);
+    // const downloadFile = (fileUrl, fileName) => {
+    //     // console.log('File URL:', fileUrl);
+    //     // console.log('File Name:', fileName);
 
+    //     const getFileExtension = (filename) => {
+    //         return filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2);
+    //     };
+        
+    
+    //     const fileExtension = getFileExtension(fileUrl);
+    //     // console.log('file extention name',fileExtension)
+    //     fetch(fileUrl)
+    //         .then((response) => {
+    //             if (!response.ok) {
+    //                 throw new Error(`Failed to download file: ${response.statusText}`);
+    //             }
+    //             return response.blob();
+    //         })
+    //         .then((blob) => {
+    //             if (fileExtension.toLowerCase() === 'pdf') {
+    //                 const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+    //                 const link = document.createElement('a');
+    //                 link.href = url;
+    //                 link.setAttribute('download', fileName);
+    //                 document.body.appendChild(link);
+    //                 link.click();
+    //                 link.parentNode.removeChild(link);
+    //             } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension.toLowerCase())) {
+    //                 const url = window.URL.createObjectURL(new Blob([blob], { type: `image/${fileExtension}` }));
+    //                 const link = document.createElement('a');
+    //                 link.href = url;
+    //                 link.setAttribute('download', fileName);
+    //                 document.body.appendChild(link);
+    //                 link.click();
+    //                 link.parentNode.removeChild(link);
+    //             } else {
+    //                 // console.error('Unsupported file type:', fileName);
+    //                 alert('Unsupported file type');
+    //             }
+    //         })
+    //         .catch((error) => console.error('Error downloading resource:', error));
+    // };
+    
+    const downloadFile = (fileUrl, fileName) => {
         const getFileExtension = (filename) => {
             return filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2);
         };
-        
     
         const fileExtension = getFileExtension(fileUrl);
-        // console.log('file extention name',fileExtension)
+    
         fetch(fileUrl)
             .then((response) => {
                 if (!response.ok) {
@@ -133,16 +172,9 @@ import {listProductDetails} from '../actions/productActions'
                 return response.blob();
             })
             .then((blob) => {
-                if (fileExtension.toLowerCase() === 'pdf') {
-                    const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', fileName);
-                    document.body.appendChild(link);
-                    link.click();
-                    link.parentNode.removeChild(link);
-                } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension.toLowerCase())) {
-                    const url = window.URL.createObjectURL(new Blob([blob], { type: `image/${fileExtension}` }));
+                const contentType = blob.type;
+                if (contentType && contentType.toLowerCase().includes('image')) {
+                    const url = window.URL.createObjectURL(blob);
                     const link = document.createElement('a');
                     link.href = url;
                     link.setAttribute('download', fileName);
@@ -150,14 +182,13 @@ import {listProductDetails} from '../actions/productActions'
                     link.click();
                     link.parentNode.removeChild(link);
                 } else {
-                    // console.error('Unsupported file type:', fileName);
+                    // Handle other file types as needed
                     alert('Unsupported file type');
                 }
             })
             .catch((error) => console.error('Error downloading resource:', error));
     };
     
-        
         
 
     return (loading  ? (<Loader /> 
@@ -253,8 +284,8 @@ import {listProductDetails} from '../actions/productActions'
                                                     onMouseOut={(e) => (e.target.style.backgroundColor = 'gray')}
                                                     onClick={() => {
                             
-                                                        const fileUrl = product.digitalResource;
-                                                        downloadFile(fileUrl, product.name);     
+                                                        const fileUrl = item.digitalResource;
+                                                        downloadFile(fileUrl, item.name);     
                                                     }}
                                                     
                                                 >   

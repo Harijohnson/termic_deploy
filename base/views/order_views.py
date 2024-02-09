@@ -35,6 +35,7 @@ def addOrderItems(request):
             taxPrice = data['taxPrice'],
             shippingPrice = data['shippingPrice'],
             totalPrice = data['totalPrice'],
+            
         )
 
         #create shipping address
@@ -60,6 +61,7 @@ def addOrderItems(request):
                 price = i['price'],
                 image1 = product.image1.url,
                 digital=product.digital,
+                digitalResource = product.digitalResource,
             )
             # print('details',item)
 
