@@ -51,7 +51,7 @@ h2{
 }
 
 .product-card .card-title {
-  height: 2.5rem; /* Set a fixed height for the title */
+  height: 4rem; /* Set a fixed height for the title */
   overflow: hidden;
 }
 
