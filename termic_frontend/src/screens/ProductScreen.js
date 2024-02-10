@@ -116,21 +116,22 @@ function ProductScreen(  ) {
                 />
               )}
               {product.image1 && (
-               <Row className="mt-3">
+               <Row className="mt-4">
                {[...Array(10).keys()].map((index) => {
                  const imageKey = `image${index + 1}`;
                  if (product[imageKey] !== null && product[imageKey] !== undefined) {
                    return (
-                     <Col md={1} key={index + 1} className="mb-3">
+                     <Col md={1} key={index + 1} >
                        <Image
                          src={product[imageKey]}
                          alt={`${product.name} - ${index + 1}`}
                          className={`img-fluid img-thumbnail ${activeImageIndex === index ? 'border-blue' : ''}`}
                          style={{
                            cursor: 'pointer',
-                           width: '70px',
-                           height: '70px',
+                           width:'100%',
+                           height: '90%',
                            objectFit: 'cover',
+                          
                          }}
                          onClick={() => handleImageClick(product[imageKey], index)}
                        />
