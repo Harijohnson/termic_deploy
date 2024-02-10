@@ -27,7 +27,7 @@
         const [price,setPrice] = useState(0)
         const [brand,setBrand] = useState('')
         const [category,setCategory] = useState('')
-        const [image,setImage] = useState('')
+        // const [image,setImage] = useState('')
         const [countInStock,setCountInStock] = useState(0)
         const [description,setDescription] = useState("")
         const [uploading,setUploading] = useState(false)
@@ -90,7 +90,7 @@
                     setDescription(product.description || "")
                     // setImage(product.image || "")
                     setCountInStock(product.countInStock || 0)
-                    setCarousel(product.carousel || null);
+                    setCarousel(product.carousel || "");
                     // Assuming there are fields like 'image1', 'image2', etc. in the product model
                     setImage1(product.image1 || '');
                     setImage2(product.image2 || '');
