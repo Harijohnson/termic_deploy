@@ -18,6 +18,7 @@ function ProductScreen(  ) {
 
 
 
+
   const productDetails = useSelector(state => state.productDetails)
   const { loading,error,product } = productDetails
 
@@ -46,6 +47,11 @@ function ProductScreen(  ) {
 
   const navigate = useNavigate();
 
+
+  const [selectedImage, setSelectedImage] = useState(product.image1 || "");
+  const countAvailableImages = product.image1 ? 1 : 0;
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
   useEffect(()=>{
 
     if(successProductReview){
@@ -59,8 +65,8 @@ function ProductScreen(  ) {
 
 
       dispatch(listProductDetails(id))
-    
-      },[dispatch,id,successProductReview])
+      setSelectedImage(product.image1 || '');
+      },[dispatch,id,successProductReview, product.image1])
     
   const addToCartHandeler = () =>{
       navigate(`/cart/${id}?qty=${qty}`)
@@ -75,10 +81,6 @@ function ProductScreen(  ) {
 
     ))
   }
-
-  const [selectedImage, setSelectedImage] = useState(product.image1 || "");
-  const countAvailableImages = product.image1 ? 1 : 0;
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
 
   const handleImageClick = (image,index) => {
