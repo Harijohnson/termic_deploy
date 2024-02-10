@@ -18,6 +18,7 @@ function ProductScreen(  ) {
 
 
 
+
   const productDetails = useSelector(state => state.productDetails)
   const { loading,error,product } = productDetails
 
@@ -46,6 +47,11 @@ function ProductScreen(  ) {
 
   const navigate = useNavigate();
 
+
+  const [selectedImage, setSelectedImage] = useState(product.image1 || "");
+  const countAvailableImages = product.image1 ? 1 : 0;
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
   useEffect(()=>{
 
     if(successProductReview){
@@ -59,8 +65,8 @@ function ProductScreen(  ) {
 
 
       dispatch(listProductDetails(id))
-    
-      },[dispatch,id,successProductReview])
+      setSelectedImage(product.image1 || '');
+      },[dispatch,id,successProductReview, product.image1])
     
   const addToCartHandeler = () =>{
       navigate(`/cart/${id}?qty=${qty}`)
@@ -75,10 +81,6 @@ function ProductScreen(  ) {
 
     ))
   }
-
-  const [selectedImage, setSelectedImage] = useState(product.image1 || "");
-  const countAvailableImages = product.image1 ? 1 : 0;
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
 
   const handleImageClick = (image,index) => {
@@ -114,21 +116,22 @@ function ProductScreen(  ) {
                 />
               )}
               {product.image1 && (
-               <Row className="mt-3">
+               <Row className="mt-4">
                {[...Array(10).keys()].map((index) => {
                  const imageKey = `image${index + 1}`;
                  if (product[imageKey] !== null && product[imageKey] !== undefined) {
                    return (
-                     <Col md={1} key={index + 1} className="mb-3">
+                     <Col md={1} key={index + 1} >
                        <Image
                          src={product[imageKey]}
                          alt={`${product.name} - ${index + 1}`}
                          className={`img-fluid img-thumbnail ${activeImageIndex === index ? 'border-blue' : ''}`}
                          style={{
                            cursor: 'pointer',
-                           width: '70px',
-                           height: '70px',
+                           width:'100%',
+                           height: '90%',
                            objectFit: 'cover',
+                          
                          }}
                          onClick={() => handleImageClick(product[imageKey], index)}
                        />
