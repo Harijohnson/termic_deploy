@@ -267,3 +267,11 @@ h2{
 	margin-left: 50%;
   
 }
+
+.carousel-image {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-image:hover {
+  opacity: 0.8;
+}
