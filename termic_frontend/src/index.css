@@ -51,7 +51,7 @@ h2{
 }
 
 .product-card .card-title {
-  height: 2.5rem; /* Set a fixed height for the title */
+  height: 4rem; /* Set a fixed height for the title */
   overflow: hidden;
 }
 
@@ -204,6 +204,10 @@ h2{
 
 
 /* carousel */
+.carousel {
+  background-color: transparent !important;
+}
+
 .carousel-item-next,
 .carousel-item-prev,
 .carousel-item.active {
@@ -266,4 +270,37 @@ h2{
 	margin-bottom: -5rem;
 	margin-left: 50%;
   
+}
+
+.carousel-item {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-item .carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.carousel-item.active .carousel-image {
+  opacity: 1;
+}
+
+.carousel-item .carousel-image.previous {
+  z-index: 0;
+}
+
+.carousel-item .carousel-image.next {
+  opacity: 0;
+  z-index: 2;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  z-index: 3;
 }

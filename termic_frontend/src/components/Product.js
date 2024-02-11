@@ -23,7 +23,12 @@ function Product( {product}) {
                 <strong>{product.name}</strong>
             </Card.Title>  
         </Link>
-
+        {product.digital && (  
+               <div className="digital-icon">
+               <FontAwesomeIcon icon={faDownload} title="Digital Product"></FontAwesomeIcon>
+              <label> Digital Downlodable </label>  
+             </div>
+          )}
         <Card.Text as='div'>
             <>
             <div className='my-3'>
@@ -35,12 +40,7 @@ function Product( {product}) {
             </>
         </Card.Text >
 
-        {product.digital && (  
-               <div className="digital-icon">
-               <FontAwesomeIcon icon={faDownload} title="Digital Product"></FontAwesomeIcon>
-              <label> Digital Downlodable </label>  
-             </div>
-          )}
+      
 
 
         <Card.Text as='h3'>

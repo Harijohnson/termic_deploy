@@ -17,7 +17,7 @@ class Product(models.Model):
     company = models.ForeignKey(CompanyDetails,on_delete=models.SET_NULL ,null=True)  # if the person who add the product in db the user is deleted buy product is not to be deleted
     name = models.CharField(max_length=200,null=True,blank=True)
     # image = models.ImageField(null=True,blank=True,default='/placeholder.png')
-    corousel = models.ImageField(upload_to='corousel/', null=True, blank=True,)
+    carousel = models.ImageField(upload_to='carousel/', null=True, blank=True,)
     image1 = models.ImageField(upload_to='products/', null=True, blank=True,default='placeholder/placeholder.png')
     image2 = models.ImageField(upload_to='products/', null=True, blank=True,)
     image3 = models.ImageField(upload_to='products/', null=True, blank=True)
