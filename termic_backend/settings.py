@@ -257,20 +257,20 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 CORS_ALLOW_ALL_ORIGINS = True
 
 #aws sttings
-# AWS_QUERYSTRING_AUTH =False
+AWS_QUERYSTRING_AUTH =False
     
-# DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
 
 
 
 
-# AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
 
 
-# AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 
-# AWS_STORAGE_BUCKET_NAME = 'termic-bucket'
+AWS_STORAGE_BUCKET_NAME = 'termic-bucket'
 
 
 # if os.getcwd() == "/app":
