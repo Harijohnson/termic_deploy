@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-iy#in_a@gd+4yx_f_k#-0bie_xg&zh8ev0t774g1w=@vgor$hj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','https://termic.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','termic.onrender.com']
 
 
 # Application definition
