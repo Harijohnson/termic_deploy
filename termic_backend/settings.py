@@ -169,28 +169,28 @@ WSGI_APPLICATION = 'termic_backend.wsgi.application'
 # this configured for mysql database db bd named termic 
 # create database termic.     and use this 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'termic',
-        'USER': os.environ.get('MYSQL_DB_PASS'),
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'termicdb',
-#         'USER': 'harikrishnan',
-#         'PASSWORD': os.environ.get('DB_PASS'),
-#         'HOST': 'termic-identifier.cl2wgi84ya05.eu-north-1.rds.amazonaws.com',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'termic',
+#         'USER': os.environ.get('MYSQL_DB_PASS'),
+#         'PASSWORD': 'root',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD':  "Harikrishnan1"  ,#os.environ.get('DB_PASS'),
+        'HOST': 'termic-identifier.c9kqa4266x0n.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 
 # DATABASES = {
@@ -270,9 +270,12 @@ AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 
-AWS_STORAGE_BUCKET_NAME = 'termic-bucket'
+
+AWS_STORAGE_BUCKET_NAME = 'termic-shop'
 
 
-# if os.getcwd() == "/app":
-#     DEBUG = False
-# DEBUG = False 
+if os.getcwd() == "/app":
+    DEBUG = False
+DEBUG = False 
+
+
