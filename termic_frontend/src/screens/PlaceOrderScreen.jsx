@@ -24,7 +24,10 @@ function PlaceOrderScreen() {
     cart.shippingPrice = (cart.itemsPrice >100 ? 0 :10).toFixed(2)
     cart.taxPrice = ((0.18)* cart.itemsPrice).toFixed(2)
     
-    
+    const userLogin  = useSelector(state => state.userLogin)  
+    const { userInfo } = userLogin
+
+
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
     
     if (!cart.paymentMethod) {
@@ -43,7 +46,10 @@ function PlaceOrderScreen() {
 
     const placeOrder = () =>{
         // console.log(cart)
-        if (!cart.paymentMethod) {
+        if (!userInfo){
+            navigate('/login')
+        }
+        else if (!cart.paymentMethod) {
             navigate('/payment');
         }
         
