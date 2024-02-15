@@ -262,7 +262,7 @@ import {listProductDetails} from '../actions/productActions'
                                         <Row>
                                             <Col md={1}>
 
-                                                <Image src={item.image1.replace(/.*\/images\/products\//, '/images/products/')}  alt={item.name} fluid rounded />  
+                                                <Image src={item.image1}  alt={item.name} fluid rounded />  
                                                 
                                                 
                                             </Col>
