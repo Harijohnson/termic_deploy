@@ -41,7 +41,7 @@ function HomeScreen() {
   return (
     <div className="container">
 
-
+      <Message variant='danger'>This Websit for educational purposes only not actual products are listed here</Message>
       { !keyword && <ProductCarousel maxProducts={5} /> }
       <h1 className="my-4">Latest Produtcts </h1>
       {
