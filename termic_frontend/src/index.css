@@ -303,3 +303,8 @@ h2{
 .carousel-control-prev, .carousel-control-next {
   z-index: 3;
 }
+
+
+.digital-icon {
+  font-size: 15px;
+}
