@@ -153,9 +153,9 @@ function ProductScreen(  ) {
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
 
-                <ListGroup.Item>
-                  <h5>Category : {product.category}</h5>
-                </ListGroup.Item>
+                  <ListGroup.Item >
+                    <lable style={{fontSize:'17px'}}>Category : {product.category}</lable>
+                  </ListGroup.Item>
 
                 <ListGroup.Item>
                   <Rating value={product.rating} text={`${product.numReviews} reviews`}  color={'#f8e825'}/>
@@ -168,6 +168,21 @@ function ProductScreen(  ) {
                 <ListGroup.Item>
                   Discription : {product.description}
                 </ListGroup.Item>
+
+
+                <ListGroup.Item>
+                  Seller : {product.company}
+                </ListGroup.Item>
+
+                <ListGroup.Item style={{fontSize:'26px',textDecoration:'none'}}>
+                  <Link to='/return' style={{fontSize:'26px',textDecoration:'none'}}>
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                  {'  '}
+                    Return Polecies
+                  </Link>
+                </ListGroup.Item>
+
+                
               </ListGroup>
             </Col>
     

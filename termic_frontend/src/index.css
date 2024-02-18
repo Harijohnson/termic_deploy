@@ -308,3 +308,13 @@ h2{
 .digital-icon {
   font-size: 15px;
 }
+
+.comment-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Ensure it's above other content */
+  border-radius:50%;
+  font-size: 25px;
+}
+

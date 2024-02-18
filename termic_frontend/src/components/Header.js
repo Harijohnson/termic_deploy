@@ -17,7 +17,7 @@
   import { logout } from '../actions/userActions'
 
   import { companyDetails } from '../actions/productActions'
-  import { useNavigate, } from 'react-router-dom'
+  import { useNavigate,Link } from 'react-router-dom'
   import  Loader   from '../components/Loader'
   import  Message   from '../components/Message'
   function Header() {
@@ -135,9 +135,15 @@
                     
 
                   </Nav>
+                  
                   </Navbar.Collapse>
               </Container>
           </Navbar>
+          {/* Comment Button */}
+          <Link variant="primary" className="comment-button">
+              <i class="fa-solid fa-comments"></i>
+          
+            </Link>
       </header>
     
     )
