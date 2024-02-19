@@ -65,15 +65,20 @@ function CartScreen( ) {
                       <Form.Control  
                               as='select'
                               value={item.qty}
-                              onChange={(e) => dispatch(addToCart(item.product,Number(e.target.value)))} >
+                              onChange={(e) => dispatch(addToCart(item.product,Number(e.target.value)))} 
+                                max={10} // Add this line to set the maximum value
+                                >
+                                  
                                 {
                                   Number.isInteger(item.countInStock) && item.countInStock > 0 && (
-                                  [...Array(item.countInStock).keys()].map((x) => (
+                                  
+                                    [...Array(Math.min(10, item.countInStock)).keys()].map((x) => (
                                     <option value={ x + 1 }  key={ x + 1 } >
-                                      { x + 1 }
+                                      { x + 1 }        
                                     </option>
                                   ))
                                 )}
+                                
                         </Form.Control>
                     </Col>
 

@@ -240,6 +240,7 @@ function ProductScreen(  ) {
                             <option value={x + 1} key={x + 1}>
                                 {x + 1}
                             </option>
+                            
                         ))}
                     </Form.Control>
                 </Col>
