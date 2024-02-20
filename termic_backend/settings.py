@@ -169,28 +169,28 @@ WSGI_APPLICATION = 'termic_backend.wsgi.application'
 # this configured for mysql database db bd named termic 
 # create database termic.     and use this 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'termic',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': os.environ.get('DB_PASS'),
-#         'HOST': 'termic-identifier.c9kqa4266x0n.us-east-1.rds.amazonaws.com',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'termic',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'harikrishnan',
+        'PASSWORD': os.environ.get('DB_PASS'),
+        'HOST': 'termic-identifier.c9kqa4266x0n.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 
 # DATABASES = {
