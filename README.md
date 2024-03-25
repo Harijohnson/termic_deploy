@@ -105,3 +105,6 @@ Special thanks to [GeeksForGeeks](https://www.geeksforgeeks.org/) for coding pra
 
 
 ![Screenshot (81)](https://github.com/Harijohnson/termic_shop/assets/98631963/efaf41a0-ebdd-4120-a9b5-5ff9289b788f)
+
+
+
